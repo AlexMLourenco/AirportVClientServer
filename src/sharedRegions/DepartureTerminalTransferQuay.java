@@ -5,38 +5,20 @@ import java.util.Random;
 import entities.BusDriver;
 import entities.BusDriverStates;
 import mainProject.SimulPar;
+import stubs.RepositoryStub;
 
-public class DepartureTerminalTransferQuay {
+public class DepartureTerminalTransferQuay implements SharedRegionInterface {
 
-    /**
-     * General Repository of Information
-     * @serialField repository
-     */
-    private RepositoryInfo repository;
+    private RepositoryStub repositoryStub;
 
-    /**
-     * Passengers inside the Bus
-     */
     private int passengersOnTheBus;
 
-    /**
-     * Departure Terminal Transfer Quay instantiation
-     *
-     @param repository repositoryInfo
-     *
-     */
-    public DepartureTerminalTransferQuay(RepositoryInfo repository){
-        this.repository = repository;
+    public DepartureTerminalTransferQuay(RepositoryStub repositoryStub){
+        this.repositoryStub = repositoryStub;
     }
 
     /***** PASSENGER FUNCTIONS *********/
 
-    /**
-     * Passenger leaves the Bus
-     *
-     * @param id int
-     *
-     */
     public synchronized void leaveTheBus(int id){
         try {
             wait();
@@ -44,7 +26,7 @@ public class DepartureTerminalTransferQuay {
             if (this.passengersOnTheBus == 0 ) {
                 notifyAll(); //Notify the driver
             }
-            repository.removePassengerFromTheBus(id);
+            repositoryStub.removePassengerFromTheBus(id);
         }catch(InterruptedException e){}
     }
 
@@ -55,7 +37,7 @@ public class DepartureTerminalTransferQuay {
      *
      */
     public synchronized void parkTheBusAndLetPassOff(){
-        repository.setBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
+        repositoryStub.setBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         passengersOnTheBus = busDriver.getPassengersInTheBus();
         notifyAll(); //Notify the passengers that they can start leaving the bus
@@ -71,7 +53,7 @@ public class DepartureTerminalTransferQuay {
      *
      */
     public synchronized void goToArrivalTerminal(){
-        repository.setBusDriverState(BusDriverStates.DRIVING_BACKWARD);
+        repositoryStub.setBusDriverState(BusDriverStates.DRIVING_BACKWARD);
         try {
             Thread.currentThread().sleep((long) (new Random().nextInt(SimulPar.MAX_SLEEP - SimulPar.MIN_SLEEP+1) + SimulPar.MAX_SLEEP));
         } catch (InterruptedException e) {}

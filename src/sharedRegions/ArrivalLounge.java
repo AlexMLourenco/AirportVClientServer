@@ -4,45 +4,31 @@ import java.util.Stack;
 
 import commonInfra.BAG;
 import mainProject.SimulPar;
+import stubs.RepositoryStub;
 
-public class ArrivalLounge {
+public class ArrivalLounge implements SharedRegionInterface {
 
-    /**
-     * General Repository of Information
-     * @serialField repository
-     */
-    private RepositoryInfo repository;
+    private RepositoryStub repositoryStub;
 
     /*** simulation purposes only ***/
     private int[][] plainHoldLuggage;
     private boolean[][] passengersFinalDestination;
 
-    /*** shared memory ***/
-    /**
-     * Stack with all the planes in the hold
-     * @serialField planeHold
-     */
     Stack<BAG> planeHold;
-    /**
-     * Passengers count
-     * @serialField passengersCount
-     */
+
     private int passengersCount;
 
-    /**
-     * Arrival Lounge instantiation
-     *
-     @param repository repositoryInfo
-     @param plainHoldLuggage int[][]
-     @param passengersFinalDestination boolean[][]
-     *
-     */
-    public ArrivalLounge(RepositoryInfo repository, int[][] plainHoldLuggage, boolean[][] passengersFinalDestination) {
-        this.repository = repository;
+
+    public ArrivalLounge(RepositoryStub repositoryStub) {
+        this.repositoryStub = repositoryStub;
         this.planeHold = new Stack<>();
-        this.plainHoldLuggage = plainHoldLuggage;
-        this.passengersFinalDestination = passengersFinalDestination;
+        //this.plainHoldLuggage = plainHoldLuggage;
+        //this.passengersFinalDestination = passengersFinalDestination;
     }
+
+
+
+
 
     /*****  PORTER FUNCTIONS *****/
 
@@ -53,8 +39,7 @@ public class ArrivalLounge {
         // We have to wait until all the passengers got out of the plane and have bags to collect in the plane hold
         try {
             wait();
-        } catch (InterruptedException e) {
-        }
+        } catch (InterruptedException e) {}
     }
 
     /**
@@ -68,24 +53,17 @@ public class ArrivalLounge {
      * Porter tries to collect a bag from the plane hold
      */
     public synchronized BAG tryToCollectABag() {
-        repository.removeLuggageInPlainHold();
+        repositoryStub.removeLuggageInPlainHold();
         BAG b = planeHold.pop();
         return b;
     }
 
     /***** PASSENGER FUNCTIONS *********/
 
-    /**
-     * Passenger decides what to do
-     *
-     * @param id int
-     * @param isFinalDestination boolean
-     * @param numberOfLuggages int
-     *
-     */
+
     public synchronized char whatShouldIDo(int id, boolean isFinalDestination, int numberOfLuggages) {
         this.passengersCount ++;
-        char action = repository.passengerArrived(id, isFinalDestination, numberOfLuggages);
+        char action = repositoryStub.passengerArrived(id, isFinalDestination, numberOfLuggages);
         if (this.passengersCount == SimulPar.PASSENGERS) {
             notifyAll(); // The last passenger to arrive will wake up the porter.
         }
@@ -94,12 +72,6 @@ public class ArrivalLounge {
 
     /***** MAIN THREAD *********/
 
-    /**
-     * Initialize plane hold from a flightNumber
-     *
-     * @param flightNumber int
-     *
-     */
     public synchronized void init_plane_hold(int flightNumber) {
         this.passengersCount = 0;
         planeHold.clear();
@@ -109,7 +81,7 @@ public class ArrivalLounge {
                 planeHold.push(bag);
             }
         }
-        repository.flightLanded(planeHold.size());
+        repositoryStub.flightLanded(planeHold.size());
     }
 
     /**

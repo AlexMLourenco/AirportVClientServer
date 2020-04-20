@@ -1,101 +1,98 @@
 package mainProject;
 
-import static mainProject.SimulPar.LANDINGS;
-import static mainProject.SimulPar.PASSENGERS;
-
-import java.util.Random;
 import entities.BusDriver;
 import entities.Passenger;
 import entities.Porter;
-import sharedRegions.ArrivalLounge;
-import sharedRegions.ArrivalTerminalExit;
-import sharedRegions.ArrivalTerminalTransferQuay;
-import sharedRegions.BaggageCollectionPoint;
-import sharedRegions.BaggageReclaimOffice;
-import sharedRegions.DepartureTerminalEntrance;
-import sharedRegions.DepartureTerminalTransferQuay;
-import sharedRegions.RepositoryInfo;
-import sharedRegions.TemporaryStorageArea;
+import stubs.*;
+
+import java.util.Random;
+
+import static mainProject.SimulPar.LANDINGS;
+import static mainProject.SimulPar.PASSENGERS;
 
 public class AirportVClientServer {
+
     public static void main(String args[]) {
         try {
-
-            /**
-             * Shared Memory
-             */
-            RepositoryInfo repository = new RepositoryInfo();
 
             /**
              * Random generation of passenger info for simulation purposes only
              * Luggage in the plane hold, luggage lost and final destination (yes/no)
              * **/
 
-            int[][] passengersLuggage = new int [LANDINGS] [PASSENGERS];
-            boolean[][] passengersFinalDestination = new boolean [LANDINGS] [PASSENGERS];
+            int[][] passengersLuggage = new int[LANDINGS][PASSENGERS];
+            boolean[][] passengersFinalDestination = new boolean[LANDINGS][PASSENGERS];
 
             for (int i = 0; i < LANDINGS; i++) {
                 for (int j = 0; j < PASSENGERS; j++) {
-                    passengersLuggage[i][j] = new Random().nextInt(SimulPar.LUGGAGE+1);
+                    passengersLuggage[i][j] = new Random().nextInt(SimulPar.LUGGAGE + 1);
                     passengersFinalDestination[i][j] = (Math.random() < 0.5);
                 }
             }
 
             // Random generation of luggage LOST for each passenger (for simulation purposes)
-            int[][] plainHoldLuggage = new int [LANDINGS] [PASSENGERS];
+            int[][] plainHoldLuggage = new int[LANDINGS][PASSENGERS];
 
             for (int i = 0; i < LANDINGS; i++) {
                 for (int j = 0; j < PASSENGERS; j++) {
-                    plainHoldLuggage[i][j] = new Random().nextInt(passengersLuggage[i][j]+1);
+                    plainHoldLuggage[i][j] = new Random().nextInt(passengersLuggage[i][j] + 1);
                 }
             }
-            /**
-             * End simulation routines
-             */
 
-            ArrivalLounge arrivalLounge = new ArrivalLounge(repository, plainHoldLuggage, passengersFinalDestination);
-            ArrivalTerminalExit arrivalTerminalExit = new ArrivalTerminalExit(repository);
-            ArrivalTerminalTransferQuay arrivalTerminalTransferQuay = new ArrivalTerminalTransferQuay(repository);
-            BaggageCollectionPoint baggageCollectionPoint = new BaggageCollectionPoint(repository);
-            BaggageReclaimOffice baggageReclaimOffice = new BaggageReclaimOffice(repository);
-            DepartureTerminalEntrance departureTerminalEntrance = new DepartureTerminalEntrance(repository);
-            DepartureTerminalTransferQuay departureTerminalTransferQuay = new DepartureTerminalTransferQuay(repository);
-            TemporaryStorageArea temporaryStorageArea = new TemporaryStorageArea(repository);
+            RepositoryStub repositoryStub = new RepositoryStub();
 
-            arrivalTerminalExit.setDepartureTerminalEntrance(departureTerminalEntrance);
-            departureTerminalEntrance.setArrivalTerminalExit(arrivalTerminalExit);
+            ArrivalLoungeStub arrivalLoungeStub = new ArrivalLoungeStub(SimulPar.SERVER_ARRIVAL_LOUNGE_HOSTNAME,
+                                                                        SimulPar.SERVER_ARRIVAL_LOUNGE_PORT);
 
+            ArrivalTerminalTransferQuayStub arrivalTerminalTransferQuayStub = new ArrivalTerminalTransferQuayStub(SimulPar.SERVER_ARRIVAL_TERMINAL_TRANSFER_QUAY_HOSTNAME,
+                                                                                                                  SimulPar.SERVER_ARRIVAL_TERMINAL_TRANSFER_QUAY_PORT);
+
+            ArrivalTerminalExitStub arrivalTerminalExitStub = new ArrivalTerminalExitStub(SimulPar.SERVER_ARRIVAL_TERMINAL_EXIT_HOSTNAME,
+                                                                                          SimulPar.SERVER_ARRIVAL_TERMINAL_EXIT_PORT);
+
+            DepartureTerminalTransferQuayStub departureTerminalTransferQuayStub = new DepartureTerminalTransferQuayStub(SimulPar.SERVER_DEPARTURE_TERMINAL_TRANSFER_QUAY_HOSTNAME,
+                                                                                                                        SimulPar.SERVER_DEPARTURE_TERMINAL_TRANSFER_QUAY_PORT);
+
+            DepartureTerminalEntranceStub departureTerminalEntranceStub = new DepartureTerminalEntranceStub(SimulPar.SERVER_DEPARTURE_TERMINAL_ENTRANCE_HOSTNAME,
+                                                                                                            SimulPar.SERVER_DEPARTURE_TERMINAL_ENTRANCE_PORT);
+
+            BaggageCollectionPointStub baggageCollectionPointStub = new BaggageCollectionPointStub(SimulPar.SERVER_BAGGAGE_COLLECTION_POINT_HOSTNAME,
+                                                                                                   SimulPar.SERVER_BAGGAGE_COLLECTION_POINT_PORT);
+
+            BaggageReclaimOfficeStub baggageReclaimOfficeStub = new BaggageReclaimOfficeStub(SimulPar.SERVER_BAGGAGE_RECLAIM_OFFICE_HOSTNAME,
+                                                                                             SimulPar.SERVER_BAGGAGE_RECLAIM_OFFICE_PORT);
+
+            TemporaryStorageAreaStub temporaryStorageAreaStub = new TemporaryStorageAreaStub(SimulPar.SERVER_TEMPORRY_STORAGE_AREA_HOSTNAME,
+                                                                                             SimulPar.SERVER_TEMPORRY_STORAGE_AREA_PORT);
             /**
              * Entities
              **/
-            Porter porter = new Porter(arrivalLounge, temporaryStorageArea, baggageCollectionPoint);
-            BusDriver busDriver = new BusDriver(arrivalTerminalTransferQuay, departureTerminalTransferQuay);
+            Porter porter = new Porter(arrivalLoungeStub, temporaryStorageAreaStub, baggageCollectionPointStub);
+            BusDriver busDriver = new BusDriver(arrivalTerminalTransferQuayStub, departureTerminalTransferQuayStub);
             Passenger[] passengers = new Passenger[PASSENGERS];
 
             porter.start();
             busDriver.start();
 
-            repository.headerState();
-
             for (int flightNumber = 0; flightNumber < LANDINGS; flightNumber ++) {
 
-                repository.init_repository(flightNumber);           //Reset flights info
-                arrivalLounge.init_plane_hold(flightNumber);        //Create the plane hold (simulation)
-                arrivalTerminalExit.clean_up();
-                departureTerminalEntrance.clean_up();
+                repositoryStub.init_repository(flightNumber);           //Reset flights info
+                arrivalLoungeStub.init_plane_hold(flightNumber);        //Create the plane hold (simulation)
+                arrivalTerminalExitStub.clean_up();
+                departureTerminalEntranceStub.clean_up();
                 busDriver.setPassengersInTheBus(0);
 
                 for (int j = 0; j < PASSENGERS; j ++) {
                     passengers[j]=new Passenger(j,
-                                                passengersLuggage[flightNumber][j],
-                                                passengersFinalDestination[flightNumber][j],
-                                                arrivalLounge,
-                                                arrivalTerminalTransferQuay,
-                                                arrivalTerminalExit,
-                                                departureTerminalTransferQuay,
-                                                departureTerminalEntrance,
-                                                baggageCollectionPoint,
-                                                baggageReclaimOffice);
+                            passengersLuggage[flightNumber][j],
+                            passengersFinalDestination[flightNumber][j],
+                            arrivalLoungeStub,
+                            arrivalTerminalTransferQuayStub,
+                            arrivalTerminalExitStub,
+                            departureTerminalTransferQuayStub,
+                            departureTerminalEntranceStub,
+                            baggageCollectionPointStub,
+                            baggageReclaimOfficeStub);
                     passengers[j].start();
                 }
                 for (int j = 0; j < PASSENGERS; j ++) {
@@ -108,18 +105,19 @@ public class AirportVClientServer {
             porter.setKeepAlive(false);
             busDriver.setKeepAlive(false);
 
-            arrivalLounge.setPorterEndOfWork();
-            arrivalTerminalTransferQuay.setBusDriverEndOfWork();
+            arrivalLoungeStub.setPorterEndOfWork();
+            arrivalTerminalTransferQuayStub.setBusDriverEndOfWork();
 
             porter.join();
             busDriver.join();
 
-            repository.addReport();
+            //repositoryStub.addReport();
 
         }  catch (Exception ex) { System.out.println(ex); }
 
-    }
+        }
+
+
 
 }
-
 

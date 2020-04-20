@@ -3,35 +3,18 @@ package sharedRegions;
 import entities.Passenger;
 import entities.PassengerStates;
 import mainProject.SimulPar;
+import stubs.RepositoryStub;
 
-public class DepartureTerminalEntrance {
+public class DepartureTerminalEntrance implements SharedRegionInterface {
 
-    /**
-     * General Repository of Information
-     * @serialField repository
-     */
-    private RepositoryInfo repository;
+    private RepositoryStub repositoryStub;
 
-    /**
-     * Integer to get the number of passengers currently waiting to leave the airport or to check in for the next leg of the journey
-     * @serialField numberOfPassengers
-     */
     private int numberOfPassengers;
 
-    /**
-     * Arrival Terminal Exit
-     * @serialField arrivalTerminalExit
-     */
     private ArrivalTerminalExit arrivalTerminalExit;
 
-    /**
-     * Departure Terminal Entrance instantiation
-     *
-     @param repository repositoryInfo
-     *
-     */
-    public DepartureTerminalEntrance(RepositoryInfo repository){
-        this.repository = repository;
+    public DepartureTerminalEntrance(RepositoryStub repositoryStub){
+        this.repositoryStub = repositoryStub;
     }
 
     /*****  PASSENGER  FUNCTIONS *****/
@@ -42,7 +25,7 @@ public class DepartureTerminalEntrance {
      */
     public synchronized void prepareNextLeg(){
         Passenger passenger = (Passenger) Thread.currentThread();
-        repository.setPassengerState(passenger.getIdentifier(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
+        repositoryStub.setPassengerState(passenger.getIdentifier(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
         numberOfPassengers++;
         if (arrivalTerminalExit.getNumberOfPassengers() + numberOfPassengers == SimulPar.PASSENGERS) {
             notifyAll();
@@ -54,13 +37,6 @@ public class DepartureTerminalEntrance {
         }
     }
 
-    /**
-     * Set the counter of the number of passengers waiting for their fellow passengers to zero
-     *
-     */
-    public synchronized void clean_up() {
-        this.numberOfPassengers = 0;
-    }
 
     /**
      * Get the number of passengers waiting for their fellow passengers

@@ -3,6 +3,8 @@ package entities;
 import mainProject.SimulPar;
 import sharedRegions.ArrivalTerminalTransferQuay;
 import sharedRegions.DepartureTerminalTransferQuay;
+import stubs.ArrivalTerminalTransferQuayStub;
+import stubs.DepartureTerminalTransferQuayStub;
 
 public class BusDriver extends Thread {
 
@@ -10,21 +12,14 @@ public class BusDriver extends Thread {
     private int passengersInTheBus;
     private boolean keepAlive;
 
-    private ArrivalTerminalTransferQuay arrivalTerminalTransferQuay;
-    private DepartureTerminalTransferQuay departureTerminalTransferQuay;
+    private ArrivalTerminalTransferQuayStub arrivalTerminalTransferQuayStub;
+    private DepartureTerminalTransferQuayStub departureTerminalTransferQuayStub;
 
-    /**
-     * Bus Driver instantiation
-     *
-     * @param arrivalTerminalTransferQuay ArrivalTerminalTransferQuay
-     * @param departureTerminalTransferQuay DepartureTerminalTransferQuay
-     *
-     */
-    public BusDriver(ArrivalTerminalTransferQuay arrivalTerminalTransferQuay,
-                     DepartureTerminalTransferQuay departureTerminalTransferQuay){
+    public BusDriver(ArrivalTerminalTransferQuayStub arrivalTerminalTransferQuayStub,
+                     DepartureTerminalTransferQuayStub departureTerminalTransferQuayStub){
         super("Bus Driver");
-        this.arrivalTerminalTransferQuay = arrivalTerminalTransferQuay;
-        this.departureTerminalTransferQuay = departureTerminalTransferQuay;
+        this.arrivalTerminalTransferQuayStub = arrivalTerminalTransferQuayStub;
+        this.departureTerminalTransferQuayStub = departureTerminalTransferQuayStub;
         this.keepAlive = true;
     }
 
@@ -49,12 +44,12 @@ public class BusDriver extends Thread {
         activityStarted = System.nanoTime() / 1000;
         while (true) {
             this.checkWorkDayEnded();
-            if (arrivalTerminalTransferQuay.readyToDeparture()) {
-                arrivalTerminalTransferQuay.announcingBusBoarding();
-                arrivalTerminalTransferQuay.goToDepartureTerminal();
-                departureTerminalTransferQuay.parkTheBusAndLetPassOff();
-                departureTerminalTransferQuay.goToArrivalTerminal();
-                arrivalTerminalTransferQuay.parkTheBus();
+            if (arrivalTerminalTransferQuayStub.readyToDeparture()) {
+                arrivalTerminalTransferQuayStub.announcingBusBoarding();
+                arrivalTerminalTransferQuayStub.goToDepartureTerminal();
+                departureTerminalTransferQuayStub.parkTheBusAndLetPassOff();
+                departureTerminalTransferQuayStub.goToArrivalTerminal();
+                arrivalTerminalTransferQuayStub.parkTheBus();
             }
             if (!this.keepAlive) break;
         }

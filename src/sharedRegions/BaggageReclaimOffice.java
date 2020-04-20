@@ -2,23 +2,15 @@ package sharedRegions;
 
 import entities.Passenger;
 import entities.PassengerStates;
+import stubs.RepositoryStub;
 
-public class BaggageReclaimOffice {
+public class BaggageReclaimOffice implements SharedRegionInterface {
 
-    /**
-     * General Repository of Information
-     * @serialField repository
-     */
-    private RepositoryInfo repository;
+    private RepositoryStub repositoryStub;
 
-    /**
-     * Baggage Reclaim Office instantiation
-     *
-     @param repository repositoryInfo
-     *
-     */
-    public BaggageReclaimOffice(RepositoryInfo repository){
-        this.repository = repository;
+
+    public BaggageReclaimOffice(RepositoryStub repositoryStub){
+        this.repositoryStub = repositoryStub;
     }
 
     /***** PASSENGER FUNCTIONS *********/
@@ -29,8 +21,8 @@ public class BaggageReclaimOffice {
      */
     public synchronized void reportMissingBag(){
         Passenger passenger = (Passenger) Thread.currentThread();
-        repository.setPassengerState(passenger.getIdentifier(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-        repository.bagsLost++;
+        repositoryStub.setPassengerState(passenger.getIdentifier(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+        //repository.bagsLost++; //TODO: ISTO NAO PODE SER ASSIM
         try {
             passenger.sleep(2000);
         } catch (Exception e) { }

@@ -1,13 +1,6 @@
 package entities;
 
-import mainProject.SimulPar;
-import sharedRegions.ArrivalLounge;
-import sharedRegions.ArrivalTerminalExit;
-import sharedRegions.ArrivalTerminalTransferQuay;
-import sharedRegions.BaggageCollectionPoint;
-import sharedRegions.BaggageReclaimOffice;
-import sharedRegions.DepartureTerminalEntrance;
-import sharedRegions.DepartureTerminalTransferQuay;
+import stubs.*;
 
 public class Passenger extends Thread {
     private int identifier;
@@ -15,85 +8,65 @@ public class Passenger extends Thread {
     private int numberOfLuggages;
     private int numberOfCollectedLuggages;
 
-    private ArrivalLounge arrivalLounge;
-    private ArrivalTerminalTransferQuay arrivalTerminalTransferQuay;
-    private ArrivalTerminalExit arrivalTerminalExit;
-    private DepartureTerminalTransferQuay departureTerminalTransferQuay;
-    private DepartureTerminalEntrance departureTerminalEntrance;
-    private BaggageCollectionPoint baggageCollectionPoint;
-    private BaggageReclaimOffice baggageReclaimOffice;
+    private ArrivalLoungeStub arrivalLoungeStub;
+    private ArrivalTerminalTransferQuayStub arrivalTerminalTransferQuayStub;
+    private ArrivalTerminalExitStub arrivalTerminalExitStub;
+    private DepartureTerminalTransferQuayStub departureTerminalTransferQuayStub ;
+    private DepartureTerminalEntranceStub departureTerminalEntranceStub;
+    private BaggageCollectionPointStub baggageCollectionPointStub;
+    private BaggageReclaimOfficeStub baggageReclaimOfficeStub;
 
-    /**
-     * Passenger instantiation
-     *
-     * @param identifier int
-     * @param numberOfLuggages int
-     * @param isFinalDestination boolean
-     * @param arrivalLounge ArrivalLounge
-     * @param arrivalTerminalTransferQuay ArrivalTerminalTransferQuay
-     * @param arrivalTerminalExit ArrivalTerminalExit
-     * @param departureTerminalTransferQuay DepartureTerminalTransferQuay
-     * @param departureTerminalEntrance DepartureTerminalEntrance
-     * @param baggageCollectionPoint BaggageCollectionPoint
-     * @param baggageReclaimOffice BaggageReclaimOffice
-     *
-     */
     public Passenger(int identifier,
                      int numberOfLuggages,
                      boolean isFinalDestination,
-                     ArrivalLounge arrivalLounge,
-                     ArrivalTerminalTransferQuay arrivalTerminalTransferQuay,
-                     ArrivalTerminalExit arrivalTerminalExit,
-                     DepartureTerminalTransferQuay departureTerminalTransferQuay,
-                     DepartureTerminalEntrance departureTerminalEntrance,
-                     BaggageCollectionPoint baggageCollectionPoint,
-                     BaggageReclaimOffice baggageReclaimOffice){
+                     ArrivalLoungeStub arrivalLoungeStub,
+                     ArrivalTerminalTransferQuayStub arrivalTerminalTransferQuayStub,
+                     ArrivalTerminalExitStub arrivalTerminalExitStub,
+                     DepartureTerminalTransferQuayStub departureTerminalTransferQuayStub,
+                     DepartureTerminalEntranceStub departureTerminalEntranceStub,
+                     BaggageCollectionPointStub baggageCollectionPointStub,
+                     BaggageReclaimOfficeStub baggageReclaimOfficeStub){
 
         super("Passenger "+ identifier);
         this.identifier = identifier;
         this.numberOfLuggages = numberOfLuggages;
         this.isFinalDestination = isFinalDestination;
         this.numberOfCollectedLuggages = 0;
-        this.arrivalLounge = arrivalLounge;
-        this.arrivalTerminalTransferQuay = arrivalTerminalTransferQuay;
-        this.arrivalTerminalExit = arrivalTerminalExit;
-        this.departureTerminalTransferQuay = departureTerminalTransferQuay;
-        this.departureTerminalEntrance = departureTerminalEntrance;
-        this.baggageCollectionPoint = baggageCollectionPoint;
-        this.baggageReclaimOffice = baggageReclaimOffice;
+        this.arrivalLoungeStub = arrivalLoungeStub;
+        this.arrivalTerminalTransferQuayStub = arrivalTerminalTransferQuayStub;
+        this.arrivalTerminalExitStub = arrivalTerminalExitStub;
+        this.departureTerminalTransferQuayStub = departureTerminalTransferQuayStub;
+        this.departureTerminalEntranceStub = departureTerminalEntranceStub;
+        this.baggageCollectionPointStub = baggageCollectionPointStub;
+        this.baggageReclaimOfficeStub = baggageReclaimOfficeStub;
     }
 
-    /**
-     * Identifier of the Passenger
-     * */
     public int getIdentifier() {
         return identifier;
     }
 
-    /**
-     * Passenger's lifecycle
-     */
+
     @Override
     public void run() {
-        char action = arrivalLounge.whatShouldIDo(identifier, isFinalDestination, numberOfLuggages);
+        char action = arrivalLoungeStub.whatShouldIDo(identifier, isFinalDestination, numberOfLuggages);
 
         switch (action) {
             case 'B':  // B - Take a bus
-                arrivalTerminalTransferQuay.takeABus(identifier);
-                arrivalTerminalTransferQuay.waitForBus(identifier);
-                arrivalTerminalTransferQuay.enterTheBus(identifier);
-                departureTerminalTransferQuay.leaveTheBus(identifier);
-                departureTerminalEntrance.prepareNextLeg();
+                arrivalTerminalTransferQuayStub.takeABus(identifier);
+                arrivalTerminalTransferQuayStub.waitForBus(identifier);
+                arrivalTerminalTransferQuayStub.enterTheBus(identifier);
+                departureTerminalTransferQuayStub.leaveTheBus(identifier);
+                departureTerminalEntranceStub.prepareNextLeg(identifier);
                 break;
             case 'C':   // C - Collect Bag
-                baggageCollectionPoint.goCollectBag();
+                baggageCollectionPointStub.goCollectBag();
                 if (this.numberOfCollectedLuggages != numberOfLuggages) {
-                    baggageReclaimOffice.reportMissingBag();
+                    baggageReclaimOfficeStub.reportMissingBag();
                 }
-                arrivalTerminalExit.goHome();
+                arrivalTerminalExitStub.goHome();
                 break;
             case 'H':   // H - Go Home
-                arrivalTerminalExit.goHome();
+                arrivalTerminalExitStub.goHome();
                 break;
         }
 

@@ -1,6 +1,8 @@
 package commonInfra;
 
-public class BAG {
+import java.io.Serializable;
+
+public class BAG implements Serializable {
 
     private int passenger;
     private boolean isFinalDestination;

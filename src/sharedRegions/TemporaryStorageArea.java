@@ -1,43 +1,23 @@
 package sharedRegions;
 
 import commonInfra.BAG;
+import stubs.RepositoryStub;
+
 import java.util.*;
 
-public class TemporaryStorageArea {
+public class TemporaryStorageArea implements SharedRegionInterface {
 
-    /**
-     * General Repository of Information
-     * @serialField repository
-     */
-    private RepositoryInfo repository;
+    private RepositoryStub repositoryStub;
 
-    /**
-     * Queue of bags in the storeroom
-     * @serialField bags
-     */
     private Queue<BAG> bags;
 
-    /**
-     * Temporary Storage Area
-     *
-     @param repository repositoryInfo
-     *
-     */
-    public TemporaryStorageArea(RepositoryInfo repository){
-        this.repository = repository;
+    public TemporaryStorageArea(RepositoryStub repositoryStub){
+        this.repositoryStub = repositoryStub;
         this.bags = new LinkedList<>();
     }
 
-    /***** PORTER FUNCTIONS *********/
-
-    /**
-     * Porter carry's the bag to the Appropriate Store
-     *
-     @param bag BAG
-     *
-     */
     public synchronized void carryItToAppropriateStore(BAG bag) {
         this.bags.add(bag);
-        this.repository.registerLuggageInStoreRoom();
+        this.repositoryStub.registerLuggageInStoreRoom();
     }
 }

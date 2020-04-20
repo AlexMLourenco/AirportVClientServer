@@ -10,7 +10,7 @@ import entities.PassengerStates;
 import entities.PorterStates;
 import mainProject.SimulPar;
 
-public class RepositoryInfo {
+public class Repository implements SharedRegionInterface {
 
     /**** Report Values ****/
     static int passengersFinalDestination = 0;
@@ -57,19 +57,15 @@ public class RepositoryInfo {
     int busWaitingQueue[];              //Passengers Waiting Queue
     int busSeats[];                     //Passengers Seated on the Bus
 
-    /**
-     * General Repository Of Information instantiation
-     *
-     * Saves the loggs in a file
-     */
-    public RepositoryInfo() throws FileNotFoundException {
-        f = new File(SimulPar.FILENAME);
-        pw = new PrintWriter(f);
+
+    public Repository() throws FileNotFoundException {
+        //f = new File(SimulPar.FILENAME);
+        //pw = new PrintWriter(f);
 
         String header = headerState();
         header = header.concat("\n");
         System.out.println(header);
-        pw.write(header);
+        //pw.write(header);
     }
 
     /**
@@ -290,8 +286,8 @@ public class RepositoryInfo {
         String output = logInternalState();
         output = output.concat("\n");
         System.out.println(output);
-        pw.write(output);
-        pw.flush();
+        //pw.write(output);
+        //pw.flush();
     }
 
     /****** LOGGING ******/
@@ -372,7 +368,7 @@ public class RepositoryInfo {
     public void addReport() {
         String output = report();
         System.out.println(output);
-        pw.write(output);
-        pw.flush();
+        //pw.write(output);
+        //pw.flush();
     }
 }

@@ -4,65 +4,63 @@ import commonInfra.BAG;
 import sharedRegions.ArrivalLounge;
 import sharedRegions.BaggageCollectionPoint;
 import sharedRegions.TemporaryStorageArea;
+import stubs.ArrivalLoungeStub;
+import stubs.BaggageCollectionPointStub;
+import stubs.TemporaryStorageAreaStub;
 
 public class Porter extends Thread {
 
-    private ArrivalLounge arrivalLounge;
-    private TemporaryStorageArea temporaryStorageArea;
-    private BaggageCollectionPoint baggageCollectionPoint;
+    private ArrivalLoungeStub arrivalLoungeStub;
+    private TemporaryStorageAreaStub temporaryStorageAreaStub;
+    private BaggageCollectionPointStub baggageCollectionPointStub;
+
+    private StateInterface entityState;
+
     private boolean keepAlive;
 
-    /**
-     * Porter instantiation
-     *
-     * @param arrivalLounge ArrivalLounge
-     * @param temporaryStorageArea TemporaryStorageArea
-     * @param baggageCollectionPoint BaggageCollectionPoint
-     *
-     */
-    public Porter(ArrivalLounge arrivalLounge,
-                  TemporaryStorageArea temporaryStorageArea,
-                  BaggageCollectionPoint baggageCollectionPoint) {
+    public Porter(ArrivalLoungeStub arrivalLoungeStub,
+                  TemporaryStorageAreaStub temporaryStorageAreaStub,
+                  BaggageCollectionPointStub baggageCollectionPointStub) {
         super("Porter");
-        this.arrivalLounge= arrivalLounge;
-        this.temporaryStorageArea= temporaryStorageArea;
-        this.baggageCollectionPoint = baggageCollectionPoint;
+        this.arrivalLoungeStub= arrivalLoungeStub;
+        this.temporaryStorageAreaStub= temporaryStorageAreaStub;
+        this.baggageCollectionPointStub = baggageCollectionPointStub;
         this.keepAlive = true;
     }
 
-    /**
-     * Porter's lifecycle
-     */
     @Override
     public void run() {
         Boolean planeHoldEmpty;
         while (true) {
-            arrivalLounge.takeARest();
+            arrivalLoungeStub.takeARest();
             if (!this.keepAlive) break;
 
-            planeHoldEmpty = arrivalLounge.noMoreBagsToCollect();
-            if (planeHoldEmpty) baggageCollectionPoint.warningNoMoreBagsInThePlaneHold();
+            planeHoldEmpty = arrivalLoungeStub.noMoreBagsToCollect();
+            if (planeHoldEmpty) baggageCollectionPointStub.warningNoMoreBagsInThePlaneHold();
 
             while (!planeHoldEmpty) {
 
-                BAG bag = arrivalLounge.tryToCollectABag();
+                BAG bag = arrivalLoungeStub.tryToCollectABag();
                 if (bag.isFinalDestination()) {
-                    baggageCollectionPoint.carryItToAppropriateStore(bag);
+                    baggageCollectionPointStub.carryItToAppropriateStore(bag);
                 } else {
-                    temporaryStorageArea.carryItToAppropriateStore(bag); }
+                    temporaryStorageAreaStub.carryItToAppropriateStore(bag); }
 
-                planeHoldEmpty = arrivalLounge.noMoreBagsToCollect();
+                planeHoldEmpty = arrivalLoungeStub.noMoreBagsToCollect();
 
-                if (planeHoldEmpty) baggageCollectionPoint.warningNoMoreBagsInThePlaneHold();
+                if (planeHoldEmpty) baggageCollectionPointStub.warningNoMoreBagsInThePlaneHold();
             }
         }
     }
 
-    /**
-     * Boolean to check if the Porter's thread continues alive or not
-     *
-     * @param keepAlive boolean
-     */
+    public StateInterface getEntityState() {
+        return entityState;
+    }
+
+    public void setEntityState(StateInterface entityState) {
+        this.entityState = entityState;
+    }
+
     public void setKeepAlive(boolean keepAlive) {
         this.keepAlive = keepAlive;
     }

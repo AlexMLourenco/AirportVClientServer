@@ -7,14 +7,15 @@ import java.util.Random;
 import entities.BusDriver;
 import entities.BusDriverStates;
 import mainProject.SimulPar;
+import stubs.RepositoryStub;
 
-public class ArrivalTerminalTransferQuay {
+public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
 
     /**
      * General Repository of Information
      * @serialField repository
      */
-    private RepositoryInfo repository;
+    private RepositoryStub repositoryStub;
 
     /**
      * Queue of passengers waiting for a Bus
@@ -33,29 +34,18 @@ public class ArrivalTerminalTransferQuay {
      */
     private boolean busDriverReadyToReceivePassengers = false;
 
-    /**
-     * Arrival Terminal Transfer Quay instantiation
-     *
-     @param repository repositoryInfo
-     *
-     */
-    public ArrivalTerminalTransferQuay(RepositoryInfo repository) {
-        this.repository = repository;
+
+    public ArrivalTerminalTransferQuay(RepositoryStub repositoryStub) {
+        this.repositoryStub = repositoryStub;
         this.waitingForBus = new LinkedList<>();
         this.inTheBus = new LinkedList<>();
     }
 
     /***** PASSENGER FUNCTIONS *********/
 
-    /**
-     * Passenger is put in the waiting list to enter the Bus
-     *
-     @param id int
-     *
-     */
     public synchronized void takeABus(int id) {
         waitingForBus.add(id);
-        repository.registerPassengerToTakeABus(id);
+        repositoryStub.registerPassengerToTakeABus(id);
         if (waitingForBus.size() == SimulPar.BUS_CAPACITY) {
             notifyAll();  //If we have enough persons to wake up the driver let's do it
         }
@@ -92,7 +82,7 @@ public class ArrivalTerminalTransferQuay {
      */
     public synchronized void enterTheBus(int id) {
         inTheBus.add(id);
-        repository.registerPassengerToEnterTheBus(id);
+        repositoryStub.registerPassengerToEnterTheBus(id);
         notifyAll();
     }
 
@@ -118,7 +108,7 @@ public class ArrivalTerminalTransferQuay {
      */
     public void goToDepartureTerminal() {
         try {
-            repository.setBusDriverState(BusDriverStates.DRIVING_FORWARD);
+            repositoryStub.setBusDriverState(BusDriverStates.DRIVING_FORWARD);
             Thread.currentThread().sleep((long) (new Random().nextInt(SimulPar.MAX_SLEEP - SimulPar.MIN_SLEEP + 1) + SimulPar.MAX_SLEEP));
         } catch (InterruptedException e) {
         }
@@ -129,7 +119,7 @@ public class ArrivalTerminalTransferQuay {
      *
      */
     public void parkTheBus() {
-        repository.setBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        repositoryStub.setBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
     }
 
     /**
