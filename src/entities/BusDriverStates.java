@@ -1,6 +1,8 @@
 package entities;
 
-public enum BusDriverStates implements StateInterface {
+import java.io.Serializable;
+
+public enum BusDriverStates implements StateInterface, Serializable {
     PARKING_AT_THE_ARRIVAL_TERMINAL("PKAT"),
     DRIVING_FORWARD("DRFW"),
     PARKING_AT_THE_DEPARTURE_TERMINAL("PKDT"),

@@ -43,6 +43,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
 
     /***** PASSENGER FUNCTIONS *********/
 
+    /** DONE **/
     public synchronized void takeABus(int id) {
         waitingForBus.add(id);
         repositoryStub.registerPassengerToTakeABus(id);
@@ -51,12 +52,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         }
     }
 
-    /**
-     * Passenger is waiting for the Bus to arrive
-     *
-     @param id int
-     *
-     */
+    /** DONE **/
     public synchronized void waitForBus(int id) {
         while (true) {
             try {
@@ -74,12 +70,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         }
     }
 
-    /**
-     * Passenger is put in the list of passengers inside the Bus
-     *
-     @param id int
-     *
-     */
+    /** DONE **/
     public synchronized void enterTheBus(int id) {
         inTheBus.add(id);
         repositoryStub.registerPassengerToEnterTheBus(id);
@@ -88,11 +79,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
 
     /***** DRIVER FUNCTIONS *********/
 
-    /**
-     * Bus Driver is ready to Departure
-     * Bus Driver reach his schedule
-     *
-     */
+    /** DONE **/
     public synchronized boolean readyToDeparture() {
         this.busDriverReadyToReceivePassengers = false;
         try {
@@ -102,10 +89,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         return (waitingForBus.size() > 0);
     }
 
-    /**
-     * Bus Driver drives to the Departure Terminal
-     *
-     */
+    /** DONE **/
     public void goToDepartureTerminal() {
         try {
             repositoryStub.setBusDriverState(BusDriverStates.DRIVING_FORWARD);
@@ -114,24 +98,16 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         }
     }
 
-    /**
-     * Bus Driver parks the Bus
-     *
-     */
+    /** DONE **/
     public void parkTheBus() {
         repositoryStub.setBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
     }
 
-    /**
-     * Bus Driver announce Bus Boarding of the Passengers
-     *
-     */
-    public synchronized void announcingBusBoarding() {
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
+    /** DONE **/
+    public synchronized int announcingBusBoarding() {
         this.busDriverReadyToReceivePassengers = true;
         this.inTheBus.clear();
         int numberOfPassengers = (waitingForBus.size() > 3 ? 3 : waitingForBus.size());
-        busDriver.setPassengersInTheBus(numberOfPassengers);
         notifyAll();
         try {
             while  (numberOfPassengers != inTheBus.size()) {
@@ -144,12 +120,10 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         for (int i = 0; i < numberOfPassengers; i++) {
             waitingForBus.poll();
         }
+        return numberOfPassengers;
     }
 
-    /**
-     * Set if Bus Driver's work day is over
-     *
-     */
+    /** DONE **/
     public synchronized void setBusDriverEndOfWork() {
         notifyAll();
     }

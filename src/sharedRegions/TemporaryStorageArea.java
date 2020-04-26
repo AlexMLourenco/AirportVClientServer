@@ -16,6 +16,7 @@ public class TemporaryStorageArea implements SharedRegionInterface {
         this.bags = new LinkedList<>();
     }
 
+    /*** DONE **/
     public synchronized void carryItToAppropriateStore(BAG bag) {
         this.bags.add(bag);
         this.repositoryStub.registerLuggageInStoreRoom();

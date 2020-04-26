@@ -77,22 +77,22 @@ public class AirportVClientServer {
             for (int flightNumber = 0; flightNumber < LANDINGS; flightNumber ++) {
 
                 repositoryStub.init_repository(flightNumber);           //Reset flights info
-                arrivalLoungeStub.init_plane_hold(flightNumber);        //Create the plane hold (simulation)
+                arrivalLoungeStub.init_plane_hold(flightNumber, plainHoldLuggage, passengersFinalDestination);        //Create the plane hold (simulation)
                 arrivalTerminalExitStub.clean_up();
                 departureTerminalEntranceStub.clean_up();
                 busDriver.setPassengersInTheBus(0);
 
                 for (int j = 0; j < PASSENGERS; j ++) {
                     passengers[j]=new Passenger(j,
-                            passengersLuggage[flightNumber][j],
-                            passengersFinalDestination[flightNumber][j],
-                            arrivalLoungeStub,
-                            arrivalTerminalTransferQuayStub,
-                            arrivalTerminalExitStub,
-                            departureTerminalTransferQuayStub,
-                            departureTerminalEntranceStub,
-                            baggageCollectionPointStub,
-                            baggageReclaimOfficeStub);
+                                                passengersLuggage[flightNumber][j],
+                                                passengersFinalDestination[flightNumber][j],
+                                                arrivalLoungeStub,
+                                                arrivalTerminalTransferQuayStub,
+                                                arrivalTerminalExitStub,
+                                                departureTerminalTransferQuayStub,
+                                                departureTerminalEntranceStub,
+                                                baggageCollectionPointStub,
+                                                baggageReclaimOfficeStub);
                     passengers[j].start();
                 }
                 for (int j = 0; j < PASSENGERS; j ++) {

@@ -1,8 +1,7 @@
 package stubs;
 
-import common.Message;
-import common.MessageType;
-import entities.Porter;
+import commonInfra.Message;
+import commonInfra.MessageType;
 
 public class ArrivalTerminalTransferQuayStub extends GenericStub{
 
@@ -11,16 +10,43 @@ public class ArrivalTerminalTransferQuayStub extends GenericStub{
     }
 
     public boolean readyToDeparture() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.ARRIVAL_TERMINAL_TRANSFER_QUAY_READY_TO_DEPARTUE);
+
+        this.process(outMessage);
+
         return true;
     }
 
-    public void announcingBusBoarding() {
+    public int announcingBusBoarding() {
+        Message outMessage, inMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.ARRIVAL_TERMINAL_TRANSFER_QUAY_ANNOUNCING_BUS_BOARDING);
+
+        inMessage = this.process(outMessage);
+        return inMessage.getIntValue();
     }
 
     public void goToDepartureTerminal() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.ARRIVAL_TERMINAL_TRANSFER_QUAY_GO_TO_DEPARTURE_TERMINAL);
+
+        this.process(outMessage);
+
     }
 
     public void parkTheBus() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.ARRIVAL_TERMINAL_TRANSFER_QUAY_PARK_THE_BUS);
+
+        this.process(outMessage);
     }
 
     public void takeABus(int identifier) {
@@ -33,6 +59,12 @@ public class ArrivalTerminalTransferQuayStub extends GenericStub{
         this.process(outMessage);
     }
     public void setBusDriverEndOfWork() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.ARRIVAL_TERMINAL_TRANSFER_QUAY_SET_BUS_DRIVER_END_OF_WORK);
+
+        this.process(outMessage);
 
     }
     public void enterTheBus(int identifier) {

@@ -1,7 +1,7 @@
 package proxies;
 
-import common.Message;
-import common.ServiceProvider;
+import commonInfra.Message;
+import commonInfra.MessageType;
 import sharedRegions.ArrivalTerminalExit;
 
 public class ArrivalTerminalExitProxy implements SharedRegionProxyInterface {
@@ -14,13 +14,23 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxyInterface {
 
     public Message processAndReply(Message message){
         Message response = new Message();
-        ServiceProvider sp = (ServiceProvider) Thread.currentThread();
-
+        System.out.println("Processing Message Type: " + message.getMessageType());
         switch(message.getMessageType()) {
             case ARRIVAL_TERMINAL_EXIT_GO_HOME:
-                arrivalTerminalExit.goHome();
+                arrivalTerminalExit.goHome(message.getIdentifier());
+                break;
+            case ARRIVAL_TERMINAL_EXIT_CLEAN_UP:
+                arrivalTerminalExit.cleanUp();
+                break;
+            case ARRIVAL_TERMINAL_EXIT_GET_NUMBER_OF_PASSENGERS:
+                response.setIntValue(arrivalTerminalExit.getNumberOfPassengers());
+                break;
+            case ARRIVAL_TERMINAL_EXIT_READY_TO_LEAVE:
+                arrivalTerminalExit.readyToLeave();
                 break;
         }
+        response.setMessageType(MessageType.REPLY_OK);
+        System.out.println("Replying Message: " + response);
         return response;
     }
 

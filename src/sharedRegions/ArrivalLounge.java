@@ -10,10 +10,6 @@ public class ArrivalLounge implements SharedRegionInterface {
 
     private RepositoryStub repositoryStub;
 
-    /*** simulation purposes only ***/
-    private int[][] plainHoldLuggage;
-    private boolean[][] passengersFinalDestination;
-
     Stack<BAG> planeHold;
 
     private int passengersCount;
@@ -22,45 +18,31 @@ public class ArrivalLounge implements SharedRegionInterface {
     public ArrivalLounge(RepositoryStub repositoryStub) {
         this.repositoryStub = repositoryStub;
         this.planeHold = new Stack<>();
-        //this.plainHoldLuggage = plainHoldLuggage;
-        //this.passengersFinalDestination = passengersFinalDestination;
     }
 
-
-
-
-
-    /*****  PORTER FUNCTIONS *****/
-
-    /**
-     * Porter takes a Rest
-     */
+    /** DONE **/
     public synchronized void takeARest() {
-        // We have to wait until all the passengers got out of the plane and have bags to collect in the plane hold
         try {
             wait();
         } catch (InterruptedException e) {}
     }
 
-    /**
-     * Porter has no more bags to collect from the plane hold
-     */
+    /** DONE **/
     public synchronized boolean noMoreBagsToCollect() {
         return planeHold.empty();
     }
 
-    /**
-     * Porter tries to collect a bag from the plane hold
-     */
+    /** DONE **/
     public synchronized BAG tryToCollectABag() {
         repositoryStub.removeLuggageInPlainHold();
         BAG b = planeHold.pop();
         return b;
     }
 
+
     /***** PASSENGER FUNCTIONS *********/
 
-
+    /** DONE **/
     public synchronized char whatShouldIDo(int id, boolean isFinalDestination, int numberOfLuggages) {
         this.passengersCount ++;
         char action = repositoryStub.passengerArrived(id, isFinalDestination, numberOfLuggages);
@@ -72,7 +54,7 @@ public class ArrivalLounge implements SharedRegionInterface {
 
     /***** MAIN THREAD *********/
 
-    public synchronized void init_plane_hold(int flightNumber) {
+    public synchronized void init_plane_hold(int flightNumber, int [][] plainHoldLuggage, boolean [][] passengersFinalDestination ) {
         this.passengersCount = 0;
         planeHold.clear();
         for (int i = 0; i < SimulPar.PASSENGERS; i ++) {

@@ -284,7 +284,7 @@ public class Repository implements SharedRegionInterface {
      */
     private void export() {
         String output = logInternalState();
-        output = output.concat("\n");
+        //output = output.concat("\n");
         System.out.println(output);
         //pw.write(output);
         //pw.flush();
@@ -298,7 +298,7 @@ public class Repository implements SharedRegionInterface {
      */
     public String headerState() {
         String str = "PLANE    PORTER                  DRIVER\n";
-        str = str.concat("FN BN  Stat CB SR   Stat  Q1 Q2 Q3 Q4 Q5 Q6  S1 S2 S3\n");
+        str = str.concat("FN BN  Stat CB SR   Stat  Q1 Q2 Q3 Q4 Q5 Q6  S1 S2 S3 ");
         str = str.concat("St1 Si1 NR1 NA1 St2 Si2 NR2 NA2 St3 Si3 NR3 NA3 St4 Si4 NR4 NA4 St5 Si5 NR5 NA5 St6 Si6 NR6 NA6");
         return str;
     }
@@ -325,7 +325,7 @@ public class Repository implements SharedRegionInterface {
                 str = str.concat("-  ");
             }
         }
-        str = str.concat("\n");
+        str = str.concat(" ");
 
         for (int i = 0; i < SimulPar.PASSENGERS; i++) {
             str = str.concat(String.format("%-4s", passengerStates[i].getValue()));

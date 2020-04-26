@@ -1,7 +1,7 @@
 package mainProject;
 
-import common.ServerCom;
-import common.ServiceProvider;
+import commonInfra.ServerCom;
+import commonInfra.ServiceProvider;
 import proxies.RepositoryProxy;
 import sharedRegions.Repository;
 
@@ -17,7 +17,7 @@ public class RepositoryMain {
         Repository repository = new Repository();
         RepositoryProxy repositoryProxy = new RepositoryProxy(repository);
 
-        serverCom = new ServerCom(SimulPar.SERVER_REPOSITORY_PORT,1000);
+        serverCom = new ServerCom(SimulPar.SERVER_REPOSITORY_PORT,0);
         serverCom.start();
 
         while(!repositoryProxy.simulationFinished()) {

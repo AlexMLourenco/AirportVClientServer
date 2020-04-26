@@ -1,6 +1,7 @@
-package common;
+package commonInfra;
 
 import commonInfra.BAG;
+import commonInfra.MessageType;
 import entities.StateInterface;
 
 import java.io.Serializable;
@@ -17,6 +18,9 @@ public class Message implements Serializable {
     private int intValue;
     private boolean booleanValue;
     private char charValue;
+
+    private int[][] intArray;
+    private boolean[][] booleanArray;
 
     private BAG bag;
 
@@ -79,5 +83,26 @@ public class Message implements Serializable {
 
     public void setCharValue(char charValue) {
         this.charValue = charValue;
+    }
+
+    public int[][] getIntArray() {
+        return intArray;
+    }
+
+    public void setIntArray(int[][] intArray) {
+        this.intArray = intArray;
+    }
+
+    public boolean[][] getBooleanArray() {
+        return booleanArray;
+    }
+
+    public void setBooleanArray(boolean[][] booleanArray) {
+        this.booleanArray = booleanArray;
+    }
+
+    @Override
+    public String toString() {
+        return "Message: " + this.getMessageType();
     }
 }

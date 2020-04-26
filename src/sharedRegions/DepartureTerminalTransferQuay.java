@@ -18,7 +18,7 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
     }
 
     /***** PASSENGER FUNCTIONS *********/
-
+    /** DONE **/
     public synchronized void leaveTheBus(int id){
         try {
             wait();
@@ -32,14 +32,10 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
 
     /***** BUS DRIVER FUNCTIONS *********/
 
-    /**
-     * Bus Driver parks the Bus and let the Passengers off
-     *
-     */
-    public synchronized void parkTheBusAndLetPassOff(){
+    /** DONE **/
+    public synchronized void parkTheBusAndLetPassOff(int passengersOnTheBus){
         repositoryStub.setBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
-        passengersOnTheBus = busDriver.getPassengersInTheBus();
+        this.passengersOnTheBus = passengersOnTheBus;
         notifyAll(); //Notify the passengers that they can start leaving the bus
         try {
             wait(); //wait for the last passenger to leave the bus
@@ -48,10 +44,7 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
         }
     }
 
-    /**
-     * Bus Driver drives to the Arrival Terminal
-     *
-     */
+    /** DONE **/
     public synchronized void goToArrivalTerminal(){
         repositoryStub.setBusDriverState(BusDriverStates.DRIVING_BACKWARD);
         try {

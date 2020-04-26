@@ -1,9 +1,8 @@
 package stubs;
 
-import common.Message;
-import common.MessageType;
+import commonInfra.Message;
+import commonInfra.MessageType;
 import commonInfra.BAG;
-import entities.Porter;
 
 public class ArrivalLoungeStub extends GenericStub{
 
@@ -13,36 +12,55 @@ public class ArrivalLoungeStub extends GenericStub{
     }
 
     public void setPorterEndOfWork() {
+        Message outMessage;
 
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.ARRIVAL_LOUNGE_SET_PORTER_END_OF_WORK);
+
+        this.process(outMessage);
     }
+
     public void takeARest() {
-        Message outMessage, inMessage;
-        Porter porter = (Porter) Thread.currentThread();
+        Message outMessage;
 
         outMessage= new Message();
         outMessage.setMessageType(MessageType.ARRIVAL_LOUNGE_TAKE_A_REST);
 
-        inMessage = this.process(outMessage);
-
-        porter.setEntityState(inMessage.getEntityState());
+        this.process(outMessage);
     }
 
-    public void init_plane_hold(int flightNumber) {
+    public void init_plane_hold(int flightNumber, int [][] plainHoldLuggage, boolean [][] passengersFinalDestination ) {
         Message outMessage;
 
         outMessage= new Message();
         outMessage.setMessageType(MessageType.ARRIVAL_LOUNGE_INIT_PLANE_HOLD);
         outMessage.setIntValue(flightNumber);
+        outMessage.setIntArray(plainHoldLuggage);
+        outMessage.setBooleanArray(passengersFinalDestination);
 
         this.process(outMessage);
     }
 
     public Boolean noMoreBagsToCollect() {
-        return  true;
+        Message outMessage, inMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.ARRIVAL_LOUNGE_NO_MORE_BAGS_TO_COLLECT);
+
+        inMessage = this.process(outMessage);
+
+        return inMessage.getBooleanValue();
     }
 
     public BAG tryToCollectABag() {
-        return null;
+        Message outMessage, inMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.ARRIVAL_LOUNGE_TRY_TO_COLLECT_A_BAG);
+
+        inMessage = this.process(outMessage);
+
+        return inMessage.getBag();
     }
 
     public char whatShouldIDo(int identifier, boolean isFinalDestination, int numberOfLuggages) {

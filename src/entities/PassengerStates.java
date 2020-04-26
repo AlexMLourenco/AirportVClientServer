@@ -1,6 +1,8 @@
 package entities;
 
-public enum PassengerStates implements StateInterface{
+import java.io.Serializable;
+
+public enum PassengerStates implements StateInterface, Serializable {
     WHAT_SHOULD_I_DO("WSD"),
     AT_THE_ARRIVAL_TRANSFER_TERMINAL("ATT"),
     TERMINAL_TRANSFER("TRT"),

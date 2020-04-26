@@ -107,6 +107,7 @@ public class SimulPar {
 
         return null;
     }
+
     public static int getPortForSharedRegion(String region) {
         if (region.equalsIgnoreCase("ArrivalTerminalExit")){
             return SERVER_ARRIVAL_TERMINAL_EXIT_PORT;

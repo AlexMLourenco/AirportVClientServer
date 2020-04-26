@@ -1,23 +1,23 @@
-package common;
+package commonInfra;
+
+import commonInfra.GenericCom;
 
 import java.io.*;
 import java.net.*;
 
-public class ClientCom extends GenericCom{
+public class ClientCom extends GenericCom {
 
     private Socket socket = null;
 
     private String hostname = null;
     private int port;
 
-    public ClientCom (String hostname, int port)
-    {
+    public ClientCom (String hostname, int port) {
         this.hostname = hostname;
         this.port = port;
     }
 
-    public boolean open ()
-    {
+    public boolean open () {
         String errorMessage = Thread.currentThread ().getName () + ": ";
         boolean keepAlive = false;
         SocketAddress serverAddress = new InetSocketAddress(hostname, port);
@@ -48,12 +48,10 @@ public class ClientCom extends GenericCom{
             System.exit (1);
         }
 
-
         try {
             this.setOut(new ObjectOutputStream (socket.getOutputStream ()));
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             errorMessage = errorMessage.concat(String.format("Could not open OUT channel on the socket %s - %d", hostname,port));
             System.out.println(errorMessage);
             e.printStackTrace ();
@@ -63,17 +61,14 @@ public class ClientCom extends GenericCom{
         try {
             this.setIn(new ObjectInputStream (socket.getInputStream ()));
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             errorMessage = errorMessage.concat(String.format("Could not open IN channel on the socket %s - %d", hostname,port));
             System.out.println(errorMessage);
             e.printStackTrace ();
             System.exit (1);
         }
-
         return (keepAlive);
     }
-
 
     public void close () {
         String errorMessage = Thread.currentThread ().getName () + ": ";
@@ -106,6 +101,4 @@ public class ClientCom extends GenericCom{
             System.exit (1);
         }
     }
-
-
 }

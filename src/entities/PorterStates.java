@@ -1,6 +1,8 @@
 package entities;
 
-public enum PorterStates implements StateInterface {
+import java.io.Serializable;
+
+public enum PorterStates implements StateInterface, Serializable {
     WAITING_FOR_A_PLANE_TO_LAND ("WPTL"),
     AT_THE_PLANES_HOLD("APLH"),
     AT_THE_LUGGAGE_BELT_CONVEYOR("ALCB"),

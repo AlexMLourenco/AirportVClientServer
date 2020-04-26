@@ -1,20 +1,21 @@
 package sharedRegions;
 
-import entities.Passenger;
 import entities.PassengerStates;
 import mainProject.SimulPar;
+import stubs.ArrivalTerminalExitStub;
 import stubs.RepositoryStub;
 
 public class DepartureTerminalEntrance implements SharedRegionInterface {
 
     private RepositoryStub repositoryStub;
+    private ArrivalTerminalExitStub arrivalTerminalExitStub;
 
     private int numberOfPassengers;
 
-    private ArrivalTerminalExit arrivalTerminalExit;
-
-    public DepartureTerminalEntrance(RepositoryStub repositoryStub){
+    public DepartureTerminalEntrance(RepositoryStub repositoryStub,
+                                     ArrivalTerminalExitStub arrivalTerminalExitStub){
         this.repositoryStub = repositoryStub;
+        this.arrivalTerminalExitStub = arrivalTerminalExitStub;
     }
 
     /*****  PASSENGER  FUNCTIONS *****/
@@ -23,13 +24,12 @@ public class DepartureTerminalEntrance implements SharedRegionInterface {
      * Passenger is in the departure terminal to prepare the next Leg of the journey
      *
      */
-    public synchronized void prepareNextLeg(){
-        Passenger passenger = (Passenger) Thread.currentThread();
-        repositoryStub.setPassengerState(passenger.getIdentifier(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
+    public synchronized void prepareNextLeg(int id){
+        repositoryStub.setPassengerState(id, PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
         numberOfPassengers++;
-        if (arrivalTerminalExit.getNumberOfPassengers() + numberOfPassengers == SimulPar.PASSENGERS) {
+        if (arrivalTerminalExitStub.getNumberOfPassengers() + numberOfPassengers == SimulPar.PASSENGERS) {
             notifyAll();
-            arrivalTerminalExit.readyToLeave();
+            arrivalTerminalExitStub.readyToLeave();
         } else{
             try {
                 wait();
@@ -46,13 +46,6 @@ public class DepartureTerminalEntrance implements SharedRegionInterface {
         return numberOfPassengers;
     }
 
-    /**
-     * Set the Arrival Terminal Exit memory zone
-     *
-     */
-    public void setArrivalTerminalExit(ArrivalTerminalExit arrivalTerminalExit) {
-        this.arrivalTerminalExit = arrivalTerminalExit;
-    }
 
     /**
      * Wake the passengers when when everyone is ready to leave the airport or check in for the next leg of the journey
@@ -60,5 +53,9 @@ public class DepartureTerminalEntrance implements SharedRegionInterface {
      */
     public synchronized void readyToLeave() {
         notifyAll();
+    }
+
+    public synchronized void cleanUp() {
+        this.numberOfPassengers = 0;
     }
 }

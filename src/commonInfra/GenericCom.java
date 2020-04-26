@@ -1,4 +1,4 @@
-package common;
+package commonInfra;
 
 import java.io.*;
 
@@ -16,7 +16,8 @@ public class GenericCom {
 
         try {
             inObject = in.readObject ();
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             if (ex instanceof InvalidClassException) {
                 errorMessage = errorMessage.concat("Could not deserialize the object!");
             } else if (ex instanceof IOException) {
@@ -24,6 +25,7 @@ public class GenericCom {
             } else if (ex instanceof ClassNotFoundException) {
                 errorMessage = errorMessage.concat("Unknown data type!");
             }
+
             System.out.println(errorMessage);
             ex.printStackTrace ();
             System.exit (1);
@@ -36,7 +38,8 @@ public class GenericCom {
         String errorMessage = Thread.currentThread ().getName () + ": ";
         try {
             out.writeObject (outObject);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             if (ex instanceof  InvalidClassException ) {
                 errorMessage = errorMessage.concat("Could not serialize object!");
             } else if (ex instanceof NotSerializableException) {

@@ -3,29 +3,33 @@ package sharedRegions;
 import entities.Passenger;
 import entities.PassengerStates;
 import mainProject.SimulPar;
+import stubs.DepartureTerminalEntranceStub;
 import stubs.RepositoryStub;
 
 public class ArrivalTerminalExit implements SharedRegionInterface {
 
     private RepositoryStub repositoryStub;
+    private DepartureTerminalEntranceStub departureTerminalEntranceStub;
 
     private int numberOfPassengers;
 
-    private DepartureTerminalEntrance departureTerminalEntrance;
-
-    public ArrivalTerminalExit(RepositoryStub repositoryStub){
+    public ArrivalTerminalExit(RepositoryStub repositoryStub,
+                               DepartureTerminalEntranceStub departureTerminalEntranceStub){
         this.repositoryStub = repositoryStub;
+        this.departureTerminalEntranceStub = departureTerminalEntranceStub;
     }
 
-    /***** PASSENGER FUNCTIONS *********/
 
-    public synchronized void goHome(){
-        Passenger passenger = (Passenger) Thread.currentThread();
-        repositoryStub.setPassengerState(passenger.getIdentifier(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+    public synchronized void cleanUp() {
+        this.numberOfPassengers = 0;
+    }
+
+    public synchronized void goHome(int id){
+        repositoryStub.setPassengerState(id, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
         numberOfPassengers++;
-        if (departureTerminalEntrance.getNumberOfPassengers() + numberOfPassengers == SimulPar.PASSENGERS) {
+        if (departureTerminalEntranceStub.getNumberOfPassengers() + numberOfPassengers == SimulPar.PASSENGERS) {
             notifyAll();
-            departureTerminalEntrance.readyToLeave();
+            departureTerminalEntranceStub.readyToLeave();
         } else{
             try {
                 wait();
@@ -41,13 +45,7 @@ public class ArrivalTerminalExit implements SharedRegionInterface {
         return numberOfPassengers;
     }
 
-    /**
-     * Set the Departure Terminal Entrance memory zone
-     *
-     */
-    public void setDepartureTerminalEntrance(DepartureTerminalEntrance departureTerminalEntrance) {
-        this.departureTerminalEntrance = departureTerminalEntrance;
-    }
+
 
     /**
      * Wake the passengers when when everyone is ready to leave the airport or check in for the next leg of the journey

@@ -15,16 +15,11 @@ public class BaggageReclaimOffice implements SharedRegionInterface {
 
     /***** PASSENGER FUNCTIONS *********/
 
-    /**
-     * Passengers reports a missing bag
-     *
-     */
-    public synchronized void reportMissingBag(){
-        Passenger passenger = (Passenger) Thread.currentThread();
-        repositoryStub.setPassengerState(passenger.getIdentifier(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-        //repository.bagsLost++; //TODO: ISTO NAO PODE SER ASSIM
+    /** DONE **/
+    public synchronized void reportMissingBag(int identifier){
+        repositoryStub.setPassengerState(identifier, PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         try {
-            passenger.sleep(2000);
+            Thread.currentThread().sleep(2000);
         } catch (Exception e) { }
 
     }

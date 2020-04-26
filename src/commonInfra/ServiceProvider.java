@@ -1,8 +1,8 @@
-package common;
+package commonInfra;
 
 import proxies.SharedRegionProxyInterface;
 
-public class ServiceProvider extends Thread implements PorterInterface, PassengerInterface, BusDriverInterface {
+public class ServiceProvider extends Thread  {
 
     private SharedRegionProxyInterface sharedRegion;
     private ServerCom serverCom;
@@ -22,7 +22,4 @@ public class ServiceProvider extends Thread implements PorterInterface, Passenge
         serverCom.writeObject(msg);
         serverCom.close();
     }
-
-
-
 }

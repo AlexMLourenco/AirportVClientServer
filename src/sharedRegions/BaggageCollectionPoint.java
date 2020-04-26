@@ -37,22 +37,14 @@ public class BaggageCollectionPoint implements SharedRegionInterface {
 
     /***** PORTER FUNCTIONS *********/
 
-    /**
-     * Porter carry's the bag to the Appropriate Store
-     *
-     @param bag BAG
-     *
-     */
+    /** DONE */
     public synchronized void carryItToAppropriateStore(BAG bag){
         this.bags.add(bag);
         repositoryStub.registerLuggageInConveyorBelt();
         notifyAll(); //Notify that a new bag is in the belt (this will wake up the passengers)
     }
 
-    /**
-     * Let the Porter know that are no more bags to collect at the plane hold
-     *
-     */
+    /** DONE */
     public synchronized void warningNoMoreBagsInThePlaneHold() {
         this.noMoreBagsInThePlaneHold = true;
         this.repositoryStub.setPorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
@@ -61,27 +53,25 @@ public class BaggageCollectionPoint implements SharedRegionInterface {
 
     /***** PASSENGER FUNCTIONS *********/
 
-    /**
-     * Passenger goes to collect a bag
-     *
-     */
-    public synchronized void goCollectBag(){
-        Passenger passenger = (Passenger) Thread.currentThread();
-        repositoryStub.setPassengerState(passenger.getIdentifier(), PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+    /** DONE */
+    public synchronized int goCollectBag(int id){
+        int collected = 0;
+        repositoryStub.setPassengerState(id, PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         while(true){
             try{
                 //wait until the porter places a bag in the belt or informs that there are no more bags in the plane hold
                 wait();
                 if (this.bags.size() != 0) {
-                    if (this.bags.element().getPassenger() == passenger.getIdentifier()) {
+                    if (this.bags.element().getPassenger() == id) {
                         this.repositoryStub.registerCollectedLuggage(this.bags.element().getPassenger());
                         this.bags.remove();
-                        passenger.increaseCollectedLuggages();
+                        collected++;
                     }
                 }
-                if (noMoreBagsInThePlaneHold) return;
+                if (noMoreBagsInThePlaneHold) break;
 
             }catch(InterruptedException e){}
         }
+        return collected;
     }
 }

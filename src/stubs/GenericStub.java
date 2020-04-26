@@ -1,7 +1,7 @@
 package stubs;
 
-import common.ClientCom;
-import common.Message;
+import commonInfra.ClientCom;
+import commonInfra.Message;
 
 public class GenericStub {
 

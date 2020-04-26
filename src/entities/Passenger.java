@@ -59,14 +59,14 @@ public class Passenger extends Thread {
                 departureTerminalEntranceStub.prepareNextLeg(identifier);
                 break;
             case 'C':   // C - Collect Bag
-                baggageCollectionPointStub.goCollectBag();
+                this.numberOfCollectedLuggages = baggageCollectionPointStub.goCollectBag(identifier);
                 if (this.numberOfCollectedLuggages != numberOfLuggages) {
-                    baggageReclaimOfficeStub.reportMissingBag();
+                    baggageReclaimOfficeStub.reportMissingBag(identifier);
                 }
-                arrivalTerminalExitStub.goHome();
+                arrivalTerminalExitStub.goHome(identifier);
                 break;
             case 'H':   // H - Go Home
-                arrivalTerminalExitStub.goHome();
+                arrivalTerminalExitStub.goHome(identifier);
                 break;
         }
 

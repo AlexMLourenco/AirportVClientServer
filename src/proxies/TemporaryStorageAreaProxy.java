@@ -1,7 +1,7 @@
 package proxies;
 
-import common.Message;
-import common.ServiceProvider;
+import commonInfra.Message;
+import commonInfra.MessageType;
 import sharedRegions.TemporaryStorageArea;
 
 public class TemporaryStorageAreaProxy implements SharedRegionProxyInterface {
@@ -14,10 +14,15 @@ public class TemporaryStorageAreaProxy implements SharedRegionProxyInterface {
     public Message processAndReply(Message message) {
 
         Message response = new Message();
-        ServiceProvider sp = (ServiceProvider) Thread.currentThread();
+        System.out.println("Processing Message Type: " + message.getMessageType());
 
         switch(message.getMessageType()) {
+            case TEMPORARY_STORAGE_AREA_CARRY_IT_TO_APPROPRIATE_STORE:
+                temporaryStorageArea.carryItToAppropriateStore(message.getBag());
+                break;
         }
+        response.setMessageType(MessageType.REPLY_OK);
+        System.out.println("Replying Message: " + response);
         return response;
     }
 

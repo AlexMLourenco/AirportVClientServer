@@ -45,9 +45,9 @@ public class BusDriver extends Thread {
         while (true) {
             this.checkWorkDayEnded();
             if (arrivalTerminalTransferQuayStub.readyToDeparture()) {
-                arrivalTerminalTransferQuayStub.announcingBusBoarding();
+                this.setPassengersInTheBus(arrivalTerminalTransferQuayStub.announcingBusBoarding());
                 arrivalTerminalTransferQuayStub.goToDepartureTerminal();
-                departureTerminalTransferQuayStub.parkTheBusAndLetPassOff();
+                departureTerminalTransferQuayStub.parkTheBusAndLetPassOff(this.passengersInTheBus);
                 departureTerminalTransferQuayStub.goToArrivalTerminal();
                 arrivalTerminalTransferQuayStub.parkTheBus();
             }
@@ -55,27 +55,14 @@ public class BusDriver extends Thread {
         }
     }
 
-    /**
-     * Get the passengers in the Bus
-     */
     public int getPassengersInTheBus() {
         return passengersInTheBus;
     }
 
-    /**
-     * Set passengers in the Bus
-     *
-     * @param passengersInTheBus int
-     */
     public void setPassengersInTheBus(int passengersInTheBus) {
         this.passengersInTheBus = passengersInTheBus;
     }
 
-    /**
-     * Boolean to check if the Bus Driver's thread continues alive or not
-     *
-     * @param keepAlive boolean
-     */
     public void setKeepAlive(boolean keepAlive) {
         this.keepAlive = keepAlive;
     }
