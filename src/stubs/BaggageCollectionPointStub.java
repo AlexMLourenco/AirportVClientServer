@@ -42,4 +42,14 @@ public class BaggageCollectionPointStub extends GenericStub{
 
         return inMessage.getIntValue();
     }
+
+    public void clean_up() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.DEPARTURE_TERMINAL_ENTRANCE_CLEAN_UP);
+
+        this.process(outMessage);
+    }
+
 }

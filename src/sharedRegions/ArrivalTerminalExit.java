@@ -1,6 +1,5 @@
 package sharedRegions;
 
-import entities.Passenger;
 import entities.PassengerStates;
 import mainProject.SimulPar;
 import stubs.DepartureTerminalEntranceStub;
@@ -34,6 +33,7 @@ public class ArrivalTerminalExit implements SharedRegionInterface {
             try {
                 wait();
             } catch (InterruptedException e) {}
+            System.out.println("Unblocked Go Home");
         }
     }
 

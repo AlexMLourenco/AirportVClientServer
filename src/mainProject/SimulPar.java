@@ -49,6 +49,9 @@ public class SimulPar {
      */
     public static final int MAX_SLEEP = 10;
 
+
+    public static final int BUS_DRIVER_SLEEP = 250;
+
     /**
      * Repository log filename
      */

@@ -29,7 +29,9 @@ public class BaggageCollectionPointProxy implements SharedRegionProxyInterface {
             case BAGGAGE_COLLECTION_POINT_GO_COLLECT_BAG:
                 response.setIntValue(baggageCollectionPoint.goCollectBag(message.getIdentifier()));
                 break;
-
+            case BAGGAGE_COLLECTION_POINT_CLEAN_UP:
+                baggageCollectionPoint.cleanUp();
+                break;
 
         }
 

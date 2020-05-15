@@ -31,11 +31,22 @@ public class AirportVClientServer {
             }
 
             // Random generation of luggage LOST for each passenger (for simulation purposes)
+            // only for passengers with final destination
             int[][] plainHoldLuggage = new int[LANDINGS][PASSENGERS];
 
             for (int i = 0; i < LANDINGS; i++) {
                 for (int j = 0; j < PASSENGERS; j++) {
-                    plainHoldLuggage[i][j] = new Random().nextInt(passengersLuggage[i][j] + 1);
+                    if (passengersFinalDestination[i][j]) {
+                        plainHoldLuggage[i][j] = new Random().nextInt(passengersLuggage[i][j]+1);
+                    } else {
+                        plainHoldLuggage[i][j] = passengersLuggage[i][j];
+                    }
+                }
+            }
+
+            for (int i = 0; i < LANDINGS; i++) {
+                for (int j = 0; j < PASSENGERS; j++) {
+                    System.out.println(String.format("%d\t%d\t%d\t%d\t%b",i,j,passengersLuggage[i][j],plainHoldLuggage[i][j],passengersFinalDestination[i][j]));
                 }
             }
 
@@ -80,6 +91,7 @@ public class AirportVClientServer {
                 arrivalLoungeStub.init_plane_hold(flightNumber, plainHoldLuggage, passengersFinalDestination);        //Create the plane hold (simulation)
                 arrivalTerminalExitStub.clean_up();
                 departureTerminalEntranceStub.clean_up();
+                baggageCollectionPointStub.clean_up();
                 busDriver.setPassengersInTheBus(0);
 
                 for (int j = 0; j < PASSENGERS; j ++) {

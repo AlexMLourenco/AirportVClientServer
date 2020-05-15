@@ -59,6 +59,8 @@ public class Repository implements SharedRegionInterface {
 
 
     public Repository() throws FileNotFoundException {
+
+        this.luggageInStoreRoom = 0;
         //f = new File(SimulPar.FILENAME);
         //pw = new PrintWriter(f);
 
@@ -76,7 +78,6 @@ public class Repository implements SharedRegionInterface {
 
         this.passengersCount = 0;
         this.luggageInPlaneHold = 0;
-        this.luggageInStoreRoom = 0;
         this.luggageInConveyorBelt = 0;
 
         this.porterState = PorterStates.WAITING_FOR_A_PLANE_TO_LAND;

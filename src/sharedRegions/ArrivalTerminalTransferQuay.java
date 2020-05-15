@@ -111,7 +111,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         notifyAll();
         try {
             while  (numberOfPassengers != inTheBus.size()) {
-                wait(2000);
+                wait(SimulPar.BUS_DRIVER_SLEEP);
             }
         } catch (InterruptedException e) {}
 

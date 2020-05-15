@@ -101,6 +101,7 @@ public class Message implements Serializable {
         this.booleanArray = booleanArray;
     }
 
+
     @Override
     public String toString() {
         return "Message: " + this.getMessageType();

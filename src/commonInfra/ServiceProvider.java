@@ -22,4 +22,7 @@ public class ServiceProvider extends Thread  {
         serverCom.writeObject(msg);
         serverCom.close();
     }
+
+
+
 }

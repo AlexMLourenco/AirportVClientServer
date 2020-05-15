@@ -53,7 +53,7 @@ public class ArrivalLounge implements SharedRegionInterface {
     }
 
     /***** MAIN THREAD *********/
-
+    /** DONE **/
     public synchronized void init_plane_hold(int flightNumber, int [][] plainHoldLuggage, boolean [][] passengersFinalDestination ) {
         this.passengersCount = 0;
         planeHold.clear();
@@ -66,10 +66,7 @@ public class ArrivalLounge implements SharedRegionInterface {
         repositoryStub.flightLanded(planeHold.size());
     }
 
-    /**
-     * Set if Porter's work day is over
-     *
-     */
+    /** DONE **/
     public synchronized void setPorterEndOfWork() {
         notifyAll();
     }
