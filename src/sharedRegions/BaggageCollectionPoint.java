@@ -2,6 +2,7 @@ package sharedRegions;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 import commonInfra.BAG;
 import entities.Passenger;
@@ -35,6 +36,11 @@ public class BaggageCollectionPoint implements SharedRegionInterface {
         this.noMoreBagsInThePlaneHold = false;
     }
 
+
+    public void cleanUp() {
+        this.noMoreBagsInThePlaneHold = false;
+    }
+
     /***** PORTER FUNCTIONS *********/
 
     /** DONE */
@@ -62,12 +68,19 @@ public class BaggageCollectionPoint implements SharedRegionInterface {
                 //wait until the porter places a bag in the belt or informs that there are no more bags in the plane hold
                 wait();
                 if (this.bags.size() != 0) {
-                    if (this.bags.element().getPassenger() == id) {
-                        this.repositoryStub.registerCollectedLuggage(this.bags.element().getPassenger());
-                        this.bags.remove();
-                        collected++;
+                    Stack<BAG> removeBags = new Stack<>();
+                    for (BAG bag: this.bags) {
+                        if (bag.getPassenger() == id) {
+                            this.repositoryStub.registerCollectedLuggage(this.bags.element().getPassenger());
+                            removeBags.push(bag);
+                            collected++;
+                        }
+                    }
+                    for (BAG bag: removeBags) {
+                        this.bags.remove(bag);
                     }
                 }
+
                 if (noMoreBagsInThePlaneHold) break;
 
             }catch(InterruptedException e){}
