@@ -4,34 +4,18 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-import entities.BusDriver;
 import entities.BusDriverStates;
 import mainProject.SimulPar;
 import stubs.RepositoryStub;
 
 public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
 
-    /**
-     * General Repository of Information
-     * @serialField repository
-     */
     private RepositoryStub repositoryStub;
 
-    /**
-     * Queue of passengers waiting for a Bus
-     * @serialField waitingForBus
-     */
     private Queue<Integer> waitingForBus;
 
-    /**
-     * Queue of passengers in the Bus
-     * @serialField inTheBus
-     */
     private Queue<Integer> inTheBus;
 
-    /**
-     * Boolena signal that tells us if the Bus Driver is ready to receive Passengers
-     */
     private boolean busDriverReadyToReceivePassengers = false;
 
 
@@ -45,6 +29,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
 
     /** DONE **/
     public synchronized void takeABus(int id) {
+        System.out.println(id);
         waitingForBus.add(id);
         repositoryStub.registerPassengerToTakeABus(id);
         if (waitingForBus.size() == SimulPar.BUS_CAPACITY) {
@@ -83,7 +68,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
     public synchronized boolean readyToDeparture() {
         this.busDriverReadyToReceivePassengers = false;
         try {
-            wait(SimulPar.BUS_SCHEDULE_MILLIS);
+            wait(SimulPar.BUS_DRIVER_SCHEDULE_MILLIS);
         } catch (InterruptedException e) {}
 
         return (waitingForBus.size() > 0);
@@ -111,7 +96,8 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         notifyAll();
         try {
             while  (numberOfPassengers != inTheBus.size()) {
-                wait(SimulPar.BUS_DRIVER_SLEEP);
+                wait();
+                System.out.println("announcingBusBoarding: inTheBus " + inTheBus.size() + " passengers " + numberOfPassengers);
             }
         } catch (InterruptedException e) {}
 

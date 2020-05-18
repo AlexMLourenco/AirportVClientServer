@@ -112,6 +112,7 @@ public class Repository implements SharedRegionInterface {
         export();
     }
 
+
     /**
      * Set Bus Driver State
      *
@@ -267,7 +268,7 @@ public class Repository implements SharedRegionInterface {
      * @param id int
      *
      */
-    public void removePassengerFromTheBus(int id) {
+    public synchronized void removePassengerFromTheBus(int id) {
         for (int i= 0; i < SimulPar.BUS_CAPACITY; i++) {
             if (busSeats[i] == id) {
                 busSeats[i] = -1;  // Add to bus
@@ -276,6 +277,8 @@ public class Repository implements SharedRegionInterface {
         }
         export();
     }
+
+
 
     /****** FILE ******/
 

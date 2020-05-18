@@ -10,7 +10,7 @@ public class DepartureTerminalEntrance implements SharedRegionInterface {
     private RepositoryStub repositoryStub;
     private ArrivalTerminalExitStub arrivalTerminalExitStub;
 
-    private int numberOfPassengers;
+    private int numberOfPassengers = 0;
 
     public DepartureTerminalEntrance(RepositoryStub repositoryStub,
                                      ArrivalTerminalExitStub arrivalTerminalExitStub){
@@ -20,10 +20,7 @@ public class DepartureTerminalEntrance implements SharedRegionInterface {
 
     /*****  PASSENGER  FUNCTIONS *****/
 
-    /**
-     * Passenger is in the departure terminal to prepare the next Leg of the journey
-     *
-     */
+    /** DONE **/
     public synchronized void prepareNextLeg(int id){
         repositoryStub.setPassengerState(id, PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
         numberOfPassengers++;
@@ -39,23 +36,18 @@ public class DepartureTerminalEntrance implements SharedRegionInterface {
     }
 
 
-    /**
-     * Get the number of passengers waiting for their fellow passengers
-     *
-     */
+    /** DONE **/
     public synchronized int getNumberOfPassengers(){
         return numberOfPassengers;
     }
 
 
-    /**
-     * Wake the passengers when when everyone is ready to leave the airport or check in for the next leg of the journey
-     *
-     */
+    /** DONE **/
     public synchronized void readyToLeave() {
         notifyAll();
     }
 
+    /** DONE **/
     public synchronized void cleanUp() {
         this.numberOfPassengers = 0;
     }

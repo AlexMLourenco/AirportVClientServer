@@ -18,11 +18,12 @@ public class ArrivalTerminalExit implements SharedRegionInterface {
         this.departureTerminalEntranceStub = departureTerminalEntranceStub;
     }
 
-
+    /** DONE */
     public synchronized void cleanUp() {
         this.numberOfPassengers = 0;
     }
 
+    /** DONE */
     public synchronized void goHome(int id){
         repositoryStub.setPassengerState(id, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
         numberOfPassengers++;
@@ -37,20 +38,12 @@ public class ArrivalTerminalExit implements SharedRegionInterface {
         }
     }
 
-    /**
-     * Get the number of passengers waiting for their fellow passengers
-     *
-     */
+    /** DONE */
     public synchronized int getNumberOfPassengers(){
         return numberOfPassengers;
     }
 
-
-
-    /**
-     * Wake the passengers when when everyone is ready to leave the airport or check in for the next leg of the journey
-     *
-     */
+    /** DONE */
     public synchronized void readyToLeave() {
         notifyAll();
     }

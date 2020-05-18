@@ -12,22 +12,10 @@ import stubs.RepositoryStub;
 
 public class BaggageCollectionPoint implements SharedRegionInterface {
 
-    /**
-     * General Repository of Information
-     * @serialField repository
-     */
     private RepositoryStub repositoryStub;
 
-    /**
-     * Queue of all the bags
-     * @serialField bags
-     */
     private Queue<BAG> bags;
 
-    /**
-     * Signal that tells us if there are more bags at the plane hold or not
-     * @serialField noMoreBagsInThePlaneHold
-     */
     private boolean noMoreBagsInThePlaneHold;
 
     public BaggageCollectionPoint(RepositoryStub repositoryStub){
@@ -36,7 +24,7 @@ public class BaggageCollectionPoint implements SharedRegionInterface {
         this.noMoreBagsInThePlaneHold = false;
     }
 
-
+    /** DONE */
     public void cleanUp() {
         this.noMoreBagsInThePlaneHold = false;
     }

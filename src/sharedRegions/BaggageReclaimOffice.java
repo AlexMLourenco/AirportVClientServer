@@ -1,7 +1,7 @@
 package sharedRegions;
 
-import entities.Passenger;
 import entities.PassengerStates;
+import mainProject.SimulPar;
 import stubs.RepositoryStub;
 
 public class BaggageReclaimOffice implements SharedRegionInterface {
@@ -19,7 +19,7 @@ public class BaggageReclaimOffice implements SharedRegionInterface {
     public synchronized void reportMissingBag(int identifier){
         repositoryStub.setPassengerState(identifier, PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         try {
-            Thread.currentThread().sleep(2000);
+            Thread.currentThread().sleep(SimulPar.REPORT_MISSING_BAG_SLEEP);
         } catch (Exception e) { }
 
     }
