@@ -39,4 +39,13 @@ public class DepartureTerminalTransferQuayStub extends GenericStub{
         this.process(outMessage);
 
     }
+
+    public void setSimulationFinished() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.DEPARTURE_TERMINAL_TRANSFER_QUAY_SIMULATION_FINISHED);
+
+        this.process(outMessage);
+    }
 }

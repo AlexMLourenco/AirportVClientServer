@@ -8,6 +8,9 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxyInterface {
 
     private final ArrivalTerminalExit arrivalTerminalExit;
 
+    private boolean simulationFinished = false;
+
+
     public ArrivalTerminalExitProxy(ArrivalTerminalExit arrivalTerminalExit) {
         this.arrivalTerminalExit = arrivalTerminalExit;
     }
@@ -28,6 +31,9 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxyInterface {
             case ARRIVAL_TERMINAL_EXIT_READY_TO_LEAVE:
                 arrivalTerminalExit.readyToLeave();
                 break;
+            case ARRIVAL_TERMINAL_SIMULATION_FINISHED:
+                this.simulationFinished = true;
+                break;
         }
         response.setMessageType(MessageType.REPLY_OK);
         System.out.println("Replying Message: " + response);
@@ -36,7 +42,7 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxyInterface {
 
 
     public boolean simulationFinished() {
-        return false;
+        return this.simulationFinished;
     }
 
 

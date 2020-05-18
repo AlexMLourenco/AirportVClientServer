@@ -8,6 +8,9 @@ public class ArrivalLoungeProxy implements SharedRegionProxyInterface {
 
     private final ArrivalLounge arrivalLounge;
 
+    private boolean simulationFinished = false;
+
+
     public ArrivalLoungeProxy(ArrivalLounge arrivalLounge) {
         this.arrivalLounge = arrivalLounge;
 
@@ -37,6 +40,10 @@ public class ArrivalLoungeProxy implements SharedRegionProxyInterface {
             case ARRIVAL_LOUNGE_WHAT_SHOULD_I_DO:
                 response.setCharValue(arrivalLounge.whatShouldIDo(message.getIdentifier(), message.getBooleanValue(), message.getIntValue()));
                 break;
+            case ARRIVAL_LOUNGE_SIMULATION_FINISHED:
+                simulationFinished = true;
+                break;
+
         }
         response.setMessageType(MessageType.REPLY_OK);
         System.out.println("Replying Message: " + response);
@@ -44,7 +51,7 @@ public class ArrivalLoungeProxy implements SharedRegionProxyInterface {
     }
 
     public boolean simulationFinished() {
-        return false;
+        return simulationFinished;
     }
 
 

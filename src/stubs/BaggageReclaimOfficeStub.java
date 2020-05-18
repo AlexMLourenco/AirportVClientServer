@@ -19,4 +19,13 @@ public class BaggageReclaimOfficeStub extends GenericStub{
         this.process(outMessage);
 
     }
+
+    public void setSimulationFinished() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.BAGGAGE_RECLAIM_OFFICE_SIMULATION_FINISHED);
+
+        this.process(outMessage);
+    }
 }

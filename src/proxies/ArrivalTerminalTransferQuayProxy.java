@@ -8,6 +8,8 @@ public class ArrivalTerminalTransferQuayProxy implements SharedRegionProxyInterf
 
     private final ArrivalTerminalTransferQuay arrivalTerminalTransferQuay;
 
+    private boolean simulationFinished = false;
+
     public ArrivalTerminalTransferQuayProxy(ArrivalTerminalTransferQuay arrivalTerminalTransferQuay) {
         this.arrivalTerminalTransferQuay = arrivalTerminalTransferQuay;
 
@@ -40,6 +42,10 @@ public class ArrivalTerminalTransferQuayProxy implements SharedRegionProxyInterf
             case ARRIVAL_TERMINAL_TRANSFER_QUAY_ENTER_THE_BUS:
                 arrivalTerminalTransferQuay.enterTheBus(message.getIdentifier());
                 break;
+
+            case ARRIVAL_TERMINAL_TRANSFER_QUAY_SIMULATION_FINISHED:
+                this.simulationFinished = true;
+                break;
         }
         response.setMessageType(MessageType.REPLY_OK);
         System.out.println("Replying Message: " + response);
@@ -47,7 +53,7 @@ public class ArrivalTerminalTransferQuayProxy implements SharedRegionProxyInterf
     }
 
     public boolean simulationFinished() {
-        return false;
+        return simulationFinished;
     }
 
 

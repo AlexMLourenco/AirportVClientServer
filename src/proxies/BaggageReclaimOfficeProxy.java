@@ -8,6 +8,8 @@ public class BaggageReclaimOfficeProxy implements SharedRegionProxyInterface {
 
     private static BaggageReclaimOffice baggageReclaimOffice;
 
+    private boolean simulationFinished = false;
+
     public BaggageReclaimOfficeProxy(BaggageReclaimOffice baggageReclaimOffice) {
         this.baggageReclaimOffice = baggageReclaimOffice;
 
@@ -21,6 +23,9 @@ public class BaggageReclaimOfficeProxy implements SharedRegionProxyInterface {
             case BAGGAGE_RECLAIM_OFFICE_RECLAIM_MISSING_BAG:
                 baggageReclaimOffice.reportMissingBag(message.getIdentifier());
                 break;
+            case BAGGAGE_RECLAIM_OFFICE_SIMULATION_FINISHED:
+                this.simulationFinished = true;
+                break;
         }
         response.setMessageType(MessageType.REPLY_OK);
         System.out.println("Replying Message: " + response);
@@ -28,7 +33,7 @@ public class BaggageReclaimOfficeProxy implements SharedRegionProxyInterface {
     }
 
     public boolean simulationFinished() {
-        return false;
+        return this.simulationFinished;
     }
 
 

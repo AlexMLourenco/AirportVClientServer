@@ -76,4 +76,13 @@ public class ArrivalLoungeStub extends GenericStub{
 
         return inMessage.getCharValue();
     }
+
+    public void setSimulationFinished() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.ARRIVAL_LOUNGE_SIMULATION_FINISHED);
+
+        this.process(outMessage);
+    }
 }

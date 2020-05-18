@@ -28,24 +28,24 @@ public class SharedRegionMain {
             if (regionName.equalsIgnoreCase("ArrivalTerminalExit")) {
                 shRegConstructor = shRegClass.getConstructor(RepositoryStub.class, DepartureTerminalEntranceStub.class);
                 sharedRegion = (SharedRegionInterface) shRegConstructor.newInstance(
-                        new RepositoryStub(SimulPar.SERVER_REPOSITORY_HOSTNAME, SimulPar.SERVER_REPOSITORY_PORT),
-                        new DepartureTerminalEntranceStub(SimulPar.SERVER_DEPARTURE_TERMINAL_ENTRANCE_HOSTNAME, SimulPar.SERVER_DEPARTURE_TERMINAL_ENTRANCE_PORT));
+                        new RepositoryStub(SharedRegionConfig.SERVER_REPOSITORY_HOSTNAME, SharedRegionConfig.SERVER_REPOSITORY_PORT),
+                        new DepartureTerminalEntranceStub(SharedRegionConfig.SERVER_DEPARTURE_TERMINAL_ENTRANCE_HOSTNAME, SharedRegionConfig.SERVER_DEPARTURE_TERMINAL_ENTRANCE_PORT));
             } else if (regionName.equalsIgnoreCase("DepartureTerminalEntrance")) {
                 shRegConstructor = shRegClass.getConstructor(RepositoryStub.class, ArrivalTerminalExitStub.class);
                 sharedRegion = (SharedRegionInterface) shRegConstructor.newInstance(
-                        new RepositoryStub(SimulPar.SERVER_REPOSITORY_HOSTNAME, SimulPar.SERVER_REPOSITORY_PORT),
-                        new ArrivalTerminalExitStub(SimulPar.SERVER_ARRIVAL_TERMINAL_EXIT_HOSTNAME, SimulPar.SERVER_ARRIVAL_TERMINAL_EXIT_PORT));
+                        new RepositoryStub(SharedRegionConfig.SERVER_REPOSITORY_HOSTNAME, SharedRegionConfig.SERVER_REPOSITORY_PORT),
+                        new ArrivalTerminalExitStub(SharedRegionConfig.SERVER_ARRIVAL_TERMINAL_EXIT_HOSTNAME, SharedRegionConfig.SERVER_ARRIVAL_TERMINAL_EXIT_PORT));
             } else {
                 shRegConstructor = shRegClass.getConstructor(RepositoryStub.class);
                 sharedRegion = (SharedRegionInterface) shRegConstructor.newInstance(
-                        new RepositoryStub(SimulPar.SERVER_REPOSITORY_HOSTNAME, SimulPar.SERVER_REPOSITORY_PORT));
+                        new RepositoryStub(SharedRegionConfig.SERVER_REPOSITORY_HOSTNAME, SharedRegionConfig.SERVER_REPOSITORY_PORT));
             }
 
             Class<?> proxyClass = Class.forName("proxies." + regionName + "Proxy");
             Constructor<?> proxyConstructor = proxyClass.getConstructor(shRegClass);
             SharedRegionProxyInterface proxy = (SharedRegionProxyInterface) proxyConstructor.newInstance(sharedRegion);
 
-            serverCom = new ServerCom(SimulPar.getPortForSharedRegion(regionName),1000);
+            serverCom = new ServerCom(SharedRegionConfig.getPortForSharedRegion(regionName),1000);
             serverCom.start();
 
             while(!proxy.simulationFinished()) {

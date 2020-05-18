@@ -7,7 +7,7 @@ import sharedRegions.DepartureTerminalTransferQuay;
 public class DepartureTerminalTransferQuayProxy implements SharedRegionProxyInterface {
 
     private final DepartureTerminalTransferQuay departureTerminalTransferQuay;
-
+    private boolean simulationFinished = false;
     public DepartureTerminalTransferQuayProxy(DepartureTerminalTransferQuay departureTerminalTransferQuay) {
         this.departureTerminalTransferQuay = departureTerminalTransferQuay;
     }
@@ -24,7 +24,9 @@ public class DepartureTerminalTransferQuayProxy implements SharedRegionProxyInte
             case DEPARTURE_TERMINAL_TRANSFER_QUAY_GO_TO_ARRIVAL_TERMINAL:
                 departureTerminalTransferQuay.goToArrivalTerminal();
                 break;
-
+            case DEPARTURE_TERMINAL_TRANSFER_QUAY_SIMULATION_FINISHED:
+                this.simulationFinished = true;
+                break;
         }
         response.setMessageType(MessageType.REPLY_OK);
         System.out.println("Replying Message: " + response);
@@ -32,7 +34,7 @@ public class DepartureTerminalTransferQuayProxy implements SharedRegionProxyInte
     }
 
     public boolean simulationFinished() {
-        return false;
+        return this.simulationFinished;
     }
 
 

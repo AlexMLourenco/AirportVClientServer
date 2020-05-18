@@ -47,7 +47,16 @@ public class BaggageCollectionPointStub extends GenericStub{
         Message outMessage;
 
         outMessage= new Message();
-        outMessage.setMessageType(MessageType.DEPARTURE_TERMINAL_ENTRANCE_CLEAN_UP);
+        outMessage.setMessageType(MessageType.BAGGAGE_COLLECTION_POINT_CLEAN_UP);
+
+        this.process(outMessage);
+    }
+
+    public void setSimulationFinished() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.BAGGAGE_COLLECTION_POINT_SIMULATION_FINISHED);
 
         this.process(outMessage);
     }

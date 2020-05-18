@@ -48,15 +48,22 @@ public class Passenger extends Thread {
 
     @Override
     public void run() {
+        System.out.println("Passenger " + identifier + ": start");
         char action = arrivalLoungeStub.whatShouldIDo(identifier, isFinalDestination, numberOfLuggages);
 
+        System.out.println("Passenger " + identifier + ": whatShouldIDo action " + action );
         switch (action) {
             case 'B':  // B - Take a bus
                 arrivalTerminalTransferQuayStub.takeABus(identifier);
+                System.out.println("Passenger " + identifier + ": takeABus" );
                 arrivalTerminalTransferQuayStub.waitForBus(identifier);
+                System.out.println("Passenger " + identifier + ": waitForBus" );
                 arrivalTerminalTransferQuayStub.enterTheBus(identifier);
+                System.out.println("Passenger " + identifier + ": enterTheBus" );
                 departureTerminalTransferQuayStub.leaveTheBus(identifier);
+                System.out.println("Passenger " + identifier + ": leaveTheBus" );
                 departureTerminalEntranceStub.prepareNextLeg(identifier);
+                System.out.println("Passenger " + identifier + ": prepareNextLeg" );
                 break;
             case 'C':   // C - Collect Bag
                 this.numberOfCollectedLuggages = baggageCollectionPointStub.goCollectBag(identifier);

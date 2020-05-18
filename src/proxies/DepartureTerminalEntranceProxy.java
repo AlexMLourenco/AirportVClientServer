@@ -8,6 +8,9 @@ public class DepartureTerminalEntranceProxy implements SharedRegionProxyInterfac
 
     private final DepartureTerminalEntrance departureTerminalEntrance;
 
+    private boolean simulationFinished = false;
+
+
     public DepartureTerminalEntranceProxy(DepartureTerminalEntrance departureTerminalEntrance) {
         this.departureTerminalEntrance = departureTerminalEntrance;
     }
@@ -30,6 +33,9 @@ public class DepartureTerminalEntranceProxy implements SharedRegionProxyInterfac
             case DEPARTURE_TERMINAL_ENTRANCE_CLEAN_UP:
                 departureTerminalEntrance.cleanUp();
                 break;
+            case DEPARTURE_TERMINAL_ENTRANCE_SIMULATION_FINISHED:
+                this.simulationFinished = true;
+                break;
         }
         response.setMessageType(MessageType.REPLY_OK);
         System.out.println("Replying Message: " + response);
@@ -37,7 +43,7 @@ public class DepartureTerminalEntranceProxy implements SharedRegionProxyInterfac
     }
 
     public boolean simulationFinished() {
-        return false;
+        return this.simulationFinished;
     }
 
 

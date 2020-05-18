@@ -8,6 +8,8 @@ public class BaggageCollectionPointProxy implements SharedRegionProxyInterface {
 
     private static BaggageCollectionPoint baggageCollectionPoint;
 
+    private boolean simulationFinished = false;
+
     public BaggageCollectionPointProxy(BaggageCollectionPoint baggageCollectionPoint) {
         this.baggageCollectionPoint = baggageCollectionPoint;
 
@@ -32,7 +34,9 @@ public class BaggageCollectionPointProxy implements SharedRegionProxyInterface {
             case BAGGAGE_COLLECTION_POINT_CLEAN_UP:
                 baggageCollectionPoint.cleanUp();
                 break;
-
+            case BAGGAGE_COLLECTION_POINT_SIMULATION_FINISHED:
+                this.simulationFinished = true;
+                break;
         }
 
         response.setMessageType(MessageType.REPLY_OK);
@@ -41,7 +45,7 @@ public class BaggageCollectionPointProxy implements SharedRegionProxyInterface {
     }
 
     public boolean simulationFinished() {
-        return false;
+        return this.simulationFinished;
     }
 
 

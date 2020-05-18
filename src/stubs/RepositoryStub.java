@@ -5,12 +5,12 @@ import commonInfra.MessageType;
 import entities.BusDriverStates;
 import entities.PassengerStates;
 import entities.PorterStates;
-import mainProject.SimulPar;
+import mainProject.SharedRegionConfig;
 
 public class RepositoryStub extends GenericStub{
 
     public RepositoryStub() {
-        super(SimulPar.SERVER_REPOSITORY_HOSTNAME,SimulPar.SERVER_REPOSITORY_PORT);
+        super(SharedRegionConfig.SERVER_REPOSITORY_HOSTNAME,SharedRegionConfig.SERVER_REPOSITORY_PORT);
     }
 
     public RepositoryStub(String hostname, int port) {
@@ -143,4 +143,13 @@ public class RepositoryStub extends GenericStub{
         outMessage.setMessageType(MessageType.REPOSITORY_REGISTER_LUGGAGE_IN_STORE_ROOM);
         this.process(outMessage);
     }
+
+    public void setSimulationFinished() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.REPOSITORY_SIMULATION_FINISHED);
+        this.process(outMessage);
+    }
+
 }

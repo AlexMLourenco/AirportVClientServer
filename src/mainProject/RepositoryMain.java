@@ -17,7 +17,7 @@ public class RepositoryMain {
         Repository repository = new Repository();
         RepositoryProxy repositoryProxy = new RepositoryProxy(repository);
 
-        serverCom = new ServerCom(SimulPar.SERVER_REPOSITORY_PORT,0);
+        serverCom = new ServerCom(SharedRegionConfig.SERVER_REPOSITORY_PORT,0);
         serverCom.start();
 
         while(!repositoryProxy.simulationFinished()) {

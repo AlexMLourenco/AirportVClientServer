@@ -8,6 +8,8 @@ public class TemporaryStorageAreaProxy implements SharedRegionProxyInterface {
 
     private final TemporaryStorageArea temporaryStorageArea;
 
+    private boolean simulationFinished = false;
+
     public TemporaryStorageAreaProxy(TemporaryStorageArea temporaryStorageArea) {
         this.temporaryStorageArea = temporaryStorageArea;
     }
@@ -20,6 +22,9 @@ public class TemporaryStorageAreaProxy implements SharedRegionProxyInterface {
             case TEMPORARY_STORAGE_AREA_CARRY_IT_TO_APPROPRIATE_STORE:
                 temporaryStorageArea.carryItToAppropriateStore(message.getBag());
                 break;
+            case TEMPORARY_STORAGE_AREA_SIMULATION_FINISHED:
+                this.simulationFinished = true;
+                break;
         }
         response.setMessageType(MessageType.REPLY_OK);
         System.out.println("Replying Message: " + response);
@@ -27,7 +32,7 @@ public class TemporaryStorageAreaProxy implements SharedRegionProxyInterface {
     }
 
     public boolean simulationFinished() {
-        return false;
+        return this.simulationFinished;
     }
 
 

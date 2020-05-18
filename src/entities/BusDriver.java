@@ -1,8 +1,6 @@
 package entities;
 
 import mainProject.SimulPar;
-import sharedRegions.ArrivalTerminalTransferQuay;
-import sharedRegions.DepartureTerminalTransferQuay;
 import stubs.ArrivalTerminalTransferQuayStub;
 import stubs.DepartureTerminalTransferQuayStub;
 
@@ -28,9 +26,9 @@ public class BusDriver extends Thread {
      * If it does the thread goes to sleep and wakes up a sleep_time later.
      * */
     private void checkWorkDayEnded() {
-        if ((System.nanoTime() / 1000) - activityStarted > SimulPar.BUS_END_OF_DAY_MILLIS) {
+        if ((System.nanoTime() / 1000) - activityStarted > SimulPar.BUS_DRIVER_END_OF_DAY_DURATION_MILLIS) {
             try {
-                sleep(SimulPar.BUS_SLEEP_MILLIS);
+                sleep(SimulPar.BUS_DRIVER_END_OF_DAY_SLEEP_MILLIS);
             } catch (InterruptedException e) { e.printStackTrace(); }
             activityStarted = System.nanoTime() / 1000;
         }
@@ -43,13 +41,21 @@ public class BusDriver extends Thread {
     public void run() {
         activityStarted = System.nanoTime() / 1000;
         while (true) {
+            System.out.println("Bus Driver: Start");
             this.checkWorkDayEnded();
+            System.out.println("Bus Driver: checkWorkDayEnded");
             if (arrivalTerminalTransferQuayStub.readyToDeparture()) {
+                System.out.println("Bus Driver: Ready to Departure");
                 this.setPassengersInTheBus(arrivalTerminalTransferQuayStub.announcingBusBoarding());
+                System.out.println("Bus Driver: Passengers in the Bus " + this.getPassengersInTheBus());
                 arrivalTerminalTransferQuayStub.goToDepartureTerminal();
+                System.out.println("Bus Driver: goToDepartureTerminal");
                 departureTerminalTransferQuayStub.parkTheBusAndLetPassOff(this.passengersInTheBus);
+                System.out.println("Bus Driver: parkTheBusAndLetPassOff");
                 departureTerminalTransferQuayStub.goToArrivalTerminal();
+                System.out.println("Bus Driver: goToArrivalTerminal");
                 arrivalTerminalTransferQuayStub.parkTheBus();
+                System.out.println("Bus Driver: parkTheBus");
             }
             if (!this.keepAlive) break;
         }

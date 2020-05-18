@@ -47,5 +47,14 @@ public class DepartureTerminalEntranceStub  extends GenericStub{
 
         this.process(outMessage);
     }
+
+    public void setSimulationFinished() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.DEPARTURE_TERMINAL_ENTRANCE_SIMULATION_FINISHED);
+
+        this.process(outMessage);
+    }
 }
 

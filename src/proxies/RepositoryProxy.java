@@ -11,6 +11,8 @@ public class RepositoryProxy implements SharedRegionProxyInterface {
 
     private final Repository repository;
 
+    private boolean simulationFinished = false;
+
     public RepositoryProxy(Repository repository) {
         this.repository = repository;
     }
@@ -31,13 +33,14 @@ public class RepositoryProxy implements SharedRegionProxyInterface {
             case REPOSITORY_SET_PORTER_STATE: repository.setPorterState((PorterStates)message.getEntityState()); break;
             case REPOSITORY_SET_BUS_DRIVER_STATE: repository.setBusDriverState((BusDriverStates)message.getEntityState());break;
             case REPOSITORY_SET_PASSENGER_STATE: repository.setPassengerState(message.getIdentifier(), (PassengerStates)message.getEntityState());break;
+            case REPOSITORY_SIMULATION_FINISHED: this.simulationFinished = true ; break;
         }
         response.setMessageType(MessageType.REPLY_OK);
         return response;
     }
 
     public boolean simulationFinished() {
-        return false;
+        return simulationFinished;
     }
 
 

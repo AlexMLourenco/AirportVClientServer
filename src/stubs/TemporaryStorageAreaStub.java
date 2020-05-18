@@ -24,4 +24,13 @@ public class TemporaryStorageAreaStub extends GenericStub{
         this.process(outMessage);
 
     }
+
+    public void setSimulationFinished() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.TEMPORARY_STORAGE_AREA_SIMULATION_FINISHED);
+
+        this.process(outMessage);
+    }
 }
