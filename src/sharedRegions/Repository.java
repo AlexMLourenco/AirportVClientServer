@@ -1,6 +1,6 @@
 package sharedRegions;
 
-import java.util.Arrays;
+import java.util.*;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
@@ -54,8 +54,11 @@ public class Repository implements SharedRegionInterface {
     /**
      * ArrivalTerminalTransferQuay
      */
-    int busWaitingQueue[];              //Passengers Waiting Queue
-    int busSeats[];                     //Passengers Seated on the Bus
+    //int busWaitingQueue[];              //Passengers Waiting Queue
+    //int busSeats[];                     //Passengers Seated on the Bus
+
+    private List<Integer> busWaitingQueue;
+    private List<Integer> busSeats;
 
 
     public Repository() throws FileNotFoundException {
@@ -86,10 +89,13 @@ public class Repository implements SharedRegionInterface {
         for (int i = 0; i < SimulPar.PASSENGERS; i++) {
             this.passengerStates[i] = PassengerStates.WHAT_SHOULD_I_DO;
         }
-        this.busWaitingQueue = new int[SimulPar.PASSENGERS];
-        Arrays.fill(this.busWaitingQueue, -1);
-        this.busSeats = new int[SimulPar.BUS_CAPACITY];
-        Arrays.fill(this.busSeats, -1);
+
+        this.busWaitingQueue = new ArrayList<>();
+        this.busSeats = new ArrayList<>();
+        //this.busWaitingQueue = new int[SimulPar.PASSENGERS];
+        //Arrays.fill(this.busWaitingQueue, -1);
+        //this.busSeats = new int[SimulPar.BUS_CAPACITY];
+        //Arrays.fill(this.busSeats, -1);
         this.passengersSituation = new char[SimulPar.PASSENGERS];
         Arrays.fill(this.passengersSituation, '-');
         passengersLuggage = new int [SimulPar.PASSENGERS];
@@ -230,13 +236,8 @@ public class Repository implements SharedRegionInterface {
      *
      */
     public synchronized void registerPassengerToTakeABus(int id) {
-        for (int i= 0; i < SimulPar.PASSENGERS; i++) {
-            if (busWaitingQueue[i] == -1) {
-                busWaitingQueue[i] = id;
-                passengerStates[id] = PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL;
-                break;
-            }
-        }
+        busWaitingQueue.add(id);
+        setPassengerState(id, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         export();
     }
 
@@ -247,18 +248,8 @@ public class Repository implements SharedRegionInterface {
      *
      */
     public synchronized void registerPassengerToEnterTheBus(int id) {
-        for (int i= 0; i < SimulPar.BUS_CAPACITY; i++) { //Search for an empty spot on the bus
-            if (busSeats[i] == -1) {
-                busSeats[i] = id;  // Add to bus
-                break;
-            }
-        }
-
-        for (int i= 0; i < SimulPar.PASSENGERS-1; i++) {
-            busWaitingQueue[i] = busWaitingQueue[i+1];
-        }
-        busWaitingQueue[SimulPar.PASSENGERS-1] = -1;
-
+        busSeats.add(new Integer(id));
+        busWaitingQueue.remove(new Integer(id));
         this.setPassengerState(id,PassengerStates.TERMINAL_TRANSFER);
     }
 
@@ -269,12 +260,7 @@ public class Repository implements SharedRegionInterface {
      *
      */
     public synchronized void removePassengerFromTheBus(int id) {
-        for (int i= 0; i < SimulPar.BUS_CAPACITY; i++) {
-            if (busSeats[i] == id) {
-                busSeats[i] = -1;  // Add to bus
-                break;
-            }
-        }
+        busSeats.remove(new Integer(id));
         export();
     }
 
@@ -315,16 +301,16 @@ public class Repository implements SharedRegionInterface {
         String str = "";
         str = str.concat(String.format("%-3d%-4d%-5s%-3d%-5d%-6s",(flightNumber+1), luggageInPlaneHold, porterState.getValue(), luggageInConveyorBelt, luggageInStoreRoom, busDriverState.getValue()));
         for (int i = 0; i < SimulPar.PASSENGERS; i++) {
-            if (this.busWaitingQueue[i]!=-1) {
-                str = str.concat(String.format("%-3d", this.busWaitingQueue[i]));
+            if (this.busWaitingQueue.size() > i) {
+                str = str.concat(String.format("%-3d", this.busWaitingQueue.get(i)));
             } else {
                 str = str.concat("-  ");
             }
         }
         str = str.concat(" ");
         for (int i = 0; i < SimulPar.BUS_CAPACITY; i++) {
-            if (this.busSeats[i]!=-1) {
-                str = str.concat(String.format("%-3d", this.busSeats[i]));
+            if (this.busSeats.size() > i) {
+                str = str.concat(String.format("%-3d", this.busSeats.get(i)));
             } else {
                 str = str.concat("-  ");
             }

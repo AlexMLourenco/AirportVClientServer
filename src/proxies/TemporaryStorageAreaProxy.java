@@ -16,7 +16,6 @@ public class TemporaryStorageAreaProxy implements SharedRegionProxyInterface {
     public Message processAndReply(Message message) {
 
         Message response = new Message();
-        System.out.println("Processing Message Type: " + message.getMessageType());
 
         switch(message.getMessageType()) {
             case TEMPORARY_STORAGE_AREA_CARRY_IT_TO_APPROPRIATE_STORE:
@@ -27,7 +26,6 @@ public class TemporaryStorageAreaProxy implements SharedRegionProxyInterface {
                 break;
         }
         response.setMessageType(MessageType.REPLY_OK);
-        System.out.println("Replying Message: " + response);
         return response;
     }
 

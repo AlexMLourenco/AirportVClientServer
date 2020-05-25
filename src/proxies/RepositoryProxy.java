@@ -21,7 +21,7 @@ public class RepositoryProxy implements SharedRegionProxyInterface {
         Message response = new Message();
         switch(message.getMessageType()) {
             case REPOSITORY_INIT: repository.init_repository(message.getIntValue());break;
-            case REPOSITORY_PASSENGER_ARRIVED: response.setCharValue(repository.passengerArrived(message.getIdentifier(), message.getBooleanValue(), message.getIntValue()));
+            case REPOSITORY_PASSENGER_ARRIVED: response.setCharValue(repository.passengerArrived(message.getIdentifier(), message.getBooleanValue(), message.getIntValue()));break;
             case REPOSITORY_REMOVE_PASSENGER_FROM_BUS: repository.removePassengerFromTheBus(message.getIdentifier());break;
             case REPOSITORY_REGISTER_PASSENGER_TO_ENTER_THE_BUS: repository.registerPassengerToEnterTheBus(message.getIdentifier()); break;
             case REPOSITORY_REGISTER_PASSENGER_TO_TAKE_A_BUS: repository.registerPassengerToTakeABus(message.getIdentifier()); break;

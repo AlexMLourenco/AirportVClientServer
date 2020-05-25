@@ -40,7 +40,7 @@ public class BusDriver extends Thread {
     @Override
     public void run() {
         activityStarted = System.nanoTime() / 1000;
-        while (true) {
+        while (this.keepAlive) {
             System.out.println("Bus Driver: Start");
             this.checkWorkDayEnded();
             System.out.println("Bus Driver: checkWorkDayEnded");
@@ -57,7 +57,6 @@ public class BusDriver extends Thread {
                 arrivalTerminalTransferQuayStub.parkTheBus();
                 System.out.println("Bus Driver: parkTheBus");
             }
-            if (!this.keepAlive) break;
         }
     }
 

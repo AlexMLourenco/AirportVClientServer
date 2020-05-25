@@ -19,8 +19,6 @@ public class ArrivalLoungeProxy implements SharedRegionProxyInterface {
     public Message processAndReply(Message message) {
         Message response = new Message();
 
-        System.out.println("Processing Message Type: " + message.getMessageType());
-
         switch(message.getMessageType()) {
             case ARRIVAL_LOUNGE_TAKE_A_REST:
                 arrivalLounge.takeARest();
@@ -43,10 +41,8 @@ public class ArrivalLoungeProxy implements SharedRegionProxyInterface {
             case ARRIVAL_LOUNGE_SIMULATION_FINISHED:
                 simulationFinished = true;
                 break;
-
         }
         response.setMessageType(MessageType.REPLY_OK);
-        System.out.println("Replying Message: " + response);
         return response;
     }
 

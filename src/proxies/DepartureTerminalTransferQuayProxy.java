@@ -13,7 +13,6 @@ public class DepartureTerminalTransferQuayProxy implements SharedRegionProxyInte
     }
     public Message processAndReply(Message message) {
         Message response = new Message();
-        System.out.println("Processing Message Type: " + message.getMessageType());
         switch(message.getMessageType()) {
             case DEPARTURE_TERMINAL_TRANSFER_QUAY_PARK_THE_BUS_AND_LET_PASS_OFF:
                 departureTerminalTransferQuay.parkTheBusAndLetPassOff(message.getIntValue());
@@ -29,7 +28,6 @@ public class DepartureTerminalTransferQuayProxy implements SharedRegionProxyInte
                 break;
         }
         response.setMessageType(MessageType.REPLY_OK);
-        System.out.println("Replying Message: " + response);
         return response;
     }
 

@@ -18,7 +18,6 @@ public class BaggageReclaimOfficeProxy implements SharedRegionProxyInterface {
     public Message processAndReply(Message message) {
 
         Message response = new Message();
-        System.out.println("Processing Message Type: " + message.getMessageType());
         switch(message.getMessageType()) {
             case BAGGAGE_RECLAIM_OFFICE_RECLAIM_MISSING_BAG:
                 baggageReclaimOffice.reportMissingBag(message.getIdentifier());
@@ -28,7 +27,6 @@ public class BaggageReclaimOfficeProxy implements SharedRegionProxyInterface {
                 break;
         }
         response.setMessageType(MessageType.REPLY_OK);
-        System.out.println("Replying Message: " + response);
         return response;
     }
 

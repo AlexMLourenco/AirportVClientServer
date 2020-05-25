@@ -20,20 +20,19 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
     /***** PASSENGER FUNCTIONS *********/
 
     /** DONE **/
-    public synchronized void leaveTheBus(int id){
+    public synchronized  void leaveTheBus(int id){
+
         try {
             System.out.println("Passenger " + id + " : is on a ride!");
             wait();
-            synchronized (this.passengersOnTheBus) {
-                System.out.println("Passenger " + id + " : arrived ");
-                this.passengersOnTheBus--;
-                System.out.println("Passenger " + id + " : " + passengersOnTheBus);
-                if (this.passengersOnTheBus == 0 ) {
-                    notifyAll(); //Notify the driver
-                }
+            System.out.println("Passenger " + id + " : arrived ");
+            this.passengersOnTheBus--;
+            System.out.println("Passenger " + id + " : " + passengersOnTheBus);
+            repositoryStub.removePassengerFromTheBus(id);
+            if (this.passengersOnTheBus == 0 ) {
+                notifyAll(); //Notify the driver
             }
 
-            repositoryStub.removePassengerFromTheBus(id);
         }catch(InterruptedException e){}
     }
 
@@ -42,19 +41,20 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
     /** DONE **/
     public synchronized void parkTheBusAndLetPassOff(int passengersOnTheBus){
         repositoryStub.setBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
-        synchronized (this.passengersOnTheBus) {
-            this.passengersOnTheBus = passengersOnTheBus;
-            notifyAll(); //Notify the passengers that they can start leaving the bus
-        }
+        this.passengersOnTheBus = passengersOnTheBus;
+        notifyAll(); // notify that they can start leaving the bus
         try {
-            wait(); //wait for the last passenger to leave the bus
-        } catch (Exception e ) {
-
+            while (this.passengersOnTheBus != 0) {
+                wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
     }
 
     /** DONE **/
-    public synchronized void goToArrivalTerminal(){
+    public void goToArrivalTerminal(){
         repositoryStub.setBusDriverState(BusDriverStates.DRIVING_BACKWARD);
         try {
             Thread.currentThread().sleep((long) (new Random().nextInt(SimulPar.MAX_SLEEP - SimulPar.MIN_SLEEP+1) + SimulPar.MAX_SLEEP));

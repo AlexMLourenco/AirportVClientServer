@@ -17,7 +17,6 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxyInterface {
 
     public Message processAndReply(Message message){
         Message response = new Message();
-        System.out.println("Processing Message Type: " + message.getMessageType());
         switch(message.getMessageType()) {
             case ARRIVAL_TERMINAL_EXIT_GO_HOME:
                 arrivalTerminalExit.goHome(message.getIdentifier());
@@ -36,7 +35,6 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxyInterface {
                 break;
         }
         response.setMessageType(MessageType.REPLY_OK);
-        System.out.println("Replying Message: " + response);
         return response;
     }
 

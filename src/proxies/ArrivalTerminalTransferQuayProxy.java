@@ -16,7 +16,6 @@ public class ArrivalTerminalTransferQuayProxy implements SharedRegionProxyInterf
     }
     public Message processAndReply(Message message) {
         Message response = new Message();
-        System.out.println("Processing Message Type: " + message.getMessageType());
         switch(message.getMessageType()) {
             case ARRIVAL_TERMINAL_TRANSFER_QUAY_READY_TO_DEPARTUE:
                 arrivalTerminalTransferQuay.readyToDeparture();
@@ -48,7 +47,6 @@ public class ArrivalTerminalTransferQuayProxy implements SharedRegionProxyInterf
                 break;
         }
         response.setMessageType(MessageType.REPLY_OK);
-        System.out.println("Replying Message: " + response);
         return response;
     }
 

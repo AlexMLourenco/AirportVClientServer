@@ -18,8 +18,6 @@ public class BaggageCollectionPointProxy implements SharedRegionProxyInterface {
     public Message processAndReply(Message message) {
 
         Message response = new Message();
-        System.out.println("Processing Message Type: " + message.getMessageType());
-
 
         switch(message.getMessageType()) {
             case BAGGAGE_COLLECTION_POINT_WARNING_NO_MORE_BAGS_IN_PLANE_HOLD:
@@ -40,7 +38,6 @@ public class BaggageCollectionPointProxy implements SharedRegionProxyInterface {
         }
 
         response.setMessageType(MessageType.REPLY_OK);
-        System.out.println("Replying Message: " + response);
         return response;
     }
 
