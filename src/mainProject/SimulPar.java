@@ -14,12 +14,12 @@ public class SimulPar {
     /**
      * Number of Plane Landings
      */
-    public static final int LANDINGS = 20 ;
+    public static final int LANDINGS = 5 ;
 
     /**
      * Maximum number of pieces of luggage by each passenger
      */
-    public static final int LUGGAGE = 30;
+    public static final int LUGGAGE = 2;
 
     /**
      * Maximum Capacity of seating places in the bus
