@@ -123,6 +123,8 @@ public class AirportVClientServer {
             porter.join();
             busDriver.join();
 
+            repositoryStub.setFinalStats();
+
             /**** Shutdown dos servers **/
             arrivalLoungeStub.setSimulationFinished();
             arrivalTerminalTransferQuayStub.setSimulationFinished();

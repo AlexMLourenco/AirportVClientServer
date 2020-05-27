@@ -144,6 +144,14 @@ public class RepositoryStub extends GenericStub{
         this.process(outMessage);
     }
 
+    public void setFinalStats() {
+        Message outMessage;
+
+        outMessage= new Message();
+        outMessage.setMessageType(MessageType.REPOSITORY_FINAL_STATS);
+        this.process(outMessage);
+    }
+
     public void setSimulationFinished() {
         Message outMessage;
 
