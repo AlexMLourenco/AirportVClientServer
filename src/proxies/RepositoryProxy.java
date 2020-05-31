@@ -34,7 +34,10 @@ public class RepositoryProxy implements SharedRegionProxyInterface {
             case REPOSITORY_SET_BUS_DRIVER_STATE: repository.setBusDriverState((BusDriverStates)message.getEntityState()); break;
             case REPOSITORY_SET_PASSENGER_STATE: repository.setPassengerState(message.getIdentifier(), (PassengerStates)message.getEntityState()); break;
             case REPOSITORY_FINAL_STATS: repository.addReport(); break;
-            case REPOSITORY_SIMULATION_FINISHED: this.simulationFinished = true; break;
+            case REPOSITORY_SIMULATION_FINISHED:
+                this.simulationFinished = true;
+                System.exit(0);
+                break;
         }
         response.setMessageType(MessageType.REPLY_OK);
         return response;

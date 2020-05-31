@@ -25,7 +25,6 @@ public class GenericCom {
                 errorMessage = errorMessage.concat("Unknown data type!");
             }
             System.out.println(errorMessage);
-            ex.printStackTrace ();
             System.exit (1);
         }
 

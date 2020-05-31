@@ -13,10 +13,10 @@ import mainProject.SimulPar;
 public class Repository implements SharedRegionInterface {
 
     /**** Report Values ****/
-    static int passengersFinalDestination = 0;
-    static int passengersInTransit = 0;
-    static int bagsTransportedInThePlaneHold = 0;
-    static int bagsLost = 0;
+    int passengersFinalDestination = 0;
+    int passengersInTransit = 0;
+    int totalBagsTransported = 0;
+    int totalBagsArrived = 0;
 
     /**** Flight ****/
     int flightNumber;                   //Number of the flight
@@ -54,15 +54,10 @@ public class Repository implements SharedRegionInterface {
     /**
      * ArrivalTerminalTransferQuay
      */
-    //int busWaitingQueue[];              //Passengers Waiting Queue
-    //int busSeats[];                     //Passengers Seated on the Bus
-
     private List<Integer> busWaitingQueue;
     private List<Integer> busSeats;
 
-
     public Repository() throws FileNotFoundException {
-
         this.luggageInStoreRoom = 0;
         f = new File(SimulPar.FILENAME);
         pw = new PrintWriter(f);
@@ -92,10 +87,6 @@ public class Repository implements SharedRegionInterface {
 
         this.busWaitingQueue = new ArrayList<>();
         this.busSeats = new ArrayList<>();
-        //this.busWaitingQueue = new int[SimulPar.PASSENGERS];
-        //Arrays.fill(this.busWaitingQueue, -1);
-        //this.busSeats = new int[SimulPar.BUS_CAPACITY];
-        //Arrays.fill(this.busSeats, -1);
         this.passengersSituation = new char[SimulPar.PASSENGERS];
         Arrays.fill(this.passengersSituation, '-');
         passengersLuggage = new int [SimulPar.PASSENGERS];
@@ -151,7 +142,7 @@ public class Repository implements SharedRegionInterface {
      */
     public synchronized void flightLanded(int luggageInPlaneHold) {
         this.luggageInPlaneHold = luggageInPlaneHold;
-        bagsTransportedInThePlaneHold += luggageInPlaneHold;
+        totalBagsArrived = totalBagsArrived + luggageInPlaneHold;
         export();
     }
 
@@ -167,6 +158,9 @@ public class Repository implements SharedRegionInterface {
         char action;
         this.passengersCount++;
         this.passengersLuggage[id] = numberOfLuggages;
+        totalBagsTransported += numberOfLuggages;
+      
+
         this.passengerStates[id] = PassengerStates.WHAT_SHOULD_I_DO;
         if (isFinalDestination) {
             this.passengersSituation[id] = 'F';
@@ -264,8 +258,6 @@ public class Repository implements SharedRegionInterface {
         export();
     }
 
-
-
     /****** FILE ******/
 
     /**
@@ -346,8 +338,8 @@ public class Repository implements SharedRegionInterface {
         str = str.concat("Final report\n");
         str = str.concat("N. of passengers which have this airport as their final destination = " + passengersFinalDestination + "\n");
         str = str.concat("N. of passengers which are in transit = " + passengersInTransit + "\n");
-        str = str.concat("N. of bags that should have been transported in the the planes hold = " + (bagsTransportedInThePlaneHold + bagsLost) + "\n");
-        str = str.concat("N. of bags that were lost = " + bagsLost + "\n");
+        str = str.concat("N. of bags that should have been transported in the the planes hold = " + (totalBagsTransported ) + "\n");
+        str = str.concat("N. of bags that were lost = " + (totalBagsTransported - totalBagsArrived) + "\n");
         return str;
     }
 

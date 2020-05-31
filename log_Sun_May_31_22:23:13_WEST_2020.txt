@@ -1,0 +1,79 @@
+PLANE    PORTER                  DRIVER
+FN BN  Stat CB SR   Stat  Q1 Q2 Q3 Q4 Q5 Q6  S1 S2 S3
+St1 Si1 NR1 NA1 St2 Si2 NR2 NA2 St3 Si3 NR3 NA3 St4 Si4 NR4 NA4 St5 Si5 NR5 NA5 St6 Si6 NR6 NA6
+1  5   WPTL 0  0    PKAT  -  -  -  -  -  -   -  -  -  
+WSD -   -   -   WSD -   -   -   WSD -   -   -   WSD -   -   -   WSD -   -   -   WSD -   -   -   
+1  5   WPTL 0  0    PKAT  -  -  -  -  -  -   -  -  -  
+WSD -   -   -   WSD -   -   -   WSD FDT 2   -   WSD -   -   -   WSD -   -   -   WSD -   -   -   
+1  5   WPTL 0  0    PKAT  -  -  -  -  -  -   -  -  -  
+WSD -   -   -   WSD -   -   -   WSD FDT 2   -   WSD -   -   -   WSD -   -   -   WSD TRT 2   -   
+1  5   WPTL 0  0    PKAT  -  -  -  -  -  -   -  -  -  
+WSD -   -   -   WSD -   -   -   WSD FDT 2   -   WSD FDT 0   -   WSD -   -   -   WSD TRT 2   -   
+1  5   WPTL 0  0    PKAT  -  -  -  -  -  -   -  -  -  
+WSD FDT 2   -   WSD -   -   -   WSD FDT 2   -   WSD FDT 0   -   WSD -   -   -   WSD TRT 2   -   
+1  5   WPTL 0  0    PKAT  -  -  -  -  -  -   -  -  -  
+WSD FDT 2   -   WSD -   -   -   LCP FDT 2   -   WSD FDT 0   -   WSD -   -   -   WSD TRT 2   -   
+1  5   WPTL 0  0    PKAT  -  -  -  -  -  -   -  -  -  
+WSD FDT 2   -   WSD TRT 1   -   LCP FDT 2   -   WSD FDT 0   -   WSD -   -   -   WSD TRT 2   -   
+1  5   WPTL 0  0    PKAT  5  -  -  -  -  -   -  -  -  
+WSD FDT 2   -   WSD TRT 1   -   LCP FDT 2   -   WSD FDT 0   -   WSD -   -   -   ATT TRT 2   -   
+1  5   WPTL 0  0    PKAT  5  -  -  -  -  -   -  -  -  
+WSD FDT 2   -   WSD TRT 1   -   LCP FDT 2   -   WSD FDT 0   -   WSD -   -   -   ATT TRT 2   -   
+1  5   WPTL 0  0    PKAT  5  -  -  -  -  -   -  -  -  
+WSD FDT 2   -   WSD TRT 1   -   LCP FDT 2   -   WSD FDT 0   -   WSD FDT 2   -   ATT TRT 2   -   
+1  5   WPTL 0  0    PKAT  5  -  -  -  -  -   -  -  -  
+WSD FDT 2   -   WSD TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   WSD FDT 2   -   ATT TRT 2   -   
+1  5   WPTL 0  0    PKAT  5  -  -  -  -  -   -  -  -  
+LCP FDT 2   -   WSD TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   WSD FDT 2   -   ATT TRT 2   -   
+1  5   WPTL 0  0    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   WSD FDT 2   -   ATT TRT 2   -   
+1  5   WPTL 0  0    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   WSD FDT 2   -   ATT TRT 2   -   
+1  5   WPTL 0  0    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   -   ATT TRT 2   -   
+1  4   APLH 0  0    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   -   ATT TRT 2   -   
+1  4   ASTR 0  1    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   -   ATT TRT 2   -   
+1  3   APLH 0  1    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   -   ATT TRT 2   -   
+1  3   ASTR 0  2    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   -   ATT TRT 2   -   
+1  2   APLH 0  2    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   -   ATT TRT 2   -   
+1  2   ALCB 1  2    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   -   ATT TRT 2   -   
+1  2   ALCB 0  2    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   1   ATT TRT 2   -   
+1  1   APLH 0  2    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   1   ATT TRT 2   -   
+1  1   ASTR 0  3    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   1   ATT TRT 2   -   
+1  0   APLH 0  3    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   1   ATT TRT 2   -   
+1  0   ALCB 1  3    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   -   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   1   ATT TRT 2   -   
+1  0   ALCB 0  3    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   1   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   1   ATT TRT 2   -   
+1  0   WPTL 0  3    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   1   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   LCP FDT 2   1   ATT TRT 2   -   
+1  0   WPTL 0  3    PKAT  5  1  -  -  -  -   -  -  -  
+LCP FDT 2   1   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   BRO FDT 2   1   ATT TRT 2   -   
+1  0   WPTL 0  3    PKAT  5  1  -  -  -  -   -  -  -  
+BRO FDT 2   1   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   BRO FDT 2   1   ATT TRT 2   -   
+1  0   WPTL 0  3    PKAT  5  1  -  -  -  -   -  -  -  
+BRO FDT 2   1   ATT TRT 1   -   LCP FDT 2   -   EAT FDT 0   -   EAT FDT 2   1   ATT TRT 2   -   
+1  0   WPTL 0  3    PKAT  5  1  -  -  -  -   -  -  -  
+BRO FDT 2   1   ATT TRT 1   -   BRO FDT 2   -   EAT FDT 0   -   EAT FDT 2   1   ATT TRT 2   -   
+1  0   WPTL 0  3    PKAT  5  1  -  -  -  -   -  -  -  
+EAT FDT 2   1   ATT TRT 1   -   BRO FDT 2   -   EAT FDT 0   -   EAT FDT 2   1   ATT TRT 2   -   
+1  0   WPTL 0  3    PKAT  5  1  -  -  -  -   -  -  -  
+EAT FDT 2   1   ATT TRT 1   -   EAT FDT 2   -   EAT FDT 0   -   EAT FDT 2   1   ATT TRT 2   -   
+1  0   WPTL 0  3    PKAT  1  -  -  -  -  -   5  -  -  
+EAT FDT 2   1   ATT TRT 1   -   EAT FDT 2   -   EAT FDT 0   -   EAT FDT 2   1   TRT TRT 2   -   
+1  0   WPTL 0  3    PKAT  -  -  -  -  -  -   5  1  -  
+EAT FDT 2   1   TRT TRT 1   -   EAT FDT 2   -   EAT FDT 0   -   EAT FDT 2   1   TRT TRT 2   -   
+1  0   WPTL 0  3    DRFW  -  -  -  -  -  -   5  1  -  
+EAT FDT 2   1   TRT TRT 1   -   EAT FDT 2   -   EAT FDT 0   -   EAT FDT 2   1   TRT TRT 2   -   
+1  0   WPTL 0  3    PKDT  -  -  -  -  -  -   5  1  -  
+EAT FDT 2   1   TRT TRT 1   -   EAT FDT 2   -   EAT FDT 0   -   EAT FDT 2   1   TRT TRT 2   -   

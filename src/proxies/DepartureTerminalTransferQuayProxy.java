@@ -18,6 +18,7 @@ public class DepartureTerminalTransferQuayProxy implements SharedRegionProxyInte
                 departureTerminalTransferQuay.parkTheBusAndLetPassOff(message.getIntValue());
                 break;
             case DEPARTURE_TERMINAL_TRANSFER_QUAY_LEAVE_THE_BUS:
+                System.out.println("IN: " + message.getIdentifier());
                 departureTerminalTransferQuay.leaveTheBus(message.getIdentifier());
                 break;
             case DEPARTURE_TERMINAL_TRANSFER_QUAY_GO_TO_ARRIVAL_TERMINAL:

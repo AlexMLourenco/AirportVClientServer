@@ -9,6 +9,8 @@ import stubs.RepositoryStub;
 
 public class DepartureTerminalTransferQuay implements SharedRegionInterface {
 
+    private static final Object lock = new Object();
+
     private RepositoryStub repositoryStub;
 
     private Integer passengersOnTheBus = 0;
@@ -20,20 +22,27 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
     /***** PASSENGER FUNCTIONS *********/
 
     /** DONE **/
-    public synchronized  void leaveTheBus(int id){
+    public  void leaveTheBus(int id){
 
         try {
             System.out.println("Passenger " + id + " : is on a ride!");
-            wait();
-            System.out.println("Passenger " + id + " : arrived ");
-            this.passengersOnTheBus--;
-            System.out.println("Passenger " + id + " : " + passengersOnTheBus);
-            repositoryStub.removePassengerFromTheBus(id);
-            if (this.passengersOnTheBus == 0 ) {
-                notifyAll(); //Notify the driver
+            synchronized (lock) {
+                lock.wait();
+                System.out.println("Passenger " + id + " : arrived ");
+                this.passengersOnTheBus--;
+                System.out.println("Passenger " + id + " : " + passengersOnTheBus);
+                repositoryStub.removePassengerFromTheBus(id);
             }
 
-        }catch(InterruptedException e){}
+            if (this.passengersOnTheBus == 0 ) {
+                synchronized (this) {
+                    notifyAll(); //Notify the driver
+                }
+            }
+
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
     }
 
     /***** BUS DRIVER FUNCTIONS *********/
@@ -42,11 +51,12 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
     public synchronized void parkTheBusAndLetPassOff(int passengersOnTheBus){
         repositoryStub.setBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.passengersOnTheBus = passengersOnTheBus;
-        notifyAll(); // notify that they can start leaving the bus
+        synchronized (lock) {
+            lock.notifyAll(); // notify that they can start leaving the bus
+        }
+
         try {
-            while (this.passengersOnTheBus != 0) {
-                wait();
-            }
+            wait();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
