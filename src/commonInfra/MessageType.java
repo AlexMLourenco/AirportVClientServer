@@ -1,3 +1,14 @@
+/**
+ * <h1>Message Type</h1>
+ * The Message class implements the methods to
+ * process messages between server and client
+ */
+
+
+/**
+ * commonInfra is a group of bar utils for operating on foo things.
+ */
+
 package commonInfra;
 
 public enum MessageType {

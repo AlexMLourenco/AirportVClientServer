@@ -1,3 +1,12 @@
+/**
+ * <h1>Client Comunication</h1>
+ * The ClientCom program implements methods to establish and close connection
+ * between a client and the server through a socket.
+ */
+
+/**
+ * commonInfra is a group of bar utils for operating on foo things.
+ */
 package commonInfra;
 
 import commonInfra.GenericCom;
@@ -11,13 +20,26 @@ public class ClientCom extends GenericCom {
 
     private String hostname = null;
     private int port;
-
+    /**
+     *  ClientCom constructor.
+     * @param hostname This is the parameter to set the hostname in the server socket
+     * @param port     This is the parameter to set the port in the server socket
+     */
     public ClientCom (String hostname, int port)
     {
         this.hostname = hostname;
         this.port = port;
     }
 
+    /**
+     * This method is used to check if a connection between the Client and the server is established
+     * A socket is created and it tries to connect to serverAddress
+     * @param args Unused.
+     * @return {@code true}  if the connection has been established
+     *         otherwise {@code false}  (the socket could not connect to server address...) .
+     * @see IOException, UnknownHostException , ConnectException, SocketTimeoutException
+     *
+     */
     public boolean open ()
     {
         String errorMessage = Thread.currentThread ().getName () + ": ";
@@ -76,7 +98,11 @@ public class ClientCom extends GenericCom {
         return (keepAlive);
     }
 
-
+    /**
+     * This method is used to close conection between the socket and the server
+     * @param args Unused.
+     * @return Nothing.
+     */
     public void close () {
         String errorMessage = Thread.currentThread ().getName () + ": ";
         try {

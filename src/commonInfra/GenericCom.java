@@ -1,3 +1,12 @@
+/**
+ * <h1>Generic Comunication</h1>
+ * The GenericCom class implements the methods to
+ * exchange messages between server and client
+ */
+
+/**
+ * commonInfra is a group of bar utils for operating on foo things.
+ */
 package commonInfra;
 
 import java.io.*;
@@ -5,11 +14,20 @@ import java.io.*;
 public class GenericCom {
     private ObjectInputStream in = null;
     private ObjectOutputStream out = null;
-
+    /**
+     * GenericCom constructor.
+     */
     public GenericCom() {
 
     }
-
+    /**
+     * This method is used to read an Object
+     * A socket is created and it tries to connect to serverAddress
+     * @param args Unused.
+     * @return Object the object that will be read.
+     * @see IOException, InvalidClassException , ClassNotFoundException
+     *
+     */
     public Object readObject (){
         String errorMessage = Thread.currentThread ().getName () + ": ";
         Object inObject = null;
@@ -30,7 +48,14 @@ public class GenericCom {
 
         return inObject;
     }
-
+    /**
+     * This method is used to write an Object
+     * ...
+     * @param args Unused.
+     * @return Object the object that will be read.
+     * @see InvalidClassException, NotSerializableException , IOException
+     *
+     */
     public void writeObject (Object outObject) {
         String errorMessage = Thread.currentThread ().getName () + ": ";
         try {
@@ -49,19 +74,34 @@ public class GenericCom {
         }
     }
 
-
+    /** Returns the input object.
+     * @param args Unused.
+     * @return Input Object
+     */
     public ObjectInputStream getIn() {
         return in;
     }
 
+    /** Updates the input object.
+     * @param in The object to be set.
+     * @return Nothing
+     */
     public void setIn(ObjectInputStream in) {
         this.in = in;
     }
 
+    /** Returns the output object.
+     * @param args Unused.
+     * @return Output Object
+     */
     public ObjectOutputStream getOut() {
         return out;
     }
 
+    /** Updates the output object.
+     * @param out The object to be set.
+     * @return Nothing
+     */
     public void setOut(ObjectOutputStream out) {
         this.out = out;
     }

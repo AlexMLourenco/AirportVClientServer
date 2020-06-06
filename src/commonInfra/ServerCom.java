@@ -1,3 +1,15 @@
+/**
+ * <h1>Server Com</h1>
+ * The Server Com class implements the methods to
+ * create the Server that will comunicate with the sockets
+ * and to start, end, accept and close a connection
+ *
+ */
+
+
+/**
+ * commonInfra is a group of bar utils for operating on foo things.
+ */
 package commonInfra;
 
 import java.io.*;
@@ -10,26 +22,46 @@ public class ServerCom extends GenericCom {
     private int socketTimeout;
     private int port;
 
-
+    /**
+     * ServerCom constructor.
+     * Creates a server comunication in specified port
+     * @param port The port to establish the communication
+     */
     public ServerCom (int port)
     {
         this.port = port;
         socketTimeout = 0;
     }
 
+    /**
+     * ServerCom constructor.
+     * Creates a server comunication in specified port with the listeningSocket
+     * @param port The port to establish the communication
+     * @param listeningSocket The listening Socket to establish the comunnication
+     */
     public ServerCom (int port, ServerSocket listeningSocket)
     {
         this(port);
         this.listeningSocket = listeningSocket;
         socketTimeout = 0;
     }
-
+    /**
+     * ServerCom constructor.
+     * Creates a server comunication in specified port with socket
+     * @param port The port to establish the communication
+     * @param socketTimeout The Socket to time out
+     */
     public ServerCom (int port, int socketTimeout)
     {
         this(port);
         this.socketTimeout = socketTimeout;
     }
 
+    /** Starts the communication.
+     * @param args unused
+     * @returns nothing
+     * @see BindException , IOException
+     */
     public void start ()
     {
         String errorMessage = Thread.currentThread ().getName () + ": ";
@@ -47,7 +79,11 @@ public class ServerCom extends GenericCom {
             System.exit (1);
         }
     }
-
+    /** Closes the scoket and ends the communication.
+     * @param args unused
+     * @returns nothing
+     * @see  IOException
+     */
     public void end () {
         String errorMessage = Thread.currentThread ().getName () + ": ";
         try {
@@ -61,6 +97,11 @@ public class ServerCom extends GenericCom {
         }
     }
 
+    /** Accept and Opens a communication channel with the ListeningSocket .
+     * @param args unused
+     * @returns connection The connection properties
+     * @see  SocketTimeoutException, SocketException, IOException
+     */
     public ServerCom accept() throws SocketTimeoutException {
         ServerCom connection;                                      // canal de comunicação
         String errorMessage = Thread.currentThread ().getName () + ": ";
@@ -100,7 +141,11 @@ public class ServerCom extends GenericCom {
 
         return connection;
     }
-
+    /** Closes a communication channel with the ListeningSocket .
+     * @param args unused
+     * @returns nothing
+     * @see  SocketTimeoutException, SocketException, IOException
+     */
     public void close () {
         String errorMessage = Thread.currentThread ().getName () + ": ";
         try {
