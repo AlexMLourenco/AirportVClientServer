@@ -3,3 +3,6 @@
 # Production files
 .idea/
 out/
+
+# Script Files
+scripts/
