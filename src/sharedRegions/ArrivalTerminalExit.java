@@ -34,7 +34,6 @@ public class ArrivalTerminalExit implements SharedRegionInterface {
             try {
                 wait();
             } catch (InterruptedException e) {}
-            System.out.println("Unblocked Go Home");
         }
     }
 

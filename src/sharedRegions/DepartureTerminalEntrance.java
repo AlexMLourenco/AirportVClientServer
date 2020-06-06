@@ -31,7 +31,6 @@ public class DepartureTerminalEntrance implements SharedRegionInterface {
             try {
                 wait();
             } catch (InterruptedException e) {}
-            System.out.println("Unblocked Prepare Next Leg");
         }
     }
 

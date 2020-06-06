@@ -41,21 +41,13 @@ public class BusDriver extends Thread {
     public void run() {
         activityStarted = System.nanoTime() / 1000;
         while (this.keepAlive) {
-            System.out.println("Bus Driver: Start");
             this.checkWorkDayEnded();
-            System.out.println("Bus Driver: checkWorkDayEnded");
             if (arrivalTerminalTransferQuayStub.readyToDeparture()) {
-                System.out.println("Bus Driver: Ready to Departure");
                 this.setPassengersInTheBus(arrivalTerminalTransferQuayStub.announcingBusBoarding());
-                System.out.println("Bus Driver: Passengers in the Bus " + this.getPassengersInTheBus());
                 arrivalTerminalTransferQuayStub.goToDepartureTerminal();
-                System.out.println("Bus Driver: goToDepartureTerminal");
                 departureTerminalTransferQuayStub.parkTheBusAndLetPassOff(this.passengersInTheBus);
-                System.out.println("Bus Driver: parkTheBusAndLetPassOff");
                 departureTerminalTransferQuayStub.goToArrivalTerminal();
-                System.out.println("Bus Driver: goToArrivalTerminal");
                 arrivalTerminalTransferQuayStub.parkTheBus();
-                System.out.println("Bus Driver: parkTheBus");
             }
         }
     }

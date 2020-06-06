@@ -25,12 +25,9 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
     public  void leaveTheBus(int id){
 
         try {
-            System.out.println("Passenger " + id + " : is on a ride!");
             synchronized (lock) {
                 lock.wait();
-                System.out.println("Passenger " + id + " : arrived ");
                 this.passengersOnTheBus--;
-                System.out.println("Passenger " + id + " : " + passengersOnTheBus);
                 repositoryStub.removePassengerFromTheBus(id);
             }
 

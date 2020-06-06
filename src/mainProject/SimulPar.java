@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class SimulPar {
 
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     /**
      * Number of Passengers

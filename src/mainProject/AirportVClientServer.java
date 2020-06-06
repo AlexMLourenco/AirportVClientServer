@@ -44,12 +44,6 @@ public class AirportVClientServer {
                 }
             }
 
-            for (int i = 0; i < LANDINGS; i++) {
-                for (int j = 0; j < PASSENGERS; j++) {
-                    System.out.println(String.format("%d\t%d\t%d\t%d\t%b",i,j,passengersLuggage[i][j],plainHoldLuggage[i][j],passengersFinalDestination[i][j]));
-                }
-            }
-
             RepositoryStub repositoryStub = new RepositoryStub();
 
             ArrivalLoungeStub arrivalLoungeStub = new ArrivalLoungeStub(SharedRegionConfig.SERVER_ARRIVAL_LOUNGE_HOSTNAME,

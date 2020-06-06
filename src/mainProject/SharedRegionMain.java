@@ -55,7 +55,7 @@ public class SharedRegionMain {
                     serviceProvider.start();
                 } catch (SocketTimeoutException e) {}
             }
-            System.out.printf("%s: Bye!\n",regionName);
+            //System.out.printf("%s: Bye!\n",regionName);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
