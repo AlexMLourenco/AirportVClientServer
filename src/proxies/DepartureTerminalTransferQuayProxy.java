@@ -18,7 +18,7 @@ public class DepartureTerminalTransferQuayProxy implements SharedRegionProxyInte
     /**
      * DepartureTerminalTransferQuayProxy constructor.
      * Creates a DepartureTerminalTransferQuayProxy in Departure Terminal Transfer Quay Shared Region
-     * @param departureTerminalEntrance that corresponds to Departure Terminal Transfer Quay Shared Region
+     * @param departureTerminalTransferQuay that corresponds to Departure Terminal Transfer Quay Shared Region
      */
     public DepartureTerminalTransferQuayProxy(DepartureTerminalTransferQuay departureTerminalTransferQuay) {
         this.departureTerminalTransferQuay = departureTerminalTransferQuay;

@@ -21,7 +21,6 @@ public class GenericCom {
     /**
      * This method is used to read an Object
      * A socket is created and it tries to connect to serverAddress
-     * @param args Unused.
      * @return Object the object that will be read.
      * @see IOException
      * @see InvalidClassException
@@ -51,7 +50,6 @@ public class GenericCom {
     /**
      * This method is used to write an Object
      * ...
-     * @param args Unused.
      * @return Object the object that will be read.
      * @see InvalidClassException, NotSerializableException , IOException
      *
@@ -75,7 +73,6 @@ public class GenericCom {
     }
 
     /** Returns the input object.
-     * @param args Unused.
      * @return Input Object
      */
     public ObjectInputStream getIn() {
@@ -90,7 +87,6 @@ public class GenericCom {
     }
 
     /** Returns the output object.
-     * @param args Unused.
      * @return Output Object
      */
     public ObjectOutputStream getOut() {

@@ -61,7 +61,7 @@ public class GenericStub {
 
     /**
      * Updates the Server Port
-     * @param new Server port number
+     * @param port Server port number
      */
     public void setPort(int port) {
         this.port = port;

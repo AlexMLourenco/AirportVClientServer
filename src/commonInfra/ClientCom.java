@@ -31,7 +31,6 @@ public class ClientCom extends GenericCom {
     /**
      * This method is used to check if a connection between the Client and the server is established
      * A socket is created and it tries to connect to serverAddress
-     * @param args Unused.
      * @return {@code true}  if the connection has been established
      *         otherwise {@code false}  (the socket could not connect to server address...) .
      * @see IOException

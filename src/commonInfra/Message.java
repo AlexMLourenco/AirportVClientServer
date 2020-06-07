@@ -47,7 +47,7 @@ public class Message implements Serializable {
     }
 
     /** Updates the message type.
-     * @param in The message type to be set.
+     * @param messageType the message type to be set.
      */
     public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
@@ -95,7 +95,7 @@ public class Message implements Serializable {
 
     /**
      * Updates the Identifier.
-     * @param identifier The identifier of the message
+     * @param intValue The identifier of the message
      */
     public void setIntValue(int intValue) {
         this.intValue = intValue;
@@ -143,7 +143,7 @@ public class Message implements Serializable {
 
     /**
      * Updates char Value.
-     * @param charvalue
+     * @param charValue
      */
     public void setCharValue(char charValue) {
         this.charValue = charValue;
@@ -175,7 +175,7 @@ public class Message implements Serializable {
 
     /**
      * Updates Array.
-     * @param intArray
+     * @param booleanArray
      */
     public void setBooleanArray(boolean[][] booleanArray) {
         this.booleanArray = booleanArray;

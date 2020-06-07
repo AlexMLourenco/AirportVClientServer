@@ -54,7 +54,6 @@ public class ServerCom extends GenericCom {
     }
 
     /** Starts the communication.
-     * @param args unused
      * @returns nothing
      * @see BindException
      * @see IOException
@@ -77,7 +76,6 @@ public class ServerCom extends GenericCom {
         }
     }
     /** Closes the scoket and ends the communication.
-     * @param args unused
      * @returns nothing
      * @see  IOException
      */
@@ -94,8 +92,7 @@ public class ServerCom extends GenericCom {
         }
     }
 
-    /** Accept and Opens a communication channel with the ListeningSocket .
-     * @param args unused
+    /** Accept and Opens a communication channel with the ListeningSocket
      * @returns connection The connection properties
      * @see SocketTimeoutException
      * @see SocketException
@@ -140,8 +137,7 @@ public class ServerCom extends GenericCom {
 
         return connection;
     }
-    /** Closes a communication channel with the ListeningSocket .
-     * @param args unused
+    /** Closes a communication channel with the ListeningSocket
      * @returns nothing
      * @see  SocketTimeoutException
      * @see SocketException
