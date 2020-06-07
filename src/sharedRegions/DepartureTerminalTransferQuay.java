@@ -32,9 +32,8 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
     /***** PASSENGER FUNCTIONS *********/
 
     /**
-     * Passenger leaveTheBus(int id) method
-     * @param id Passenger identifier
      * Passenger leaves the bus when reaches departure terminal
+     * @param id Passenger identifier
      */
     public  void leaveTheBus(int id){
 
@@ -59,10 +58,9 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
     /***** BUS DRIVER FUNCTIONS *********/
 
     /**
-     * Driver parkTheBusAndLetPassOff(int passengersOnTheBus) method
-     * @param passengersOnTheBus number of the passengers on the bus
      * Driver arrives to departure terminal and notifies the passengers
      * to leave the bus
+     * @param passengersOnTheBus number of the passengers on the bus
      */
     public synchronized void parkTheBusAndLetPassOff(int passengersOnTheBus){
         repositoryStub.setBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
@@ -80,8 +78,8 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
     }
 
     /**
-     * Driver goToArrivalTerminal() method
-     * when all passengers leave the bus, the driver goes to arrival drives to arrival terminal
+     *
+     * when all passengers leave the bus, the driver drives to arrival terminal
      */
     public void goToArrivalTerminal(){
         repositoryStub.setBusDriverState(BusDriverStates.DRIVING_BACKWARD);

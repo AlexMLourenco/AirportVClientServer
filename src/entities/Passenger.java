@@ -62,7 +62,6 @@ public class Passenger extends Thread {
 
     /**
      * Returns the id of the passenger.
-     * @param arguments unused
      * @return value of the id of the passenger
      */
     public int getIdentifier() {
@@ -79,7 +78,6 @@ public class Passenger extends Thread {
      *                              if his luggage is not found, he needs to go to reclaim office
      *                              and then go home
      *          Go Home -> passenger leaves the airport
-     * @returns nothing
      */
     @Override
     public void run() {
@@ -109,7 +107,6 @@ public class Passenger extends Thread {
 
     /**
      * Increase the number of luggage collected
-     * @returns nothing
      * */
     public void increaseCollectedLuggages() {
         this.numberOfCollectedLuggages++;

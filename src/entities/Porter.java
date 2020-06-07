@@ -47,7 +47,6 @@ public class Porter extends Thread {
      * Porter's lifecycle
      *      while Porter doesn't reach the end of the day he will collect
      *      the bags of the passengers and carry them to the AppropiateStore
-     * @returns nothing
      */
     @Override
     public void run() {
@@ -75,7 +74,6 @@ public class Porter extends Thread {
     }
     /**
      * Returns the current state of the Porter.
-     * @param arguments unused
      * @return entityState the current state of the Porter
      */
     public StateInterface getEntityState() {
@@ -93,7 +91,6 @@ public class Porter extends Thread {
     /** Updates the boolean keepAlive.
      * @param keepAlive {@code true} means the day isn't over yet
      *             otherwise {@code false}
-     * @return Nothing
      */
     public void setKeepAlive(boolean keepAlive) {
         this.keepAlive = keepAlive;

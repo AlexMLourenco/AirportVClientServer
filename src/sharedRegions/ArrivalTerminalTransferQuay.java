@@ -40,8 +40,8 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
     /***** PASSENGER FUNCTIONS *********/
 
     /**
-     * Passenger takeABus(id) method
-     * @param id passenger id
+     * Passenger isn't in his final destination so needs to take the bus to departure terminal
+     * @param id passenger identifier
      */
     public synchronized void takeABus(int id) {
         if (SimulPar.DEBUG_MODE) System.out.println("takeABus ( " + id + "): start ");
@@ -54,7 +54,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
     }
 
     /**
-     * Passenger takeABus(id) method
+     * Passenger waits for the bus to get in
      * @param id passenger id
      */
     public void waitForBus(int id) {
@@ -77,7 +77,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
     }
 
     /**
-     * Passenger enterTheBus(id) method
+     * Passenger gets in the Bus
      * @param id passenger id
      */
     public synchronized void enterTheBus(int id) {
@@ -95,7 +95,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
     /***** DRIVER FUNCTIONS *********/
 
     /**
-     * Driver readyToDeparture() method
+     * Driver is ready to drive the bus to departure terminal
      *
      */
     public synchronized boolean readyToDeparture() {
@@ -111,7 +111,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
     }
 
     /**
-     * Driver readyToDeparture() method
+     * Driver drives bus to Departure terminal
      *
      */
     public void goToDepartureTerminal() {
@@ -123,7 +123,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
     }
 
     /**
-     * Driver parkTheBus() method
+     * Driver parks the bus at the arrival terminal
      *
      */
     public void parkTheBus() {
@@ -131,8 +131,7 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
     }
 
     /**
-     * Driver announcingBusBoarding() method
-     * @return
+     * Driver annouces that clients can get in the bus
      */
     public synchronized int announcingBusBoarding() {
         int numberOfPassengers;

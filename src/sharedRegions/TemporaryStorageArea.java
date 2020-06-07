@@ -27,7 +27,7 @@ public class TemporaryStorageArea implements SharedRegionInterface {
     }
 
     /**
-     * Porter carryItToAppropriateStore(BAG bag) method
+     * Bag registered in the Store Room
      * @return bag that will be carried by porter to the store room
      * */
     public synchronized void carryItToAppropriateStore(BAG bag) {

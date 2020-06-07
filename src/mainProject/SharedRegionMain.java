@@ -22,7 +22,6 @@ import java.net.SocketTimeoutException;
 public class SharedRegionMain {
     /**
      * Shared regions main's thread
-     * @param args unused
      * @see SocketTimeoutException
      */
 

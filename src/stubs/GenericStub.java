@@ -14,8 +14,8 @@ public class GenericStub {
 
     /**
      * Generic Stub instatiation
-     * @param hostname
-     * @param port
+     * @param hostname server hostname
+     * @param port     server port
      */
     public GenericStub(String hostname, int port) {
         this.hostname = hostname;
@@ -36,32 +36,32 @@ public class GenericStub {
     }
 
     /**
-     * Returns the Stub Hostname
-     * @return the Stub Hostname
+     * Returns the Server Hostname
+     * @return the Server Hostname
      */
     public String getHostname() {
         return hostname;
     }
 
     /**
-     * Updates the Stub Hostname
-     * @param hostname new hostname
+     * Updates the Server Hostname
+     * @param new Server hostname
      */
     public void setHostname(String hostname) {
         this.hostname = hostname;
     }
 
     /**
-     * Returns the Stub Port
-     * @return the Stub Port
+     * Returns the Server Port
+     * @return the Server Port
      */
     public int getPort() {
         return port;
     }
 
     /**
-     * Updates the Stub Port
-     * @param new port number
+     * Updates the Server Port
+     * @param new Server port number
      */
     public void setPort(int port) {
         this.port = port;

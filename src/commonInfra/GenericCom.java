@@ -23,7 +23,9 @@ public class GenericCom {
      * A socket is created and it tries to connect to serverAddress
      * @param args Unused.
      * @return Object the object that will be read.
-     * @see IOException, InvalidClassException , ClassNotFoundException
+     * @see IOException
+     * @see InvalidClassException
+     * @see ClassNotFoundException
      *
      */
     public Object readObject (){
@@ -82,7 +84,6 @@ public class GenericCom {
 
     /** Updates the input object.
      * @param in The object to be set.
-     * @return Nothing
      */
     public void setIn(ObjectInputStream in) {
         this.in = in;
@@ -98,7 +99,6 @@ public class GenericCom {
 
     /** Updates the output object.
      * @param out The object to be set.
-     * @return Nothing
      */
     public void setOut(ObjectOutputStream out) {
         this.out = out;

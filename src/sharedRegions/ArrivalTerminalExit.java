@@ -39,7 +39,6 @@ public class ArrivalTerminalExit implements SharedRegionInterface {
     }
 
     /**
-     * Passenger goHome()
      * Passenger leaves the airport when reaches its final destination
      * @param id The id of the passenger
      * */

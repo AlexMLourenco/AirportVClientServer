@@ -21,7 +21,6 @@ import static mainProject.SimulPar.PASSENGERS;
 public class AirportVClientServer {
     /**
      * Client Server main
-     * @param args unused
      * */
     public static void main(String args[]) {
         try {

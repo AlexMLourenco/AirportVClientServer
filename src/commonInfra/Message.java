@@ -40,7 +40,6 @@ public class Message implements Serializable {
     }
     /**
      * Returns the Message type.
-     * @param args unused
      * @return the message type
      */
     public MessageType getMessageType() {
@@ -49,7 +48,6 @@ public class Message implements Serializable {
 
     /** Updates the message type.
      * @param in The message type to be set.
-     * @return Nothing
      */
     public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
@@ -57,7 +55,6 @@ public class Message implements Serializable {
 
     /**
      * Returns the Entity State.
-     * @param args unused
      * @return the message type
      */
     public StateInterface getEntityState() {
@@ -67,7 +64,6 @@ public class Message implements Serializable {
     /**
      * Updates the Entity State.
      * @param entityState
-     * @return Nothing
      */
     public void setEntityState(StateInterface entityState) {
         this.entityState = entityState;
@@ -75,7 +71,6 @@ public class Message implements Serializable {
 
     /**
      * Returns the Identifier.
-     * @param args unused
      * @return the Identifier of the message
      */
     public int getIdentifier() {
@@ -85,7 +80,6 @@ public class Message implements Serializable {
     /**
      * Updates the Identifier.
      * @param identifier The identifier of the message
-     * @return Nothing
      */
     public void setIdentifier(int identifier) {
         this.identifier = identifier;
@@ -93,7 +87,6 @@ public class Message implements Serializable {
 
     /**
      * Returns the Integer value.
-     * @param args unused
      * @return the int value of the message
      */
     public int getIntValue() {
@@ -103,7 +96,6 @@ public class Message implements Serializable {
     /**
      * Updates the Identifier.
      * @param identifier The identifier of the message
-     * @return Nothing
      */
     public void setIntValue(int intValue) {
         this.intValue = intValue;
@@ -111,7 +103,6 @@ public class Message implements Serializable {
 
     /**
      * Returns the Boolean value of... .
-     * @param args unused
      * @return boolean value it can be {@code true} if .... otherwise {@code false}
      */
     public boolean getBooleanValue() {
@@ -121,7 +112,6 @@ public class Message implements Serializable {
     /**
      * Updates the boolean value of.
      * @param booleanValue
-     * @return Nothing
      */
     public void setBooleanValue(boolean booleanValue) {
         this.booleanValue = booleanValue;
@@ -129,7 +119,6 @@ public class Message implements Serializable {
 
     /**
      * Returns a Bag
-     * @param args unused
      * @return bag
      */
     public BAG getBag() {
@@ -139,7 +128,6 @@ public class Message implements Serializable {
     /**
      * Updates the bag.
      * @param bag a Bag
-     * @return Nothing
      */
     public void setBag(BAG bag) {
         this.bag = bag;
@@ -147,7 +135,6 @@ public class Message implements Serializable {
 
     /**
      * Returns the char Value
-     * @param args unused
      * @return char Value
      */
     public char getCharValue() {
@@ -157,7 +144,6 @@ public class Message implements Serializable {
     /**
      * Updates char Value.
      * @param charvalue
-     * @return Nothing
      */
     public void setCharValue(char charValue) {
         this.charValue = charValue;
@@ -165,7 +151,6 @@ public class Message implements Serializable {
 
     /**
      * Returns the arrray ....
-     * @param args unused
      * @return intArray Array of integers
      */
     public int[][] getIntArray() {
@@ -175,7 +160,6 @@ public class Message implements Serializable {
     /**
      * Updates Array.
      * @param intArray
-     * @return Nothing
      */
     public void setIntArray(int[][] intArray) {
         this.intArray = intArray;
@@ -183,7 +167,6 @@ public class Message implements Serializable {
 
     /**
      * Returns the arrray ....
-     * @param args unused
      * @return booleanArray Array of booleans
      */
     public boolean[][] getBooleanArray() {
@@ -193,7 +176,6 @@ public class Message implements Serializable {
     /**
      * Updates Array.
      * @param intArray
-     * @return Nothing
      */
     public void setBooleanArray(boolean[][] booleanArray) {
         this.booleanArray = booleanArray;

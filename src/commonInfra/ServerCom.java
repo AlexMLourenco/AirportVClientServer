@@ -56,7 +56,8 @@ public class ServerCom extends GenericCom {
     /** Starts the communication.
      * @param args unused
      * @returns nothing
-     * @see BindException , IOException
+     * @see BindException
+     * @see IOException
      */
     public void start ()
     {
@@ -96,7 +97,9 @@ public class ServerCom extends GenericCom {
     /** Accept and Opens a communication channel with the ListeningSocket .
      * @param args unused
      * @returns connection The connection properties
-     * @see  SocketTimeoutException, SocketException, IOException
+     * @see SocketTimeoutException
+     * @see SocketException
+     * @see IOException
      */
     public ServerCom accept() throws SocketTimeoutException {
         ServerCom connection;                                      // canal de comunicação
@@ -140,7 +143,9 @@ public class ServerCom extends GenericCom {
     /** Closes a communication channel with the ListeningSocket .
      * @param args unused
      * @returns nothing
-     * @see  SocketTimeoutException, SocketException, IOException
+     * @see  SocketTimeoutException
+     * @see SocketException
+     * @see IOException
      */
     public void close () {
         String errorMessage = Thread.currentThread ().getName () + ": ";

@@ -8,13 +8,15 @@ package stubs;
 import commonInfra.Message;
 import commonInfra.MessageType;
 import commonInfra.BAG;
-
+/**
+ * This stub class represents the Baggage Collection Point as it is needed in the
+ * client side and communicates with the server side.
+ */
 public class BaggageCollectionPointStub extends GenericStub{
     /**
      * BaggageCollectionPointStub instatiation
-     * @param hostname
-     * @param port
-     *
+     * @param hostname server hostname
+     * @param port     server port
      */
     public BaggageCollectionPointStub(String hostname, int port) {
         super(hostname, port);

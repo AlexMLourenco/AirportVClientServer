@@ -40,7 +40,6 @@ public enum PassengerStates implements StateInterface, Serializable {
 
     /**
      * Returns the value of the sate.
-     * @param arguments unused
      * @return value of the current state of the Passenger
      */
     public String getValue() {

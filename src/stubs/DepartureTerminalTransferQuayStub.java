@@ -7,13 +7,15 @@ package stubs;
 
 import commonInfra.Message;
 import commonInfra.MessageType;
-
+/**
+ * This stub class represents the Departure Terminal TransferQuay as it is needed in the
+ * client side and communicates with the server side.
+ */
 public class DepartureTerminalTransferQuayStub extends GenericStub{
     /**
      * DepartureTerminalTransferQuayStub instatiation
-     * @param hostname
-     * @param port
-     *
+     * @param hostname server hostname
+     * @param port     server port
      */
     public DepartureTerminalTransferQuayStub(String hostname, int port) {
         super(hostname, port);

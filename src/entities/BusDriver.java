@@ -36,7 +36,6 @@ public class BusDriver extends Thread {
     /**
      * Check if the day of work of the Bus Driver has come to an end.
      * If it does the thread goes to sleep and wakes up a sleep_time later.
-     * @return nothing
      * */
     private void checkWorkDayEnded() {
         if ((System.nanoTime() / 1000) - activityStarted > SimulPar.BUS_DRIVER_END_OF_DAY_DURATION_MILLIS) {
@@ -52,7 +51,6 @@ public class BusDriver extends Thread {
      * Bus Driver's lifecycle
      *      while Bus Driver doesn't reach the end of the day he will drive the passengers
      *      through arrival and departure terminal
-     * @returns nothing
      */
     @Override
     public void run() {
@@ -70,7 +68,6 @@ public class BusDriver extends Thread {
     }
     /**
      * Returns the current number of passengers in the bus.
-     * @param args unused
      * @return passengersInTheBus the current number of passengers in the bus
      */
     public int getPassengersInTheBus() {
@@ -79,7 +76,6 @@ public class BusDriver extends Thread {
 
     /** Updates the number of passengers in the bus.
      * @param passengersInTheBus The set value of the number of passengers.
-     * @return Nothing
      */
     public void setPassengersInTheBus(int passengersInTheBus) {
         this.passengersInTheBus = passengersInTheBus;
@@ -88,7 +84,6 @@ public class BusDriver extends Thread {
     /** Updates the boolean keepAlive.
      * @param keepAlive {@code true} means the day isn't over yet
      *             otherwise {@code false}
-     * @return Nothing
      */
     public void setKeepAlive(boolean keepAlive) {
         this.keepAlive = keepAlive;

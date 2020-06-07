@@ -7,13 +7,16 @@ package stubs;
 
 import commonInfra.Message;
 import commonInfra.MessageType;
-
+/**
+ * This stub class represents the Arrival Terminal as it is needed in the
+ * client side and communicates with the server side.
+ */
 public class ArrivalTerminalExitStub extends GenericStub {
 
     /**
      * ArrivalTerminalExitStub instatiation
-     * @param hostname
-     * @param port
+     * @param hostname server hostname
+     * @param port     server port
      *
      */
     public ArrivalTerminalExitStub(String hostname, int port) {

@@ -34,7 +34,10 @@ public class ClientCom extends GenericCom {
      * @param args Unused.
      * @return {@code true}  if the connection has been established
      *         otherwise {@code false}  (the socket could not connect to server address...) .
-     * @see IOException, UnknownHostException , ConnectException, SocketTimeoutException
+     * @see IOException
+     * @see UnknownHostException
+     * @see ConnectException
+     * @see SocketTimeoutException
      *
      */
     public boolean open ()
@@ -97,8 +100,6 @@ public class ClientCom extends GenericCom {
 
     /**
      * This method is used to close conection between the socket and the server
-     * @param args Unused.
-     * @return Nothing.
      */
     public void close () {
         String errorMessage = Thread.currentThread ().getName () + ": ";

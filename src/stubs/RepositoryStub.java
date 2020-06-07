@@ -11,7 +11,10 @@ import entities.BusDriverStates;
 import entities.PassengerStates;
 import entities.PorterStates;
 import mainProject.SharedRegionConfig;
-
+/**
+ * This stub class represents the Repository as it is needed in the
+ * client side and communicates with the server side.
+ */
 public class RepositoryStub extends GenericStub{
     /**
      * RepositoryStub instatiation
@@ -21,8 +24,8 @@ public class RepositoryStub extends GenericStub{
     }
     /**
      * RepositoryStub instatiation
-     * @param port
-     * @param hostname
+     * @param hostname server hostname
+     * @param port     server port
      */
     public RepositoryStub(String hostname, int port) {
         super(hostname, port);

@@ -8,13 +8,16 @@ package stubs;
 import commonInfra.Message;
 import commonInfra.MessageType;
 import commonInfra.BAG;
-
+/**
+ * This stub class represents the Temporary Storage Area as it is needed in the
+ * client side and communicates with the server side.
+ */
 public class TemporaryStorageAreaStub extends GenericStub{
 
     /**
      * TemporaryStorageAreaStub instatiation
-     * @param hostname
-     * @param port
+     * @param hostname server hostname
+     * @param port     server port
      *
      */
     public TemporaryStorageAreaStub(String hostname, int port) {

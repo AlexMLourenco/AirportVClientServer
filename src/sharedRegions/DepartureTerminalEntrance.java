@@ -32,7 +32,7 @@ public class DepartureTerminalEntrance implements SharedRegionInterface {
     /*****  PASSENGER  FUNCTIONS *****/
 
     /**
-     * Passenger prepareNextLeg(int id) method
+     * Passenger is ready to enter in departure terminal
      * @param id Passenger identifier
      */
     public synchronized void prepareNextLeg(int id){

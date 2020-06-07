@@ -45,7 +45,7 @@ public class BaggageCollectionPoint implements SharedRegionInterface {
     /***** PORTER FUNCTIONS *********/
 
     /**
-     * Porter carryItToAppropriateStore(BAG bag) method
+     * Porter carries a bag to conveyor belt
      * @param bag Bag to be carried by porter that will be introduced in the Conveyor Belt
       */
     public synchronized void carryItToAppropriateStore(BAG bag){
@@ -55,8 +55,7 @@ public class BaggageCollectionPoint implements SharedRegionInterface {
     }
 
     /**
-     * Porter warningNoMoreBagsInThePlaneHold() method
-     * notifies that there's no more bags to carry
+     * Porter notifies that there's no more bags to carry
      */
     public synchronized void warningNoMoreBagsInThePlaneHold() {
         this.noMoreBagsInThePlaneHold = true;
@@ -67,7 +66,7 @@ public class BaggageCollectionPoint implements SharedRegionInterface {
     /***** PASSENGER FUNCTIONS *********/
 
     /**
-     * Passenger goCollectBag(int id) method
+     * Passenger collects the bags at the baggage collection point
      * @param id Passenger identifier
      * if the bag has the passenger id associated the passenger picks it up
      * @see InterruptedException

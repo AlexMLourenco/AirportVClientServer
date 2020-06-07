@@ -36,7 +36,6 @@ public class BAG implements Serializable {
 
     /**
      * BAG destination retrieval
-     * @param args Unused.
      * @return {@code true}  if passenger arrives the final destination
      *         otherwise {@code false}
      *

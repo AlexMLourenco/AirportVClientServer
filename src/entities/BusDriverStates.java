@@ -34,7 +34,6 @@ public enum BusDriverStates implements StateInterface, Serializable {
 
     /**
      * Returns the value of the sate.
-     * @param arguments unused
      * @return value of the current state of the bus driver
      */
     public String getValue() {
