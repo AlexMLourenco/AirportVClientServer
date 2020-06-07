@@ -1,3 +1,12 @@
+/**
+ * <h1>Arrival Terminal Exit Proxy</h1>
+ * The ArrivalTerminalExitProxy class implements SharedRegionProxyInterface methods
+ * to proccess and reply the messages and checks if the simulation is finished
+ * in Arrival Terminal Exit shared region
+ /**
+ * Package to process the messages
+ */
+
 package proxies;
 
 import commonInfra.Message;
@@ -10,7 +19,11 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxyInterface {
 
     private boolean simulationFinished = false;
 
-
+    /**
+     * ArrivalTerminalExitProxy constructor.
+     * Creates a ArrivalTerminalExitProxy in Arrival Terminal Exit Shared Region
+     * @param arrivalTerminalExit that corresponds to Arrival Terminal Exit Shared Region
+     */
     public ArrivalTerminalExitProxy(ArrivalTerminalExit arrivalTerminalExit) {
         this.arrivalTerminalExit = arrivalTerminalExit;
     }
@@ -37,6 +50,7 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxyInterface {
         response.setMessageType(MessageType.REPLY_OK);
         return response;
     }
+
 
 
     public boolean simulationFinished() {

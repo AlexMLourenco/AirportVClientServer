@@ -1,3 +1,9 @@
+/**
+ * <h1>Departure Terminal Entrance Proxy</h1>
+ * The DepartureTerminalEntranceProxy class implements SharedRegionProxyInterface methods
+ * to proccess and reply the messages and checks if the simulation is finished
+ * in Departure Terminal Entrance shared region
+ */
 package proxies;
 
 import commonInfra.Message;
@@ -10,7 +16,11 @@ public class DepartureTerminalEntranceProxy implements SharedRegionProxyInterfac
 
     private boolean simulationFinished = false;
 
-
+    /**
+     * DepartureTerminalEntranceProxy constructor.
+     * Creates a DepartureTerminalEntranceProxy in Departure Terminal Entrance Shared Region
+     * @param departureTerminalEntrance that corresponds to Departure Terminal Entrance Shared Region
+     */
     public DepartureTerminalEntranceProxy(DepartureTerminalEntrance departureTerminalEntrance) {
         this.departureTerminalEntrance = departureTerminalEntrance;
     }

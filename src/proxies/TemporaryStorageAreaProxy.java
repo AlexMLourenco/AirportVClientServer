@@ -1,3 +1,10 @@
+/**
+ * <h1>TemporaryStorageAreaProxy</h1>
+ * The TemporaryStorageAreaProxy class implements SharedRegionProxyInterface methods
+ * to proccess and reply the messages and checks if the simulation is finished
+ * in Temporary Storage Area shared region
+ */
+
 package proxies;
 
 import commonInfra.Message;
@@ -9,7 +16,11 @@ public class TemporaryStorageAreaProxy implements SharedRegionProxyInterface {
     private final TemporaryStorageArea temporaryStorageArea;
 
     private boolean simulationFinished = false;
-
+    /**
+     * TemporaryStorageAreaProxy constructor.
+     * Creates a TemporaryStorageAreaProxy in Temporary Storage Area Shared Region
+     * @param temporaryStorageArea that corresponds to Temporary Storage Area Shared Region
+     */
     public TemporaryStorageAreaProxy(TemporaryStorageArea temporaryStorageArea) {
         this.temporaryStorageArea = temporaryStorageArea;
     }

@@ -1,3 +1,11 @@
+/**
+ * <h1>Arrival Terminal Exit</h1>
+ * ArrivalTerminalExit Class implements SharedRegionInterface and the Arrival Terminal Exit shared memory region.
+ * In this shared region, is where the passengers leave the airport
+ * if its their final destination
+ *
+ */
+
 package sharedRegions;
 
 import entities.PassengerStates;
@@ -11,19 +19,30 @@ public class ArrivalTerminalExit implements SharedRegionInterface {
     private DepartureTerminalEntranceStub departureTerminalEntranceStub;
 
     private int numberOfPassengers;
-
+    /**
+     * ArrivalTerminalExit constructor.
+     * Creates a ArrivalTerminalExit in specified repository Stub and departure Terminal Entrance Stub
+     * @param repositoryStub that corresponds to Stub Repository
+     * @param departureTerminalEntranceStub that corresponds to departure Terminal Entrance Stub
+     */
     public ArrivalTerminalExit(RepositoryStub repositoryStub,
                                DepartureTerminalEntranceStub departureTerminalEntranceStub){
         this.repositoryStub = repositoryStub;
         this.departureTerminalEntranceStub = departureTerminalEntranceStub;
     }
 
-    /** DONE */
+    /**
+     * sets the number of passengers to 0
+     * */
     public synchronized void cleanUp() {
         this.numberOfPassengers = 0;
     }
 
-    /** DONE */
+    /**
+     * Passenger goHome()
+     * Passenger leaves the airport when reaches its final destination
+     * @param id The id of the passenger
+     * */
     public synchronized void goHome(int id){
         repositoryStub.setPassengerState(id, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
         numberOfPassengers++;
@@ -37,12 +56,17 @@ public class ArrivalTerminalExit implements SharedRegionInterface {
         }
     }
 
-    /** DONE */
+    /**
+     * Returns the number of Passengers
+     * @return numberOfPassengers Returns the number of Passengers
+     * */
     public synchronized int getNumberOfPassengers(){
         return numberOfPassengers;
     }
 
-    /** DONE */
+    /**
+     * Passanger notifies that is ready to leave the airport
+     * */
     public synchronized void readyToLeave() {
         notifyAll();
     }

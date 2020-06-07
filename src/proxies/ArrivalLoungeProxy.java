@@ -1,3 +1,12 @@
+/**
+ * <h1>Arrival Lounge Proxy</h1>
+ * The ArrivalLoungeProxy class implements SharedRegionProxyInterface methods
+ * to proccess and reply the messages and checks if the simulation is finished
+ * in Arrival Lounge shared region
+/**
+ * Package to process the messages
+ */
+
 package proxies;
 
 import commonInfra.Message;
@@ -10,7 +19,11 @@ public class ArrivalLoungeProxy implements SharedRegionProxyInterface {
 
     private boolean simulationFinished = false;
 
-
+    /**
+     * ArrivalLoungeProxy constructor.
+     * Creates a ArrivalLoungeProxy in Arrival Lounge Shared Region
+     * @param arrivalLounge that corresponds to Arrival Lounge Shared Region
+     */
     public ArrivalLoungeProxy(ArrivalLounge arrivalLounge) {
         this.arrivalLounge = arrivalLounge;
 
@@ -45,6 +58,7 @@ public class ArrivalLoungeProxy implements SharedRegionProxyInterface {
         response.setMessageType(MessageType.REPLY_OK);
         return response;
     }
+
 
     public boolean simulationFinished() {
         return simulationFinished;

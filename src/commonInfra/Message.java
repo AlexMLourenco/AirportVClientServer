@@ -5,9 +5,7 @@
  */
 
 
-/**
- * commonInfra is a group of bar utils for operating on foo things.
- */
+
 package commonInfra;
 
 import commonInfra.BAG;

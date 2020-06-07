@@ -1,3 +1,12 @@
+/**
+ * <h1>Arrival Terminal Transfer Quay Proxy</h1>
+ * The ArrivalTerminalTransferQuayProxy class implements SharedRegionProxyInterface methods
+ * to proccess and reply the messages and checks if the simulation is finished
+ * in Arrival Terminal Transfer Quay shared region
+ /**
+ * Package to process the messages
+ */
+
 package proxies;
 
 import commonInfra.Message;
@@ -10,10 +19,17 @@ public class ArrivalTerminalTransferQuayProxy implements SharedRegionProxyInterf
 
     private boolean simulationFinished = false;
 
+    /**
+     * ArrivalTerminalTransferQuayProxy constructor.
+     * Creates a ArrivalTerminalTransferQuayProxy in Arrival Terminal Transfer Quay  Shared Region
+     * @param arrivalTerminalTransferQuay that corresponds to Arrival Terminal Transfer Quay Shared Region
+     */
+
     public ArrivalTerminalTransferQuayProxy(ArrivalTerminalTransferQuay arrivalTerminalTransferQuay) {
         this.arrivalTerminalTransferQuay = arrivalTerminalTransferQuay;
 
     }
+
     public Message processAndReply(Message message) {
         Message response = new Message();
         switch(message.getMessageType()) {

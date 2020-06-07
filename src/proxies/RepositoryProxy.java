@@ -1,3 +1,9 @@
+/**
+ * <h1>Repository Proxy</h1>
+ * The RepositoryProxy class implements SharedRegionProxyInterface methods
+ * to proccess and reply the messages and checks if the simulation is finished
+ * in Repository shared region
+ */
 package proxies;
 
 import commonInfra.Message;
@@ -13,6 +19,11 @@ public class RepositoryProxy implements SharedRegionProxyInterface {
 
     private boolean simulationFinished = false;
 
+    /**
+     * RepositoryProxy constructor.
+     * Creates a RepositoryProxy in Repository Shared Region
+     * @param repository that corresponds to Repository Shared Region
+     */
     public RepositoryProxy(Repository repository) {
         this.repository = repository;
     }

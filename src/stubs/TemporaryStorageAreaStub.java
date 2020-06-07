@@ -1,3 +1,8 @@
+/**
+ * <h1>Temporary Storage Area Stub  </h1>
+ * TemporaryStorageAreaStub Class extends the GenericStub Class and implements the methods that represents
+ * the actions that can happen in this shared region
+ */
 package stubs;
 
 import commonInfra.Message;
@@ -6,14 +11,27 @@ import commonInfra.BAG;
 
 public class TemporaryStorageAreaStub extends GenericStub{
 
+    /**
+     * TemporaryStorageAreaStub instatiation
+     * @param hostname
+     * @param port
+     *
+     */
     public TemporaryStorageAreaStub(String hostname, int port) {
         super(hostname, port);
     }
 
+    /**
+     * no more bags in the plane hold
+     */
     public void  warningNoMoreBagsInThePlaneHold() {
 
     }
 
+    /**
+     * Porter Carries the the bags to the Temporary Storage Area
+     * @param bag the bag to be carried
+     */
     public void carryItToAppropriateStore(BAG bag) {
         Message outMessage;
 
@@ -24,7 +42,9 @@ public class TemporaryStorageAreaStub extends GenericStub{
         this.process(outMessage);
 
     }
-
+    /**
+     * Simulation reaches the end
+     */
     public void setSimulationFinished() {
         Message outMessage;
 

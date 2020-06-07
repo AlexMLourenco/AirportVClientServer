@@ -1,3 +1,9 @@
+/**
+ * <h1>Arrival Terminal Transfer Quay</h1>
+ * ArrivalTerminalTransferQuay Class implements SharedRegionInterface the Arrival Terminal Transfer Quay shared memory region.
+ * In this shared region, is where the passengers wait for the bus to go to departure terminal
+ *
+ */
 package sharedRegions;
 
 import java.util.LinkedList;
@@ -20,6 +26,11 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
 
     private boolean busDriverReadyToReceivePassengers = false;
 
+    /**
+     * ArrivalTerminalTransferQuay constructor.
+     * Creates a ArrivalTerminalTransferQuay in repository Stub and instatiate the waiting for bus and in the bus LinkedLists
+     * @param repositoryStub that corresponds to Stub Repository
+     */
     public ArrivalTerminalTransferQuay(RepositoryStub repositoryStub) {
         this.repositoryStub = repositoryStub;
         this.waitingForBus = new LinkedList<>();
@@ -28,7 +39,10 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
 
     /***** PASSENGER FUNCTIONS *********/
 
-    /** DONE **/
+    /**
+     * Passenger takeABus(id) method
+     * @param id passenger id
+     */
     public synchronized void takeABus(int id) {
         if (SimulPar.DEBUG_MODE) System.out.println("takeABus ( " + id + "): start ");
         waitingForBus.add(id);
@@ -39,7 +53,10 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         }
     }
 
-    /** DONE **/
+    /**
+     * Passenger takeABus(id) method
+     * @param id passenger id
+     */
     public void waitForBus(int id) {
         try {
             while (true) {
@@ -59,7 +76,10 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         } catch (InterruptedException e) { }
     }
 
-    /** DONE **/
+    /**
+     * Passenger enterTheBus(id) method
+     * @param id passenger id
+     */
     public synchronized void enterTheBus(int id) {
         if (SimulPar.DEBUG_MODE) System.out.println("enterTheBus ( " + id + ") ");
         synchronized (lock) {
@@ -74,7 +94,10 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
 
     /***** DRIVER FUNCTIONS *********/
 
-    /** DONE **/
+    /**
+     * Driver readyToDeparture() method
+     *
+     */
     public synchronized boolean readyToDeparture() {
         if (SimulPar.DEBUG_MODE) System.out.println("readyToDeparture : ");
         this.busDriverReadyToReceivePassengers = false;
@@ -87,7 +110,10 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         return (waitingForBus.size() > 0);
     }
 
-    /** DONE **/
+    /**
+     * Driver readyToDeparture() method
+     *
+     */
     public void goToDepartureTerminal() {
         try {
             repositoryStub.setBusDriverState(BusDriverStates.DRIVING_FORWARD);
@@ -96,12 +122,18 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         }
     }
 
-    /** DONE **/
+    /**
+     * Driver parkTheBus() method
+     *
+     */
     public void parkTheBus() {
         repositoryStub.setBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
     }
 
-    /** DONE **/
+    /**
+     * Driver announcingBusBoarding() method
+     * @return
+     */
     public synchronized int announcingBusBoarding() {
         int numberOfPassengers;
         this.busDriverReadyToReceivePassengers = true;
@@ -121,7 +153,9 @@ public class ArrivalTerminalTransferQuay implements SharedRegionInterface {
         return numberOfPassengers;
     }
 
-    /** DONE **/
+    /**
+     * Driver End of Work
+     */
     public synchronized void setBusDriverEndOfWork() {
         notifyAll();
     }

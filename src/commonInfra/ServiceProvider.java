@@ -5,10 +5,6 @@
  * connection with a server and exchange messages between them
  */
 
-
-/**
- * commonInfra is a group of bar utils for operating on foo things.
- */
 package commonInfra;
 
 import proxies.SharedRegionProxyInterface;

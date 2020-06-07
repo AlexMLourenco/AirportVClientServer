@@ -4,9 +4,6 @@
  * between a client and the server through a socket.
  */
 
-/**
- * commonInfra is a group of bar utils for operating on foo things.
- */
 package commonInfra;
 
 import commonInfra.GenericCom;

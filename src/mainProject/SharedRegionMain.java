@@ -1,3 +1,11 @@
+/**
+ * <h1>SharedRegionMain</h1>
+ * The SharedRegionMain class sets all the simulation variables
+ * of the shared reagions to launch shared region server
+ *
+ */
+
+
 package mainProject;
 
 import commonInfra.ServerCom;
@@ -12,6 +20,11 @@ import java.lang.reflect.Constructor;
 import java.net.SocketTimeoutException;
 
 public class SharedRegionMain {
+    /**
+     * Shared regions main's thread
+     * @param args unused
+     * @see SocketTimeoutException
+     */
 
     public static void main(String args[]) {
         ServerCom serverCom, serverConn;

@@ -1,3 +1,9 @@
+/**
+ * <h1>Repository Main</h1>
+ * Launches the the Repository server
+ *
+ */
+
 package mainProject;
 
 import commonInfra.ServerCom;
@@ -9,6 +15,12 @@ import java.io.FileNotFoundException;
 import java.net.SocketTimeoutException;
 
 public class RepositoryMain {
+    /**
+     * Repository main's thread
+     * @param args unused main args
+     * @throws FileNotFoundException if the file isn't found
+     * @see SocketTimeoutException
+     */
 
     public static void main(String args[]) throws FileNotFoundException {
         ServerCom serverCom, serverConn;

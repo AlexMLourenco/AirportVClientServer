@@ -1,3 +1,9 @@
+/**
+ * <h1>Repository </h1>
+ * Repository Class implements the SharedRegionInterface and Repository shared memory region.
+ * In this shared region, the internal state of the simulation is kept here and the logging is handled.
+ *
+ */
 package sharedRegions;
 
 import java.util.*;
@@ -57,6 +63,10 @@ public class Repository implements SharedRegionInterface {
     private List<Integer> busWaitingQueue;
     private List<Integer> busSeats;
 
+    /**
+     * Repository instantiation.
+     * @throws FileNotFoundException
+     */
     public Repository() throws FileNotFoundException {
         this.luggageInStoreRoom = 0;
         f = new File(SimulPar.FILENAME);
@@ -100,9 +110,8 @@ public class Repository implements SharedRegionInterface {
     /**
      * Set Passenger State
      *
-     * @param id int
+     * @param id int the passenger identifier
      * @param state PassengerStates
-     *
      */
     public synchronized void setPassengerState(int id, PassengerStates state ) {
         this.passengerStates[id] = state;
@@ -149,9 +158,9 @@ public class Repository implements SharedRegionInterface {
     /**
      * A Passenger has arrived
      *
-     * @param id int
-     * @param isFinalDestination boolean
-     * @param numberOfLuggages int
+     * @param id int passenger identifier
+     * @param isFinalDestination boolean checks if its passenger finalDestination or not
+     * @param numberOfLuggages int number of luggages of the passenger
      *
      */
     public synchronized char passengerArrived(int id, boolean isFinalDestination, int numberOfLuggages) {
@@ -213,7 +222,7 @@ public class Repository implements SharedRegionInterface {
     /**
      * Passenger has collected a luggage
      *
-     * @param id int
+     * @param id int that is associated to passenger
      *
      */
     public synchronized void registerCollectedLuggage(int id) {
@@ -226,7 +235,7 @@ public class Repository implements SharedRegionInterface {
     /**
      * Registers the Passenger will to take a Bus
      *
-     * @param id int
+     * @param id int passenger identifier
      *
      */
     public synchronized void registerPassengerToTakeABus(int id) {
@@ -238,7 +247,7 @@ public class Repository implements SharedRegionInterface {
     /**
      * Registers that the Passenger has enter the Bus
      *
-     * @param id int
+     * @param id int passenger identifier
      *
      */
     public synchronized void registerPassengerToEnterTheBus(int id) {
@@ -250,7 +259,7 @@ public class Repository implements SharedRegionInterface {
     /**
      * Removes the Passenger from the Bus
      *
-     * @param id int
+     * @param id int passenger identifier
      *
      */
     public synchronized void removePassengerFromTheBus(int id) {

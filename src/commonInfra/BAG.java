@@ -4,9 +4,7 @@
  * get the type of the destination
  */
 
-/**
- * commonInfra is a group of bar utils for operating on foo things.
- */
+
 package commonInfra;
 
 import java.io.Serializable;
@@ -19,8 +17,8 @@ public class BAG implements Serializable {
     /**
      *   BAG instantiation.
      *     Creates a Bag associated to the passenger with the specified type of destination
-     *     @param passenger passenger
-     *     @param isFinalDestination isFinalDestination
+     *     @param passenger passenger id
+     *     @param isFinalDestination isFinalDestination indicates if it's the final destination of the passenger
      */
     public BAG(int passenger, boolean isFinalDestination) {
         this.passenger = passenger;
@@ -37,9 +35,11 @@ public class BAG implements Serializable {
     }
 
     /**
-     *   BAG destination retrieval.
+     * BAG destination retrieval
+     * @param args Unused.
+     * @return {@code true}  if passenger arrives the final destination
+     *         otherwise {@code false}
      *
-     *    @return type of destination of that bag
      */
     public boolean isFinalDestination() {
         return isFinalDestination;

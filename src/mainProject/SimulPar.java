@@ -1,3 +1,11 @@
+/**
+ * <h1>SharedRegionConfig</h1>
+ * The SharedRegionConfig class sets all the server simulation variables
+ * of the shared reagions to launch shared region server
+ *
+ */
+
+
 package mainProject;
 
 import java.util.Date;

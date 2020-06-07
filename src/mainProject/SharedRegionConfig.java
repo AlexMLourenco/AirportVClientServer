@@ -1,3 +1,11 @@
+/**
+ * <h1>SharedRegionConfig</h1>
+ * The SharedRegionConfig class sets all the server simulation variables
+ * of the shared reagions to launch shared region server
+ *
+ */
+
+/**  Package that provides the Server, entities and shared regions configs to run a simulation */
 package mainProject;
 
 public class SharedRegionConfig {

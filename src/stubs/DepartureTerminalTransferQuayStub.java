@@ -1,14 +1,28 @@
+/**
+ * <h1>Departure Terminal Transfer Quay Stub </h1>
+ * DepartureTerminalTransferQuayStub Class extends the GenericStub Class and implements the methods that represents
+ * the actions that can happen in this shared region
+ */
 package stubs;
 
 import commonInfra.Message;
 import commonInfra.MessageType;
 
 public class DepartureTerminalTransferQuayStub extends GenericStub{
-
+    /**
+     * DepartureTerminalTransferQuayStub instatiation
+     * @param hostname
+     * @param port
+     *
+     */
     public DepartureTerminalTransferQuayStub(String hostname, int port) {
         super(hostname, port);
     }
 
+    /**
+     * Driver parks the bus and let all the passengers leave the bus
+     * @param passengersOnTheBus int that represents the number of passengers on the bus
+     */
     public void parkTheBusAndLetPassOff(int passengersOnTheBus) {
         Message outMessage;
 
@@ -18,7 +32,9 @@ public class DepartureTerminalTransferQuayStub extends GenericStub{
 
         this.process(outMessage);
     }
-
+    /**
+     * Driver leaves the Departure terminal after all passengers left the bus
+     */
     public void goToArrivalTerminal() {
         Message outMessage;
 
@@ -28,7 +44,10 @@ public class DepartureTerminalTransferQuayStub extends GenericStub{
         this.process(outMessage);
 
     }
-
+    /**
+     * Passenger leaves the Bus after bus is parked
+     * @param identifier int that identifies the passenger leaving the bus
+     */
     public void leaveTheBus(int identifier) {
         Message outMessage;
 
@@ -40,6 +59,9 @@ public class DepartureTerminalTransferQuayStub extends GenericStub{
 
     }
 
+    /**
+     * Simulation reaches the end
+     */
     public void setSimulationFinished() {
         Message outMessage;
 

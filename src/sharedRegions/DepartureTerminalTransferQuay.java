@@ -1,3 +1,9 @@
+/**
+ * <h1>Departure Terminal Transfer Quay </h1>
+ * DepartureTerminalTransferQuay Class implements the SharedRegionInterface and Departure Terminal Transfer Quay shared memory region.
+ * In this shared region, the passengers left the bus
+ *
+ */
 package sharedRegions;
 
 import java.util.Random;
@@ -14,14 +20,22 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
     private RepositoryStub repositoryStub;
 
     private Integer passengersOnTheBus = 0;
-
+    /**
+     * DepartureTerminalTransferQuay constructor.
+     * Creates a DepartureTerminalTransferQuay in repository Stub
+     * @param repositoryStub that corresponds to Stub Repository
+     */
     public DepartureTerminalTransferQuay(RepositoryStub repositoryStub){
         this.repositoryStub = repositoryStub;
     }
 
     /***** PASSENGER FUNCTIONS *********/
 
-    /** DONE **/
+    /**
+     * Passenger leaveTheBus(int id) method
+     * @param id Passenger identifier
+     * Passenger leaves the bus when reaches departure terminal
+     */
     public  void leaveTheBus(int id){
 
         try {
@@ -44,7 +58,12 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
 
     /***** BUS DRIVER FUNCTIONS *********/
 
-    /** DONE **/
+    /**
+     * Driver parkTheBusAndLetPassOff(int passengersOnTheBus) method
+     * @param passengersOnTheBus number of the passengers on the bus
+     * Driver arrives to departure terminal and notifies the passengers
+     * to leave the bus
+     */
     public synchronized void parkTheBusAndLetPassOff(int passengersOnTheBus){
         repositoryStub.setBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.passengersOnTheBus = passengersOnTheBus;
@@ -60,7 +79,10 @@ public class DepartureTerminalTransferQuay implements SharedRegionInterface {
 
     }
 
-    /** DONE **/
+    /**
+     * Driver goToArrivalTerminal() method
+     * when all passengers leave the bus, the driver goes to arrival drives to arrival terminal
+     */
     public void goToArrivalTerminal(){
         repositoryStub.setBusDriverState(BusDriverStates.DRIVING_BACKWARD);
         try {

@@ -4,9 +4,7 @@
  * exchange messages between server and client
  */
 
-/**
- * commonInfra is a group of bar utils for operating on foo things.
- */
+
 package commonInfra;
 
 import java.io.*;

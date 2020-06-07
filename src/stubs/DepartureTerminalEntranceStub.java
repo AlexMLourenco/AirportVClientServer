@@ -1,14 +1,28 @@
+/**
+ * <h1>Departure Terminal Entrance Stub </h1>
+ * DepartureTerminalEntranceStub Class extends the GenericStub Class and implements the methods that represents
+ * the actions that can happen in this shared region
+ */
 package stubs;
 
 import commonInfra.Message;
 import commonInfra.MessageType;
 
 public class DepartureTerminalEntranceStub  extends GenericStub{
-
+    /**
+     * DepartureTerminalEntranceStub instatiation
+     * @param hostname
+     * @param port
+     *
+     */
     public DepartureTerminalEntranceStub(String hostname, int port) {
         super(hostname, port);
     }
 
+    /**
+     * Passengers arrive the departure terminal
+     * @param identifier identifies the passenger that arrived
+     */
     public void prepareNextLeg(int identifier) {
         Message outMessage;
 
@@ -19,6 +33,10 @@ public class DepartureTerminalEntranceStub  extends GenericStub{
         this.process(outMessage);
     }
 
+    /**
+     * returns the number of passengers on the departure terminal
+     * @return number of passengers on the departure terminal
+     */
     public int getNumberOfPassengers() {
         Message outMessage, inMessage;
 
@@ -29,7 +47,9 @@ public class DepartureTerminalEntranceStub  extends GenericStub{
 
         return inMessage.getIntValue();
     }
-
+    /**
+     * Passengers ready to leave the departure terminal
+     */
     public void readyToLeave() {
         Message outMessage;
 
@@ -38,7 +58,9 @@ public class DepartureTerminalEntranceStub  extends GenericStub{
 
         this.process(outMessage);
     }
-
+    /**
+     * No Passengers on the departure terminal
+     */
     public void clean_up() {
         Message outMessage;
 
@@ -47,7 +69,9 @@ public class DepartureTerminalEntranceStub  extends GenericStub{
 
         this.process(outMessage);
     }
-
+    /**
+     * Simulation reaches the end
+     */
     public void setSimulationFinished() {
         Message outMessage;
 

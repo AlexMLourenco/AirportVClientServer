@@ -1,3 +1,11 @@
+/**
+ * <h1>AirPortVClientServer</h1>
+ * The AirPortVClientServer class sets all the simulation variables
+ * of the entities and stubs
+ * to launch a client server
+ *
+ */
+
 package mainProject;
 
 import entities.BusDriver;
@@ -11,7 +19,10 @@ import static mainProject.SimulPar.LANDINGS;
 import static mainProject.SimulPar.PASSENGERS;
 
 public class AirportVClientServer {
-
+    /**
+     * Client Server main
+     * @param args unused
+     * */
     public static void main(String args[]) {
         try {
 

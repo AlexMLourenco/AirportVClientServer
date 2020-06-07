@@ -1,3 +1,8 @@
+/**
+ * <h1>Repository Stub </h1>
+ * RepositoryStub Class extends the GenericStub Class and implements the methods that represents
+ * the actions that can happen in this shared region
+ */
 package stubs;
 
 import commonInfra.Message;
@@ -8,16 +13,24 @@ import entities.PorterStates;
 import mainProject.SharedRegionConfig;
 
 public class RepositoryStub extends GenericStub{
-
+    /**
+     * RepositoryStub instatiation
+     */
     public RepositoryStub() {
         super(SharedRegionConfig.SERVER_REPOSITORY_HOSTNAME,SharedRegionConfig.SERVER_REPOSITORY_PORT);
     }
-
+    /**
+     * RepositoryStub instatiation
+     * @param port
+     * @param hostname
+     */
     public RepositoryStub(String hostname, int port) {
         super(hostname, port);
     }
 
-
+    /**
+     * Porter removes the luggage in the plain hold
+     */
     public void removeLuggageInPlainHold() {
         Message outMessage;
 
@@ -27,6 +40,10 @@ public class RepositoryStub extends GenericStub{
         this.process(outMessage);
     }
 
+    /**
+     * Initiates the repository for a flight
+     * @param flightNumber int that identifies the flight which repository will be initiated
+     */
     public void init_repository(int flightNumber) {
         Message outMessage;
 
@@ -36,7 +53,10 @@ public class RepositoryStub extends GenericStub{
 
         this.process(outMessage);
     }
-
+    /**
+     * Flight lands at the airport
+     * @param flightNumber int that identifies the flight that landed
+     */
     public void flightLanded(int flightNumber) {
         Message outMessage;
 
@@ -47,6 +67,13 @@ public class RepositoryStub extends GenericStub{
         this.process(outMessage);
     }
 
+    /**
+     * Passenger arrives the airport
+     * @param id identifies the passenger
+     * @param isFinalDestination sets if its the final destination of the passenger
+     * @param numberOfLuggages that passenger brought
+     * @return the next Action that passenger will take, 'H' go Home, 'C' Collect Bag , 'B' Take the bus
+     */
     public char passengerArrived(int id, boolean isFinalDestination, int numberOfLuggages) {
         Message outMessage, inMessage;
 
@@ -60,6 +87,11 @@ public class RepositoryStub extends GenericStub{
         return inMessage.getCharValue();
     }
 
+    /**
+     * Sets the passenger state
+     * @param identifier identifies the passenger which state will be updated
+     * @param state new state
+     */
     public void setPassengerState(int identifier, PassengerStates state) {
         Message outMessage;
 
@@ -70,6 +102,10 @@ public class RepositoryStub extends GenericStub{
         this.process(outMessage);
     }
 
+    /**
+     * Register passenger to take the bus
+     * @param identifier identifies the passenger that needs to take the bus
+     */
     public void registerPassengerToTakeABus(int identifier) {
         Message outMessage;
 
@@ -79,7 +115,10 @@ public class RepositoryStub extends GenericStub{
         this.process(outMessage);
 
     }
-
+    /**
+     * Register passenger to enter the bus
+     * @param identifier identifies the passenger that will enter the bus
+     */
     public void registerPassengerToEnterTheBus(int identifier) {
         Message outMessage;
 
@@ -90,6 +129,10 @@ public class RepositoryStub extends GenericStub{
 
     }
 
+    /**
+     * Updates the Bus Driver state
+     * @param state the new state of the driver
+     */
     public void setBusDriverState(BusDriverStates state) {
         Message outMessage;
 
@@ -100,6 +143,9 @@ public class RepositoryStub extends GenericStub{
 
     }
 
+    /**
+     * register Luggage in Conveyor Belt
+     */
     public void registerLuggageInConveyorBelt() {
         Message outMessage;
 
@@ -107,7 +153,10 @@ public class RepositoryStub extends GenericStub{
         outMessage.setMessageType(MessageType.REPOSITORY_REGISTER_LUGGAGE_IN_CONVEYOR_BELT);
         this.process(outMessage);
     }
-
+    /**
+     * Updates the Port state
+     * @param state the new state of Porter
+     */
     public void setPorterState(PorterStates state) {
         Message outMessage;
 
@@ -116,7 +165,10 @@ public class RepositoryStub extends GenericStub{
         outMessage.setEntityState(state);
         this.process(outMessage);
     }
-
+    /**
+     * register collected Luggage
+     * @param identifier identifies the bag and the passenger as well
+     */
     public void registerCollectedLuggage(int identifier) {
         Message outMessage;
 
@@ -127,6 +179,10 @@ public class RepositoryStub extends GenericStub{
 
     }
 
+    /**
+     * removes passenger from the bus
+     * @param identifier identifies the passenger to be removed from bus
+     */
     public void removePassengerFromTheBus(int identifier) {
         Message outMessage;
 
@@ -135,7 +191,9 @@ public class RepositoryStub extends GenericStub{
         outMessage.setIdentifier(identifier);
         this.process(outMessage);
     }
-
+    /**
+     * register Luggage In Store Room
+     */
     public void registerLuggageInStoreRoom() {
         Message outMessage;
 
@@ -144,6 +202,9 @@ public class RepositoryStub extends GenericStub{
         this.process(outMessage);
     }
 
+    /**
+     * Sets final stats
+     */
     public void setFinalStats() {
         Message outMessage;
 
@@ -151,7 +212,9 @@ public class RepositoryStub extends GenericStub{
         outMessage.setMessageType(MessageType.REPOSITORY_FINAL_STATS);
         this.process(outMessage);
     }
-
+    /**
+     * Simulation reaches the end
+     */
     public void setSimulationFinished() {
         Message outMessage;
 

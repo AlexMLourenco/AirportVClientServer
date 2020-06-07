@@ -1,3 +1,8 @@
+/**
+ * <h1>Baggage Collection Point Stub </h1>
+ * BaggageCollectionPointStub Class extends the GenericStub Class and implements the methods that represents
+ * the actions that can happen in this shared region
+ */
 package stubs;
 
 import commonInfra.Message;
@@ -5,12 +10,19 @@ import commonInfra.MessageType;
 import commonInfra.BAG;
 
 public class BaggageCollectionPointStub extends GenericStub{
-
+    /**
+     * BaggageCollectionPointStub instatiation
+     * @param hostname
+     * @param port
+     *
+     */
     public BaggageCollectionPointStub(String hostname, int port) {
         super(hostname, port);
     }
 
-    /*** DONE ***/
+    /**
+     * Indicates that there's no more bags in the plane hold
+     */
     public void warningNoMoreBagsInThePlaneHold() {
         Message outMessage;
 
@@ -19,7 +31,10 @@ public class BaggageCollectionPointStub extends GenericStub{
 
         this.process(outMessage);
     }
-
+    /**
+     * Porter Carries the bag to the Baggage collection point
+     * @param bag the bag that the porter is carrying
+     */
     public void carryItToAppropriateStore(BAG bag) {
         Message outMessage;
 
@@ -30,7 +45,10 @@ public class BaggageCollectionPointStub extends GenericStub{
         this.process(outMessage);
 
     }
-
+    /**
+     * Passengers Collects the bag in baggage collection point
+     * @param identifier int that identifies the passenger and his bag
+     */
     public int goCollectBag(int identifier) {
         Message outMessage, inMessage;
 
@@ -43,6 +61,9 @@ public class BaggageCollectionPointStub extends GenericStub{
         return inMessage.getIntValue();
     }
 
+    /**
+     * no more bags to collect
+     */
     public void clean_up() {
         Message outMessage;
 
@@ -51,7 +72,9 @@ public class BaggageCollectionPointStub extends GenericStub{
 
         this.process(outMessage);
     }
-
+    /**
+     * Simulation reaches the end
+     */
     public void setSimulationFinished() {
         Message outMessage;
 

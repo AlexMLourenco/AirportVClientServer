@@ -1,3 +1,10 @@
+/**
+ * <h1>Baggage Collection Point Proxy</h1>
+ * The BaggageCollectionPointProxy class implements SharedRegionProxyInterface methods
+ * to proccess and reply the messages and checks if the simulation is finished
+ * in Baggage Collection Point shared region
+ */
+
 package proxies;
 
 import commonInfra.Message;
@@ -10,6 +17,11 @@ public class BaggageCollectionPointProxy implements SharedRegionProxyInterface {
 
     private boolean simulationFinished = false;
 
+    /**
+     * BaggageCollectionPointProxy constructor.
+     * Creates a BaggageCollectionPointProxy in Baggage Collection Point Shared Region
+     * @param baggageCollectionPoint that corresponds to Baggage Collection Point Shared Region
+     */
     public BaggageCollectionPointProxy(BaggageCollectionPoint baggageCollectionPoint) {
         this.baggageCollectionPoint = baggageCollectionPoint;
 

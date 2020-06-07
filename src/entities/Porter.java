@@ -1,3 +1,10 @@
+/**
+ * <h1>Porter</h1>
+ * The Porter class implements methods to create a Porter, his lifecycle
+ * and all the possible actions he's able to do
+ */
+
+
 package entities;
 
 import commonInfra.BAG;
@@ -18,6 +25,13 @@ public class Porter extends Thread {
 
     private boolean keepAlive;
 
+    /**
+     * BusDriver constructor.
+     * Creates a BusDriver in the specific shared regions
+     * @param arrivalLoungeStub Arrival Lounge shared region
+     * @param temporaryStorageAreaStub Temporary Storage Area shared region
+     * @param baggageCollectionPointStub Collection Bag Point shared region
+     */
     public Porter(ArrivalLoungeStub arrivalLoungeStub,
                   TemporaryStorageAreaStub temporaryStorageAreaStub,
                   BaggageCollectionPointStub baggageCollectionPointStub) {
@@ -28,6 +42,13 @@ public class Porter extends Thread {
         this.keepAlive = true;
     }
 
+    /**
+     * Extended version of {@link #run()}.
+     * Porter's lifecycle
+     *      while Porter doesn't reach the end of the day he will collect
+     *      the bags of the passengers and carry them to the AppropiateStore
+     * @returns nothing
+     */
     @Override
     public void run() {
         Boolean planeHoldEmpty;
@@ -52,15 +73,28 @@ public class Porter extends Thread {
             }
         }
     }
-
+    /**
+     * Returns the current state of the Porter.
+     * @param arguments unused
+     * @return entityState the current state of the Porter
+     */
     public StateInterface getEntityState() {
         return entityState;
     }
 
+    /** Updates the state of the porter.
+     * @param entityState the state that porter will assume
+     * @return Nothing
+     */
     public void setEntityState(StateInterface entityState) {
         this.entityState = entityState;
     }
 
+    /** Updates the boolean keepAlive.
+     * @param keepAlive {@code true} means the day isn't over yet
+     *             otherwise {@code false}
+     * @return Nothing
+     */
     public void setKeepAlive(boolean keepAlive) {
         this.keepAlive = keepAlive;
     }
