@@ -6,3 +6,6 @@ out/
 
 # Script Files
 scripts/
+
+# Interaction Diagrams
+.InteractionDiagrams.pdf
